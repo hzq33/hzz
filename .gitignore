@@ -50,3 +50,6 @@ retrieval-relevance-analysis-v2/
 # 文档不推送（保留本地）
 docs/
 scripts/dev/eval_dialogue/data/results/
+
+# 部署/监控配置（不推送，保留本地）
+deploy/
