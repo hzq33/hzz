@@ -69,6 +69,39 @@ cp .env.example .env
 
 其余为可选：会话预算 / 速率限制 / 遥测（OTEL、Langfuse）/ 本地 LLM 等，见文件内注释。
 
+### LLM 配置
+
+**方式一：`.env` 环境变量（默认 DeepSeek）**
+
+```ini
+DEEPSEEK_API_KEY=你的DeepSeek密钥      # 必填
+DEEPSEEK_MODEL=deepseek-v4-flash       # 可选，默认即可
+DEEPSEEK_FALLBACK_MODEL=deepseek-v4-pro
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+```
+
+`config.yaml` 中 `agent.api_key: ${DEEPSEEK_API_KEY}` 自动读取环境变量，无需改 config。
+
+**方式二：前端「设置」页动态配置（支持多家服务商）**
+
+启动服务后打开前端 → **设置页 → LLM 调用点**：选服务商、填 API Key、选模型，可点「测试连接」，保存即生效（写入 `llm_config` 持久化，不用改 .env / config.yaml）。每个调用点（对话 / 扮演 / 对话抽取 / QA 生成等）可独立配置模型。
+
+| Provider | base_url | 说明 |
+|----------|----------|------|
+| `deepseek` | api.deepseek.com | 默认（flash + pro） |
+| `openai` | api.openai.com/v1 | gpt-4o 系列 |
+| `moonshot` | api.moonshot.cn/v1 | Kimi |
+| `glm` | open.bigmodel.cn | 智谱清言 |
+| `ollama` | localhost:11434/v1 | 本地模型（qwen3:8b 等，无需 API key） |
+| `siliconflow` | api.siliconflow.cn/v1 | 硅基流动 |
+| `custom` | 自定义 | 任意 OpenAI 兼容端点 |
+
+> 提示：
+> 1. `AGENT_API_TOKEN` 无论如何都要填写——前端请求与 API 均要求 Bearer 鉴权，缺失/弱口令服务拒绝启动
+> 2. 文本生成 ≠ 检索：小说 RAG 还需本地 embedding 模型 `models/Qwen3-Embedding-0.6B/`（不在仓库中，需自行下载放置；reranker 同理可选）
+> 3. 换用非 DeepSeek 服务商：通过设置页覆盖端点，或改 `config.yaml` 的 `agent.model / base_url / api_key`
+> 4. 使用 Ollama 本地模型无需云端 key，生成质量取决于本地模型
+
 系统行为参数（模型、检索通道权重、对话抽取、上下文压缩等）在 `config.yaml` 中调整，如：
 
 - `memory.enable_summarization` — 上下文压缩开关（默认 `true`，超阈值自动折叠早期轮次为摘要）
