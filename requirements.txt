@@ -34,7 +34,7 @@ lancedb>=0.8.0
 
 # ── Local LLM (Qwen-1.8B 4-bit quantization) ──
 bitsandbytes>=0.43.0
-accelerate>=0.20.0
+accelerate>=0.33.0
 
 # ── Encoding & Text ──
 chardet>=5.0.0
