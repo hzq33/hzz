@@ -18,10 +18,8 @@ coverage/
 venv/
 venv_qwen/
 models/
-data/*
-!data/rosters/
-data/rosters/*
-!data/rosters/*.alias.json
+data/
+# 注：data/ 整个排除（含 rosters 别名文件），仅保留本地
 src/data/sessions/
 # Playwright
 frontend/playwright-report/
@@ -49,6 +47,6 @@ frontend/nginx.conf.template
 retrieval-relevance-study/
 retrieval-relevance-analysis-v2/
 .trae-html-share-packages/
-docs/analysis/
-docs/archive/
+# 文档不推送（保留本地）
+docs/
 scripts/dev/eval_dialogue/data/results/
