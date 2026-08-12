@@ -1,0 +1,69 @@
+{
+ "meta": {
+  "source": "20260805_205351_results_v2.json",
+  "limit": 5,
+  "timestamp": "20260805_211146"
+ },
+ "rows": [
+  {
+   "case_id": "利姆露_01",
+   "query": "你好",
+   "character": "利姆露",
+   "channel": "dialogue",
+   "has_gold": false,
+   "proxy_indoc_hit": null,
+   "self_score": 0.0,
+   "self_reason": "用户输入是问候语'你好'，检索到的上下文均为角色对话片段，未包含任何回应问候或相关人物/情节信息。",
+   "ragas_ctx_prec": null,
+   "deepeval_ctx_prec": null
+  },
+  {
+   "case_id": "利姆露_02",
+   "query": "第二卷里发生了什么",
+   "character": "利姆露",
+   "channel": "dialogue",
+   "has_gold": false,
+   "proxy_indoc_hit": null,
+   "self_score": 0.3,
+   "self_reason": "上下文只有利姆露等角色对话，未提及‘第二卷’情节，与问题仅有模糊关联。",
+   "ragas_ctx_prec": null,
+   "deepeval_ctx_prec": null
+  },
+  {
+   "case_id": "利姆露_n03",
+   "query": "第二卷里发生了什么",
+   "character": "利姆露",
+   "channel": "narrative",
+   "has_gold": false,
+   "proxy_indoc_hit": null,
+   "self_score": 0.0,
+   "self_reason": "无检索结果",
+   "ragas_ctx_prec": null,
+   "deepeval_ctx_prec": null
+  },
+  {
+   "case_id": "利姆露_04",
+   "query": "维鲁多拉和伊芙利特的关系",
+   "character": "利姆露",
+   "channel": "dialogue",
+   "has_gold": true,
+   "proxy_indoc_hit": 1,
+   "self_score": 1.0,
+   "self_reason": "上下文多次出现维鲁多拉与伊夫利特的直接对话，伊夫利特以‘大人’称呼并提建议，清晰体现主从/下属关系，能直接支撑回答。",
+   "ragas_ctx_prec": 0.8055555555287036,
+   "deepeval_ctx_prec": 0.8055555555555555
+  },
+  {
+   "case_id": "利姆露_n05",
+   "query": "维鲁多拉和伊芙利特的关系",
+   "character": "利姆露",
+   "channel": "narrative",
+   "has_gold": true,
+   "proxy_indoc_hit": 1,
+   "self_score": 0.9,
+   "self_reason": "上下文直接展示维鲁多拉与伊芙利特的对话和互动，明确体现二者知根知底、关系亲密，能支撑回答关系问题。",
+   "ragas_ctx_prec": 0.99999999998,
+   "deepeval_ctx_prec": 1.0
+  }
+ ]
+}

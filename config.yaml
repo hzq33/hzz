@@ -1,0 +1,221 @@
+agent:
+  name: ModularAgent
+  model: deepseek-v4-flash
+  fallback_model: deepseek-v4-pro
+  api_key: ${DEEPSEEK_API_KEY}
+  base_url: https://api.deepseek.com
+  temperature: 0.7
+  max_tokens: 4096
+  max_retries: 3
+  max_turns: 10
+  max_sessions: 5
+novel_rag:
+  embedding_provider: qwen3
+  qwen3_model_path: models/Qwen3-Embedding-0.6B
+  backend: lancedb
+  lance_path: ./data/novel_lance
+  preheat: true
+  impersonation_full_chain: true
+  impersonation_model: ${DEEPSEEK_MODEL}
+  impersonation_api_key: ${DEEPSEEK_API_KEY}
+  impersonation_base_url: ${DEEPSEEK_BASE_URL}
+  chunk_size: 500
+  chunk_overlap: 50
+  default_top_k: 5
+  hybrid_search: true
+  graph_enrich: true
+  reranker_enabled: true
+  reranker_provider: auto
+  reranker_model_path: models/bge-reranker-v2-m3
+  reranker_top_n: 5
+  query_rewrite:
+    enabled: true
+  routing:
+    mode: llm
+  multi_channel_weights:
+    narrative: 0.75
+    character: 0.25
+  qa:
+    enabled: true
+    max_source_blocks: 30
+    per_block: 2
+    prefer_character_overlap: true
+  narrative_hierarchy:
+    enabled: true
+    expand_radius: 1
+    max_expanded_chars: 3500
+    chapter_hard_boundary: true
+    index_parents: false
+    parent_chars: 800
+    parent_overlap_chars: 80
+    child_chars: 150
+    min_child_chars: 80
+    max_child_chars: 220
+    chapter_prefix_in_vec: true
+  character_inventory:
+    enabled: true
+    ner: llm
+    llm_max_names: 60
+    llm_max_tokens: 2048
+    llm_batch_chars: 30000
+    llm_concurrency: 4
+    llm_max_chars: 120000
+    max_chars: 80000
+    min_cluster_mentions: 2
+    seed:
+      mode: hybrid
+      min_mentions: 2
+      percentile: 70
+      top_k: 30
+      small_n_fallback: 8
+      small_n_top: 8
+      blacklist_from_quota: true
+      min_degree: 0
+    merge_decay: 0.85
+    llm_batch_size: 30
+    max_clusters_for_llm: 60
+    device: cuda
+    sync_on_ingest: true
+  dialogue_attribution:
+    enabled: true
+    provider: cloud_chapter
+    mode: quota
+    max_chunk_chars: 6000
+    slide_win_chars: 3500
+    slide_stride_chars: 2000
+    max_output_tokens: 6144
+    max_calls_per_doc: 200
+    max_turns_indexed_per_doc: 3000
+    stop_when_priority_met: true
+    index_unknown: false
+    quotas:
+      main: 50
+      supporting: 40
+      extra: 10
+    min_chapter_coverage_main: 0.3
+    supporting_top_n: 20
+    main_top_n: 5
+    promote_importance_by_mentions: true
+    merge_alias_collisions: true
+    merge_near_duplicates: true
+    near_duplicate_max_distance: 2
+    near_duplicate_min_len: 4
+    importance_blacklist:
+    - 史莱姆
+    - 哥布林
+    - 人类
+    - 兽人
+    - 魔人
+    - 魔物
+    - 精灵
+    - 矮人
+    - 恶魔
+    - 天使
+    - 世界之声
+    max_windows_per_chapter: 5
+    deepen_on_build: true
+    deepen_max_calls: 8
+    require_quote_marks: true
+    candidate_source: inventory
+    harvest:
+      enabled: true
+      batch_chapters: 1
+      max_names: 20
+      max_tokens: 512
+    min_chapter_chars: 80
+    high_confidence_min: 0.85
+    accept_min: 0.7
+    accept_min_strict: 0.7
+    reject_vocative: true
+    roster_min: 0.5
+    batch_size: 5
+    context_sentences: 2
+    max_candidates: 12
+    max_prompt_candidates: 10
+    prefer_local_over_volume_seed: true
+    cold_start_open_extract: true
+    sync_on_ingest: true
+    turns_per_block: 40
+    # 说话人 LLM 校正：碎片/简称归一到权威名（防 微微一/佳树皮 等进 roster）
+    llm_correct_speakers: true
+    vec_text_max_chars: 1200
+    concurrency: 8
+  local_llm:
+    enabled: false
+    model_path: models/Haruhi-Dialogue-Speaker-Extract_qwen18
+    device: cuda
+    quantize: 4bit
+    dialogue:
+      trigger_mode: unknown_rate
+      unknown_rate_threshold: 0.3
+    character:
+      enabled: true
+      max_characters_per_novel: 30
+    chapter:
+      enabled: true
+      max_chars: 50000
+story_analysis:
+  max_chapters: 40
+  map_concurrency: 3
+  map_max_chars: 5000
+  max_tokens: 4096
+  per_type_cap: 3
+  summary_max_chars: 80
+  map_retry:
+    enabled: true
+    max_retries: 1
+    retry_per_type_cap: 3
+    retry_extract:
+      relations: true
+      events: false
+      foreshadows: false
+  extract:
+    relations: true
+    events: true
+    foreshadows: false
+  entity_filter:
+    reject_substrings:
+    - 做法
+    - 众人
+    - 现场
+    - 之类
+    - 方面
+    - 情况
+    - 后记
+    - 作者
+    - 插画师
+    - 读者
+    - 网络版
+    - 特典
+    min_name_len: 2
+    max_name_len: 16
+  chapter_quota:
+    balance_by_volume: true
+graph_rag:
+  enabled: true
+  community_summary_max_tokens: 1024
+  summary_target_chars: 400
+  top_communities: 2
+memory:
+  max_history_tokens: 8000
+  enable_summarization: true
+  summarize_keep_turns: 8
+  summarize_threshold: 0.8
+impersonation:
+  legacy_fallback: false
+tools:
+  builtin:
+  - web_search
+  - file_operation
+  - novel_search
+  - world_knowledge
+  - character_kb
+  - story_analysis
+  - novel_admin
+  - graph_rag
+  - character_graph
+  - roster
+  plugins: []
+logging:
+  level: INFO
+  file: agent.log

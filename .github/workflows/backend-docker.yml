@@ -1,0 +1,81 @@
+# Backend Docker image build + smoke (main/develop push)
+name: Backend Docker
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'Dockerfile'
+      - 'docker-compose.yml'
+      - 'requirements.txt'
+      - 'agent_server.py'
+      - 'src/**'
+      - 'config.yaml'
+      - '.github/workflows/backend-docker.yml'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'Dockerfile'
+      - 'docker-compose.yml'
+      - 'requirements.txt'
+      - 'agent_server.py'
+      - 'src/**'
+      - '.github/workflows/backend-docker.yml'
+
+concurrency:
+  group: backend-docker-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  docker:
+    name: Build & smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          tags: makers-agent:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          load: true
+
+      - name: Smoke — live probe
+        if: github.event_name == 'push'
+        run: |
+          docker run -d --name agent-smoke \
+            -e AGENT_API_TOKEN=ci-smoke-token \
+            -e DEEPSEEK_API_KEY=ci-placeholder-key \
+            -e CORS_ORIGINS=http://localhost:3000 \
+            -p 8080:8080 \
+            makers-agent:${{ github.sha }}
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8080/api/v1/agent/health/live >/dev/null; then
+              echo "live ok"
+              break
+            fi
+            sleep 2
+          done
+          curl -fsS http://127.0.0.1:8080/api/v1/agent/health/live | grep -q '"status":"ok"'
+          curl -fsS http://127.0.0.1:8080/metrics | head -n 5
+          docker stop agent-smoke
+
+      - name: Summarize
+        if: always()
+        run: |
+          echo "## Backend Docker" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Non-root USER agent (uid 10001)" >> "$GITHUB_STEP_SUMMARY"
+          echo "- HEALTHCHECK → /api/v1/agent/health/live" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Compose volume: makers-agent-data → /app/data" >> "$GITHUB_STEP_SUMMARY"

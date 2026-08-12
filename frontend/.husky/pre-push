@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Pre-push: 推送前运行类型检查与单元测试（如已配置）
+echo "[pre-push] Running typecheck..."
+npx tsc --noEmit || { echo "[pre-push] Typecheck failed, push aborted."; exit 1; }
+
+# 单元测试（如已配置 vitest，则取消下行注释）
+# npx vitest run --silent || { echo "[pre-push] Tests failed, push aborted."; exit 1; }
+
+exit 0

@@ -1,0 +1,54 @@
+node_modules/
+.DS_Store
+dist/
+build/
+# Environment files may contain credentials. Only templates are versioned.
+.env
+.env.*
+!**/.env.example
+!**/.env.local.example
+*.log
+.vscode/
+.idea/
+__pycache__/
+*.pyc
+.next/
+coverage/
+.pytest_cache/
+venv/
+venv_qwen/
+models/
+data/*
+!data/rosters/
+data/rosters/*
+!data/rosters/*.alias.json
+src/data/sessions/
+# Playwright
+frontend/playwright-report/
+frontend/test-results/
+# Local coverage / scratch
+.coverage
+.coverage.*
+htmlcov/
+.deepeval/
+1.txt
+*_results.json
+tests/e2e_results.json
+tests/_haruhi_*.json
+scripts/dev/verify/tmp/
+
+# Docker 配置（暂不推送，保留本地）
+Dockerfile
+docker-compose.yml
+.dockerignore
+frontend/Dockerfile
+frontend/docker-entrypoint.sh
+frontend/nginx.conf.template
+
+# 检索分析报告与评估数据（不推送）
+retrieval-relevance-study/
+retrieval-relevance-analysis-v2/
+.trae-html-share-packages/
+docs/analysis/
+docs/archive/
+scripts/dev/eval_dialogue/data/results/

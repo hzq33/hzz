@@ -1,0 +1,49 @@
+# Prometheus alerting rules for makers-agent
+# Load with: rule_files: ["deploy/prometheus/agent-alerts.yml"]
+groups:
+  - name: makers-agent
+    rules:
+      - alert: AgentHighHTTP5xxRate
+        expr: |
+          sum(rate(agent_http_requests_total{status=~"5.."}[5m]))
+            /
+          clamp_min(sum(rate(agent_http_requests_total[5m])), 0.001)
+            > 0.05
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Agent API 5xx rate > 5%"
+          description: "HTTP 5xx share is {{ $value | humanizePercentage }} over 5m."
+
+      - alert: AgentHighLatencyP95
+        expr: |
+          histogram_quantile(
+            0.95,
+            sum(rate(agent_http_request_duration_seconds_bucket[5m])) by (le)
+          ) > 15
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Agent API p95 latency > 15s"
+          description: "p95 request latency is {{ $value }}s."
+
+      - alert: AgentJobFailureSpike
+        expr: |
+          sum(rate(agent_jobs_terminal_total{state="failed"}[10m])) > 0.1
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Agent job failures elevated"
+          description: "Failed job rate is {{ $value }}/s over 10m."
+
+      - alert: AgentReadinessDown
+        expr: up{job="makers-agent"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "makers-agent scrape target down"
+          description: "Prometheus cannot scrape the agent /metrics endpoint."

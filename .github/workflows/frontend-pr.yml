@@ -1,0 +1,101 @@
+# PR 自动检查 + Bundle 大小对比
+name: Frontend PR Check
+
+on:
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'frontend/**'
+
+concurrency:
+  group: pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  bundle-size:
+    name: Bundle Size Diff
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: 'frontend/.nvmrc'
+          cache: 'npm'
+          cache-dependency-path: 'frontend/package-lock.json'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Build (PR branch)
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Save PR bundle size
+        run: |
+          mkdir -p ../.cache
+          find dist/assets -name '*.js' -exec du -b {} \; | sort > ../.cache/bundle-pr.txt
+          cat ../.cache/bundle-pr.txt
+
+      - name: Checkout base branch
+        run: |
+          git fetch origin ${{ github.base_ref }}
+          git checkout ${{ github.base_ref }} -- frontend/
+
+      - name: Install base dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Build (Base branch)
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Save base bundle size
+        run: |
+          find dist/assets -name '*.js' -exec du -b {} \; | sort > ../.cache/bundle-base.txt
+          cat ../.cache/bundle-base.txt
+
+      - name: Diff bundle sizes
+        run: |
+          echo "## Bundle Size Comparison" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Asset | Base (KB) | PR (KB) | Δ |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|-----------|---------|---|" >> $GITHUB_STEP_SUMMARY
+          # 简化版对比：按文件名汇总
+          awk '{print $2, $1}' ../.cache/bundle-base.txt | sort > /tmp/base.txt
+          awk '{print $2, $1}' ../.cache/bundle-pr.txt | sort > /tmp/pr.txt
+          join -j 1 -a 1 -a 2 /tmp/base.txt /tmp/pr.txt | \
+          awk '{
+            base=$2 ? $2/1024 : 0
+            pr=$3 ? $3/1024 : 0
+            delta=pr-base
+            printf "| %s | %.2f | %.2f | %+.2f |\n", $1, base, pr, delta
+          }' >> $GITHUB_STEP_SUMMARY
+
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = `### 📦 Bundle Size Report
+            See the workflow summary for detailed diff.
+            Run: ${process.env.GITHUB_RUN_URL}`;
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body
+            });

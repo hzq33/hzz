@@ -1,0 +1,20 @@
+# 浏览器兼容性目标
+# 文档: https://github.com/browserslist/browserslist
+# 配置被以下工具共享：
+#   - Autoprefixer (postcss) — 自动添加 CSS 前缀
+#   - Vite (build.target) — esbuild / rollup 的语法降级目标
+#   - ESLint (compat) — 标记不兼容的 API 使用
+
+# 生产环境：覆盖全球 95% 以上浏览器
+[production]
+> 0.5%
+last 2 versions
+Firefox ESR
+not dead
+not op_mini all
+
+# 开发环境：仅现代浏览器，获得最快构建与最佳开发体验
+[development]
+last 1 chrome version
+last 1 firefox version
+last 1 safari version

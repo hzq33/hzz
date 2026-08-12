@@ -1,0 +1,555 @@
+{
+ "avg": 0.34909090909090906,
+ "rows": [
+  {
+   "case_id": "八奈见杏菜_51",
+   "query": "你平时喜欢吃什么？",
+   "channel": "dialogue",
+   "character": "八奈见杏菜",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.5,
+   "self_reason": "上下文提及八奈见杏菜与食物相关的对话（五平饼、咖喱），但未直接回答她平时喜欢吃什么，缺少核心信息。"
+  },
+  {
+   "case_id": "八奈见杏菜_n52",
+   "query": "你平时喜欢吃什么？",
+   "channel": "narrative",
+   "character": "八奈见杏菜",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.1,
+   "self_reason": "上下文仅提及八奈见在进食，但没有任何关于她喜欢吃什么的具体信息，无法回应问题。"
+  },
+  {
+   "case_id": "八奈见杏菜_53",
+   "query": "你和草芥是分手了，还是怎样",
+   "channel": "dialogue",
+   "character": "八奈见杏菜",
+   "routed_channel": "character",
+   "hit_count": 5,
+   "self_score": 0.8,
+   "self_reason": "上下文包含八奈见与袴田草介的互动及情感暗示，直接相关于两人关系状态，但未明确回答分手与否。"
+  },
+  {
+   "case_id": "八奈见杏菜_n54",
+   "query": "你和草芥是分手了，还是怎样",
+   "channel": "narrative",
+   "character": "八奈见杏菜",
+   "routed_channel": "character",
+   "hit_count": 5,
+   "self_score": 1.0,
+   "self_reason": "上下文明确提及八奈见被草介甩了，直接回应了关于分手的疑问。"
+  },
+  {
+   "case_id": "八奈见杏菜_55",
+   "query": "你喜欢温水君吗",
+   "channel": "dialogue",
+   "character": "八奈见杏菜",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.2,
+   "self_reason": "上下文仅包含八奈见与温水的日常对话，未涉及“喜欢温水君”的情感问答，关联微弱。"
+  },
+  {
+   "case_id": "八奈见杏菜_n56",
+   "query": "你喜欢温水君吗",
+   "channel": "narrative",
+   "character": "八奈见杏菜",
+   "routed_channel": "character",
+   "hit_count": 4,
+   "self_score": 0.0,
+   "self_reason": "上下文未包含八奈见杏菜对温水君的感情或评价，与询问是否喜欢温水君完全无关。"
+  },
+  {
+   "case_id": "八奈见杏菜_57",
+   "query": "那你欠的钱还完了吗",
+   "channel": "dialogue",
+   "character": "八奈见杏菜",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 1.0,
+   "self_reason": "上下文明确包含欠款余额及还钱相关对话，能直接回应用户询问。"
+  },
+  {
+   "case_id": "八奈见杏菜_n58",
+   "query": "那你欠的钱还完了吗",
+   "channel": "narrative",
+   "character": "八奈见杏菜",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.2,
+   "self_reason": "上下文涉及欠款余额，但未明确指向角色八奈见杏菜，无法直接回应其欠款是否还完。"
+  },
+  {
+   "case_id": "八奈见杏菜_59",
+   "query": "对会长的看法",
+   "channel": "dialogue",
+   "character": "八奈见杏菜",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.0,
+   "self_reason": "上下文未提及任何关于'会长'的看法，与用户输入完全无关。"
+  },
+  {
+   "case_id": "八奈见杏菜_n60",
+   "query": "对会长的看法",
+   "channel": "narrative",
+   "character": "八奈见杏菜",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.0,
+   "self_reason": "上下文未提及任何关于会长或八奈见杏菜对会长看法的信息，完全无关。"
+  },
+  {
+   "case_id": "八奈见杏菜_61",
+   "query": "她会是你的情敌吗",
+   "channel": "dialogue",
+   "character": "八奈见杏菜",
+   "routed_channel": "character",
+   "hit_count": 5,
+   "self_score": 0.0,
+   "self_reason": "检索到的上下文均未涉及八奈见杏菜或'情敌'相关情节，与用户输入完全无关。"
+  },
+  {
+   "case_id": "八奈见杏菜_n62",
+   "query": "她会是你的情敌吗",
+   "channel": "narrative",
+   "character": "八奈见杏菜",
+   "routed_channel": "character",
+   "hit_count": 5,
+   "self_score": 0.0,
+   "self_reason": "检索到的上下文均未涉及角色八奈见杏菜或情敌话题，与用户输入完全无关。"
+  },
+  {
+   "case_id": "温水佳树_63",
+   "query": "介绍一下你自己",
+   "channel": "dialogue",
+   "character": "温水佳树",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.0,
+   "self_reason": "检索内容均为主角与其他角色的互动，未包含任何关于温水佳树的自我介绍信息。"
+  },
+  {
+   "case_id": "温水佳树_n64",
+   "query": "介绍一下你自己",
+   "channel": "narrative",
+   "character": "温水佳树",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.0,
+   "self_reason": "检索内容均为剧情片段，未包含对角色“温水佳树”的任何介绍信息。"
+  },
+  {
+   "case_id": "温水佳树_65",
+   "query": "那你喜欢你的哥哥吗",
+   "channel": "dialogue",
+   "character": "温水佳树",
+   "routed_channel": "character",
+   "hit_count": 4,
+   "self_score": 0.8,
+   "self_reason": "上下文多处体现温水佳树对哥哥的关心与爱慕，虽未直接回答但高度相关。"
+  },
+  {
+   "case_id": "温水佳树_n66",
+   "query": "那你喜欢你的哥哥吗",
+   "channel": "narrative",
+   "character": "温水佳树",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.8,
+   "self_reason": "上下文体现佳树对哥哥的深厚感情和关心，能支撑回答是否喜欢哥哥的问题。"
+  },
+  {
+   "case_id": "温水佳树_67",
+   "query": "你和八奈见学姐关系好吗？",
+   "channel": "dialogue",
+   "character": "温水佳树",
+   "routed_channel": "character",
+   "hit_count": 4,
+   "self_score": 0.8,
+   "self_reason": "上下文包含温水与八奈见的互动及朋友关系描述，能支撑回答关系如何，但未直接给出明确结论。"
+  },
+  {
+   "case_id": "温水佳树_n68",
+   "query": "你和八奈见学姐关系好吗？",
+   "channel": "narrative",
+   "character": "温水佳树",
+   "routed_channel": "character",
+   "hit_count": 3,
+   "self_score": 0.8,
+   "self_reason": "上下文描述了温水和八奈见学姐的互动（来家里、座位旁聊天等），能推断关系较好，但未直接回答‘关系好吗’这一问题，故扣分。"
+  },
+  {
+   "case_id": "温水佳树_69",
+   "query": "哥哥最近有没有又做什么奇怪的事？",
+   "channel": "dialogue",
+   "character": "温水佳树",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.0,
+   "self_reason": "上下文虽涉及温水和彦，但均为其他场景的对话/叙述，未包含任何关于哥哥做奇怪事或佳树提问的相关信息。"
+  },
+  {
+   "case_id": "温水佳树_n70",
+   "query": "哥哥最近有没有又做什么奇怪的事？",
+   "channel": "narrative",
+   "character": "温水佳树",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.4,
+   "self_reason": "上下文涉及哥哥温水和彦的日常互动，但未直接提及‘奇怪的事’，仅部分相关。"
+  },
+  {
+   "case_id": "烧盐柠檬_71",
+   "query": "你对佳树有什么看法",
+   "channel": "dialogue",
+   "character": "烧盐柠檬",
+   "routed_channel": "narrative",
+   "hit_count": 4,
+   "self_score": 0.1,
+   "self_reason": "上下文仅包含佳树自己的台词，没有他人对佳树的看法，与询问看法的问题弱相关。"
+  },
+  {
+   "case_id": "烧盐柠檬_n72",
+   "query": "你对佳树有什么看法",
+   "channel": "narrative",
+   "character": "烧盐柠檬",
+   "routed_channel": "narrative",
+   "hit_count": 4,
+   "self_score": 0.0,
+   "self_reason": "上下文均为佳树本人的台词，未包含烧盐柠檬对佳树的看法，无法回应用户问题。"
+  },
+  {
+   "case_id": "烧盐柠檬_73",
+   "query": "会不会佳树以为你喜欢她哥哥",
+   "channel": "dialogue",
+   "character": "烧盐柠檬",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 1.0,
+   "self_reason": "上下文[1]直接包含佳树猜测哥哥恋爱对象的相关对话，能回应提问，高度相关。"
+  },
+  {
+   "case_id": "烧盐柠檬_n74",
+   "query": "会不会佳树以为你喜欢她哥哥",
+   "channel": "narrative",
+   "character": "烧盐柠檬",
+   "routed_channel": "character",
+   "hit_count": 2,
+   "self_score": 0.0,
+   "self_reason": "上下文未涉及烧盐柠檬，也未包含“佳树以为你喜欢她哥哥”的相关情节或对话。"
+  },
+  {
+   "case_id": "烧盐柠檬_75",
+   "query": "你为什么叫温水和彦叫温温",
+   "channel": "dialogue",
+   "character": "烧盐柠檬",
+   "routed_channel": "narrative",
+   "hit_count": 4,
+   "self_score": 0.0,
+   "self_reason": "上下文仅介绍温水和彦的身份，未包含‘温温’昵称的由来或烧盐柠檬的相关对话信息。"
+  },
+  {
+   "case_id": "烧盐柠檬_n76",
+   "query": "你为什么叫温水和彦叫温温",
+   "channel": "narrative",
+   "character": "烧盐柠檬",
+   "routed_channel": "narrative",
+   "hit_count": 4,
+   "self_score": 0.1,
+   "self_reason": "上下文只提到了温水和彦这个人物，但没有包含任何关于‘温温’这一昵称由来的信息，仅有人物名的模糊关联。"
+  },
+  {
+   "case_id": "烧盐柠檬_77",
+   "query": "怪不得佳树看你的眼神很奇怪",
+   "channel": "dialogue",
+   "character": "烧盐柠檬",
+   "routed_channel": "character",
+   "hit_count": 5,
+   "self_score": 0.2,
+   "self_reason": "上下文仅提及佳树，但未包含与‘看你的眼神很奇怪’相关的情节或对话，仅有模糊关联。"
+  },
+  {
+   "case_id": "烧盐柠檬_n78",
+   "query": "怪不得佳树看你的眼神很奇怪",
+   "channel": "narrative",
+   "character": "烧盐柠檬",
+   "routed_channel": "character",
+   "hit_count": 5,
+   "self_score": 0.0,
+   "self_reason": ""
+  },
+  {
+   "case_id": "马剃天爱星_79",
+   "query": "简单介绍一下你自己",
+   "channel": "dialogue",
+   "character": "马剃天爱星",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.0,
+   "self_reason": "检索到的上下文均为其他角色的日常对话，未包含马剃天爱星的任何信息，无法回应自我介绍请求。"
+  },
+  {
+   "case_id": "马剃天爱星_n80",
+   "query": "简单介绍一下你自己",
+   "channel": "narrative",
+   "character": "马剃天爱星",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.0,
+   "self_reason": "上下文内容均为其他角色与主角的互动，未涉及马剃天爱星或自我介绍信息，完全无关。"
+  },
+  {
+   "case_id": "马剃天爱星_81",
+   "query": "你是会长吗",
+   "channel": "dialogue",
+   "character": "马剃天爱星",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 1.0,
+   "self_reason": "上下文明确提及马剃天爱星是学生会副会长，可直接回应‘你是会长吗’的询问。"
+  },
+  {
+   "case_id": "马剃天爱星_n82",
+   "query": "你是会长吗",
+   "channel": "narrative",
+   "character": "马剃天爱星",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 1.0,
+   "self_reason": "上下文明确指出天爱星同学是学生会副会长，可回答她并非会长，直接回应了用户问题。"
+  },
+  {
+   "case_id": "马剃天爱星_83",
+   "query": "会长是谁",
+   "channel": "dialogue",
+   "character": "马剃天爱星",
+   "routed_channel": "narrative",
+   "hit_count": 3,
+   "self_score": 0.0,
+   "self_reason": "检索到的上下文中未提及任何关于会长的信息，无法回答用户问题。"
+  },
+  {
+   "case_id": "马剃天爱星_84",
+   "query": "你感觉会长会和温水在一起吗",
+   "channel": "dialogue",
+   "character": "马剃天爱星",
+   "routed_channel": "character",
+   "hit_count": 3,
+   "self_score": 0.0,
+   "self_reason": "检索内容为玉木慎太郎、温水、古都等人的日常对话，未提及任何“会长”与温水在一起的相关信息。"
+  },
+  {
+   "case_id": "马剃天爱星_n85",
+   "query": "你感觉会长会和温水在一起吗",
+   "channel": "narrative",
+   "character": "马剃天爱星",
+   "routed_channel": "character",
+   "hit_count": 3,
+   "self_score": 0.0,
+   "self_reason": "检索上下文未提及会长与温水的关系，内容与用户询问完全无关。"
+  },
+  {
+   "case_id": "马剃天爱星_86",
+   "query": "八奈见杏菜同学怎么样",
+   "channel": "dialogue",
+   "character": "马剃天爱星",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 1.0,
+   "self_reason": "上下文直接包含八奈见杏菜的性格、近况和对话信息，能充分回应询问。"
+  },
+  {
+   "case_id": "马剃天爱星_n87",
+   "query": "八奈见杏菜同学怎么样",
+   "channel": "narrative",
+   "character": "马剃天爱星",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 1.0,
+   "self_reason": "上下文直接包含八奈见杏菜的相关信息（近况、人际关系、言行等），能回答用户询问。"
+  },
+  {
+   "case_id": "温水和彦_01",
+   "query": "你妹妹是谁",
+   "channel": "dialogue",
+   "character": "温水和彦",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 1.0,
+   "self_reason": "上下文明确提到温水和彦的妹妹是温水佳树，包含直接回答用户问题的关键信息。"
+  },
+  {
+   "case_id": "温水和彦_02",
+   "query": "你和你妹妹关系怎么样",
+   "channel": "dialogue",
+   "character": "温水和彦",
+   "routed_channel": "character",
+   "hit_count": 4,
+   "self_score": 0.8,
+   "self_reason": "上下文包含温水佳树（妹妹）与哥哥的互动台词，能体现兄妹关系亲密，可支撑回应关系问题。"
+  },
+  {
+   "case_id": "温水和彦_03",
+   "query": "你和八奈见杏菜怎么认识的",
+   "channel": "dialogue",
+   "character": "温水和彦",
+   "routed_channel": "narrative",
+   "hit_count": 3,
+   "self_score": 0.2,
+   "self_reason": "上下文仅提及八奈见杏菜和温水和彦的人物互动，但未包含两人如何认识的关键信息或情节。"
+  },
+  {
+   "case_id": "温水和彦_04",
+   "query": "你知道学生会会长吗",
+   "channel": "dialogue",
+   "character": "温水和彦",
+   "routed_channel": "narrative",
+   "hit_count": 4,
+   "self_score": 0.9,
+   "self_reason": "上下文多处提到学生会会长、副会长及学生会相关情节，直接关联用户询问的学生会会长话题。"
+  },
+  {
+   "case_id": "温水和彦_05",
+   "query": "学生会副会长你应该认识吧",
+   "channel": "dialogue",
+   "character": "温水和彦",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.1,
+   "self_reason": "上下文仅提及学生会书记，未包含学生会副会长的任何信息，仅属于同一作品背景下的弱关联。"
+  },
+  {
+   "case_id": "温水和彦_06",
+   "query": "你平常都在做什么",
+   "channel": "dialogue",
+   "character": "温水和彦",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.5,
+   "self_reason": "上下文描述了温水的具体活动场景，但未直接概括其日常习惯，缺少核心信息。"
+  },
+  {
+   "case_id": "温水和彦_07",
+   "query": "你最喜欢看的书是什么",
+   "channel": "dialogue",
+   "character": "温水和彦",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.1,
+   "self_reason": "上下文仅提及主角享受轻小说，未包含回答'最喜欢看的书'的具体书名或偏好信息，只有模糊关联。"
+  },
+  {
+   "case_id": "袴田草介_01",
+   "query": "你女朋友是谁",
+   "channel": "dialogue",
+   "character": "袴田草介",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.8,
+   "self_reason": "上下文提到袴田草介与华恋的道别，暗示华恋可能是其女友，能回应查询"
+  },
+  {
+   "case_id": "袴田草介_02",
+   "query": "你青梅竹马是谁",
+   "channel": "dialogue",
+   "character": "袴田草介",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.0,
+   "self_reason": "上下文未提及与青梅竹马相关的任何人物或情节信息。"
+  },
+  {
+   "case_id": "袴田草介_03",
+   "query": "你和你的青梅竹马关系怎么样",
+   "channel": "dialogue",
+   "character": "袴田草介",
+   "routed_channel": "character",
+   "hit_count": 5,
+   "self_score": 0.0,
+   "self_reason": "检索到的上下文均涉及温水和彦等角色，未包含袴田草介或青梅竹马关系的信息，与用户输入完全无关。"
+  },
+  {
+   "case_id": "袴田草介_04",
+   "query": "你知道她喜欢你吗",
+   "channel": "dialogue",
+   "character": "袴田草介",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.0,
+   "self_reason": "上下文未包含与“她喜欢你吗”相关的情感信息，仅提及袴田草介的对话场景但无核心内容。"
+  },
+  {
+   "case_id": "温水佳树_01",
+   "query": "请自我介绍一下",
+   "channel": "dialogue",
+   "character": "温水佳树",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.0,
+   "self_reason": "上下文均为主角与其他人物的互动情节，不包含温水佳树的自我介绍信息。"
+  },
+  {
+   "case_id": "温水佳树_02",
+   "query": "那你知道你哥哥喜欢谁吗",
+   "channel": "dialogue",
+   "character": "温水佳树",
+   "routed_channel": "narrative",
+   "hit_count": 4,
+   "self_score": 1.0,
+   "self_reason": "上下文直接提到哥哥的对象可能是露营地的女孩子，包含回答‘哥哥喜欢谁’的关键信息。"
+  },
+  {
+   "case_id": "温水佳树_03",
+   "query": "你认识你哥哥身边的女生吗",
+   "channel": "dialogue",
+   "character": "温水佳树",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 1.0,
+   "self_reason": "上下文包含温水佳树谈及哥哥身边女生（露营女孩、朝云学姐等）的对话，直接回应了用户问题。"
+  },
+  {
+   "case_id": "雷姆_01",
+   "query": "请自我介绍一下",
+   "channel": "dialogue",
+   "character": "雷姆",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.0,
+   "self_reason": "上下文内容与用户输入完全无关，未包含雷姆的自我介绍或相关对话信息。"
+  },
+  {
+   "case_id": "雷姆_02",
+   "query": "你平常都在做什么",
+   "channel": "dialogue",
+   "character": "雷姆",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.0,
+   "self_reason": "上下文内容与雷姆的日常活动无关，未包含任何可用于回答该问题的信息。"
+  },
+  {
+   "case_id": "雷姆_03",
+   "query": "你喜欢的事物",
+   "channel": "dialogue",
+   "character": "雷姆",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.0,
+   "self_reason": "上下文内容与雷姆角色及“你喜欢的事物”话题完全无关，来自其他作品。"
+  },
+  {
+   "case_id": "雷姆_04",
+   "query": "你喜欢的人",
+   "channel": "dialogue",
+   "character": "雷姆",
+   "routed_channel": "narrative",
+   "hit_count": 5,
+   "self_score": 0.0,
+   "self_reason": "检索上下文与雷姆及“你喜欢的人”完全无关，内容来自其他作品。"
+  }
+ ]
+}

@@ -1,0 +1,369 @@
+{
+ "elapsed": 11.193630456924438,
+ "raw": "```json\n{\n  \"characters\": [\n    {\n      \"canonical_name\": \"八奈见杏菜\",\n      \"aliases\": [\"八奈\", \"八奈见\", \"奈美\", \"奈见\"],\n      \"importance\": \"main\",\n      \"from_clusters\": [\"c1\", \"c27\"],\n      \"evidence_for_canonical\": \"c27 evidence中包含'八奈见杏菜'\"\n    },\n    {\n      \"canonical_name\": \"袴田草介\",\n      \"aliases\": [\"田草介\", \"草介\"],\n      \"importance\": \"main\",\n      \"from_clusters\": [\"c15\"],\n      \"evidence_for_canonical\": \"c15 evidence中包含'袴田草介'\"\n    },\n    {\n      \"canonical_name\": \"月之木古都\",\n      \"aliases\": [\"月之木\", \"之木\", \"月之木学\"],\n      \"importance\": \"main\",\n      \"from_clusters\": [\"c2\", \"c46\"],\n      \"evidence_for_canonical\": \"c46 evidence中包含'月之木古都'\"\n    },\n    {\n      \"canonical_name\": \"绫野光希\",\n      \"aliases\": [\"绫野\", \"绫野行\", \"绫野刚\", \"光希\"],\n      \"importance\": \"main\",\n      \"from_clusters\": [\"c3\", \"c6\", \"c14\"],\n      \"evidence_for_canonical\": \"c14 evidence中包含'绫野光希'\"\n    },\n    {\n      \"canonical_name\": \"朝云千早\",\n      \"aliases\": [\"朝云\", \"千早\"],\n      \"importance\": \"main\",\n      \"from_clusters\": [\"c4\", \"c18\", \"c24\"],\n      \"evidence_for_canonical\": \"c18 evidence中包含'朝云千早'\"\n    },\n    {\n      \"canonical_name\": \"烧盐柠檬\",\n      \"aliases\": [\"烧盐\", \"柠檬\"],\n      \"importance\": \"main\",\n      \"from_clusters\": [\"c5\", \"c10\", \"c36\", \"c55\"],\n      \"evidence_for_canonical\": \"c36 evidence中包含'烧盐柠檬'\"\n    },\n    {\n      \"canonical_name\": \"温水佳树\",\n      \"aliases\": [\"佳树\"],\n      \"importance\": \"main\",\n      \"from_clusters\": [\"c7\", \"c25\"],\n      \"evidence_for_canonical\": \"c25 evidence中包含'温水佳树'\"\n    },\n    {\n      \"canonical_name\": \"温水和彦\",\n      \"aliases\": [\"温水\", \"温温\", \"温酱\", \"菜酱\"],\n      \"importance\": \"main\",\n      \"from_clusters\": [\"c8\", \"c35\"],\n      \"evidence_for_canonical\": \"c35 evidence中包含'温水和彦'\"\n    },\n    {\n      \"canonical_name\": \"甘夏古奈美\",\n      \"aliases\": [\"甘夏\"],\n      \"importance\": \"main\",\n      \"from_clusters\": [\"c11\", \"c37\"],\n      \"evidence_for_canonical\": \"c37 evidence中包含'甘夏古奈美'\"\n    },\n    {\n      \"canonical_name\": \"姬宫华恋\",\n      \"aliases\": [\"姬宫\", \"姬宫华\", \"田姬宫\", \"华恋\", \"华恋将\"],\n      \"importance\": \"main\",\n      \"from_clusters\": [\"c12\", \"c17\"],\n      \"evidence_for_canonical\": \"c12 evidence中包含'姬宫华恋'\"\n    },\n    {\n      \"canonical_name\": \"志喜屋梦子\",\n      \"aliases\": [\"志喜屋\", \"喜屋\"],\n      \"importance\": \"main\",\n      \"from_clusters\": [\"c13\", \"c23\"],\n      \"evidence_for_canonical\": \"c23 evidence中包含'志喜屋梦子'\"\n    },\n    {\n      \"canonical_name\": \"小抜\",\n      \"aliases\": [],\n      \"importance\": \"extra\",\n      \"from_clusters\": [\"c19\"],\n      \"evidence_for_canonical\": \"c19 evidence中包含'小抜老师'\"\n    },\n    {\n      \"canonical_name\": \"小鞠知花\",\n      \"aliases\": [\"小鞠\", \"鞠知花\"],\n      \"importance\": \"main\",\n      \"from_clusters\": [\"c19\", \"c34\"],\n      \"evidence_for_canonical\": \"c34 evidence中包含'小鞠知花'\"\n    },\n    {\n      \"canonical_name\": \"玉木慎太郎\",\n      \"aliases\": [\"慎太郎\", \"太郎\"],\n      \"importance\": \"main\",\n      \"from_clusters\": [\"c9\", \"c30\", \"c46\"],\n      \"evidence_for_canonical\": \"c30 evidence中包含'玉木慎太郎'\"\n    },\n    {\n      \"canonical_name\": \"权藤亜咲美\",\n      \"aliases\": [\"权酱\"],\n      \"importance\": \"extra\",\n      \"from_clusters\": [\"c47\"],\n      \"evidence_for_canonical\": \"c47 evidence中包含'权藤亜咲美'\"\n    },\n    {\n      \"canonical_name\": \"放虎原云雀\",\n      \"aliases\": [],\n      \"importance\": \"extra\",\n      \"from_clusters\": [\"c45\"],\n      \"evidence_for_canonical\": \"c45 evidence中包含'放虎原云雀'\"\n    },\n    {\n      \"canonical_name\": \"希尔维娅•卢克泽德\",\n      \"aliases\": [\"希尔维娅\"],\n      \"importance\": \"extra\",\n      \"from_clusters\": [\"c29\", \"c39\", \"c42\"],\n      \"evidence_for_canonical\": \"c42 evidence中包含'希尔维娅•卢克泽德'\"\n    },\n    {\n      \"canonical_name\": \"裘斯塔\",\n      \"aliases\": [\"王子\"],\n      \"importance\": \"extra\",\n      \"from_clusters\": [\"c22\", \"c49\"],\n      \"evidence_for_canonical\": \"c22 evidence中包含'裘斯塔第一王子'\"\n    },\n    {\n      \"canonical_name\": \"安奴\",\n      \"aliases\": [\"安娜\"],\n      \"importance\": \"extra\",\n      \"from_clusters\": [\"c21\"],\n      \"evidence_for_canonical\": \"c21 evidence中包含'安奴男爵千金'\"\n    },\n    {\n      \"canonical_name\": \"宇佐美凛\",\n      \"aliases\": [],\n      \"importance\": \"extra\",\n      \"from_clusters\": [\"c41\"],\n      \"evidence_for_canonical\": \"c41 evidence中包含'宇佐美凛'\"\n    },\n    {\n      \"canonical_name\": \"水原百合\",\n      \"aliases\": [],\n      \"importance\": \"extra\",\n      \"from_clusters\": [\"c56\"],\n      \"evidence_for_canonical\": \"c56 evidence中包含'水原百合'\"\n    },\n    {\n      \"canonical_name\": \"拓哉\",\n      \"aliases\": [],\n      \"importance\": \"extra\",\n      \"from_clusters\": [\"c43\"],\n      \"evidence_for_canonical\": \"c43 evidence中包含'拓哉'\"\n    },\n    {\n      \"canonical_name\": \"春太\",\n      \"aliases\": [],\n      \"importance\": \"extra\",\n      \"from_clusters\": [\"c43\"],\n      \"evidence_for_canonical\": \"c43 evidence中包含'春太'\"\n    },\n    {\n      \"canonical_name\": \"绮罗里\",\n      \"aliases\": [],\n      \"importance\": \"extra\",\n      \"from_clusters\": [\"c52\"],\n      \"evidence_for_canonical\": \"c52 evidence中包含'绮罗里酱'\"\n    },\n    {\n      \"canonical_name\": \"田中\",\n      \"aliases\": [],\n      \"importance\": \"extra\",\n      \"from_clusters\": [\"c50\"],\n      \"evidence_for_canonical\": \"c50 evidence中包含'田中也跑来问我'\"\n    }\n  ],\n  \"dropped\": [\n    {\"from_clusters\": [\"c9\", \"c16\", \"c20\", \"c26\", \"c38\"], \"reason\": \"太宰治、三岛由纪夫、川端、芥川是文中引用的作家,非角色\"},\n    {\"from_clusters\": [\"c28\"], \"reason\": \"岩浅氏是编辑,元信息名\"},\n    {\"from_clusters\": [\"c31\"], \"reason\": \"雨森是作者,元信息名\"},\n    {\"from_clusters\": [\"c32\"], \"reason\": \"小村雏是图源/校对,元信息名\"},\n    {\"from_clusters\": [\"c33\"], \"reason\": \"小田和正是歌手,文中引用名人\"},\n    {\"from_clusters\": [\"c40\", \"c53\"], \"reason\": \"哈利、赫敏是哈利波特角色,文中引用\"},\n    {\"from_clusters\": [\"c44\"], \"reason\": \"拿破仑是历史人物,文中引用\"},\n    {\"from_clusters\": [\"c48\"], \"reason\": \"村上春树是作家,文中引用\"},\n    {\"from_clusters\": [\"c54\"], \"reason\": \"麦凯恩是政治家,文中引用\"}\n  ]\n}\n```",
+ "parsed": {
+  "characters": [
+   {
+    "canonical_name": "八奈见杏菜",
+    "aliases": [
+     "八奈",
+     "八奈见",
+     "奈美",
+     "奈见"
+    ],
+    "importance": "main",
+    "from_clusters": [
+     "c1",
+     "c27"
+    ],
+    "evidence_for_canonical": "c27 evidence中包含'八奈见杏菜'"
+   },
+   {
+    "canonical_name": "袴田草介",
+    "aliases": [
+     "田草介",
+     "草介"
+    ],
+    "importance": "main",
+    "from_clusters": [
+     "c15"
+    ],
+    "evidence_for_canonical": "c15 evidence中包含'袴田草介'"
+   },
+   {
+    "canonical_name": "月之木古都",
+    "aliases": [
+     "月之木",
+     "之木",
+     "月之木学"
+    ],
+    "importance": "main",
+    "from_clusters": [
+     "c2",
+     "c46"
+    ],
+    "evidence_for_canonical": "c46 evidence中包含'月之木古都'"
+   },
+   {
+    "canonical_name": "绫野光希",
+    "aliases": [
+     "绫野",
+     "绫野行",
+     "绫野刚",
+     "光希"
+    ],
+    "importance": "main",
+    "from_clusters": [
+     "c3",
+     "c6",
+     "c14"
+    ],
+    "evidence_for_canonical": "c14 evidence中包含'绫野光希'"
+   },
+   {
+    "canonical_name": "朝云千早",
+    "aliases": [
+     "朝云",
+     "千早"
+    ],
+    "importance": "main",
+    "from_clusters": [
+     "c4",
+     "c18",
+     "c24"
+    ],
+    "evidence_for_canonical": "c18 evidence中包含'朝云千早'"
+   },
+   {
+    "canonical_name": "烧盐柠檬",
+    "aliases": [
+     "烧盐",
+     "柠檬"
+    ],
+    "importance": "main",
+    "from_clusters": [
+     "c5",
+     "c10",
+     "c36",
+     "c55"
+    ],
+    "evidence_for_canonical": "c36 evidence中包含'烧盐柠檬'"
+   },
+   {
+    "canonical_name": "温水佳树",
+    "aliases": [
+     "佳树"
+    ],
+    "importance": "main",
+    "from_clusters": [
+     "c7",
+     "c25"
+    ],
+    "evidence_for_canonical": "c25 evidence中包含'温水佳树'"
+   },
+   {
+    "canonical_name": "温水和彦",
+    "aliases": [
+     "温水",
+     "温温",
+     "温酱",
+     "菜酱"
+    ],
+    "importance": "main",
+    "from_clusters": [
+     "c8",
+     "c35"
+    ],
+    "evidence_for_canonical": "c35 evidence中包含'温水和彦'"
+   },
+   {
+    "canonical_name": "甘夏古奈美",
+    "aliases": [
+     "甘夏"
+    ],
+    "importance": "main",
+    "from_clusters": [
+     "c11",
+     "c37"
+    ],
+    "evidence_for_canonical": "c37 evidence中包含'甘夏古奈美'"
+   },
+   {
+    "canonical_name": "姬宫华恋",
+    "aliases": [
+     "姬宫",
+     "姬宫华",
+     "田姬宫",
+     "华恋",
+     "华恋将"
+    ],
+    "importance": "main",
+    "from_clusters": [
+     "c12",
+     "c17"
+    ],
+    "evidence_for_canonical": "c12 evidence中包含'姬宫华恋'"
+   },
+   {
+    "canonical_name": "志喜屋梦子",
+    "aliases": [
+     "志喜屋",
+     "喜屋"
+    ],
+    "importance": "main",
+    "from_clusters": [
+     "c13",
+     "c23"
+    ],
+    "evidence_for_canonical": "c23 evidence中包含'志喜屋梦子'"
+   },
+   {
+    "canonical_name": "小抜",
+    "aliases": [],
+    "importance": "extra",
+    "from_clusters": [
+     "c19"
+    ],
+    "evidence_for_canonical": "c19 evidence中包含'小抜老师'"
+   },
+   {
+    "canonical_name": "小鞠知花",
+    "aliases": [
+     "小鞠",
+     "鞠知花"
+    ],
+    "importance": "main",
+    "from_clusters": [
+     "c19",
+     "c34"
+    ],
+    "evidence_for_canonical": "c34 evidence中包含'小鞠知花'"
+   },
+   {
+    "canonical_name": "玉木慎太郎",
+    "aliases": [
+     "慎太郎",
+     "太郎"
+    ],
+    "importance": "main",
+    "from_clusters": [
+     "c9",
+     "c30",
+     "c46"
+    ],
+    "evidence_for_canonical": "c30 evidence中包含'玉木慎太郎'"
+   },
+   {
+    "canonical_name": "权藤亜咲美",
+    "aliases": [
+     "权酱"
+    ],
+    "importance": "extra",
+    "from_clusters": [
+     "c47"
+    ],
+    "evidence_for_canonical": "c47 evidence中包含'权藤亜咲美'"
+   },
+   {
+    "canonical_name": "放虎原云雀",
+    "aliases": [],
+    "importance": "extra",
+    "from_clusters": [
+     "c45"
+    ],
+    "evidence_for_canonical": "c45 evidence中包含'放虎原云雀'"
+   },
+   {
+    "canonical_name": "希尔维娅•卢克泽德",
+    "aliases": [
+     "希尔维娅"
+    ],
+    "importance": "extra",
+    "from_clusters": [
+     "c29",
+     "c39",
+     "c42"
+    ],
+    "evidence_for_canonical": "c42 evidence中包含'希尔维娅•卢克泽德'"
+   },
+   {
+    "canonical_name": "裘斯塔",
+    "aliases": [
+     "王子"
+    ],
+    "importance": "extra",
+    "from_clusters": [
+     "c22",
+     "c49"
+    ],
+    "evidence_for_canonical": "c22 evidence中包含'裘斯塔第一王子'"
+   },
+   {
+    "canonical_name": "安奴",
+    "aliases": [
+     "安娜"
+    ],
+    "importance": "extra",
+    "from_clusters": [
+     "c21"
+    ],
+    "evidence_for_canonical": "c21 evidence中包含'安奴男爵千金'"
+   },
+   {
+    "canonical_name": "宇佐美凛",
+    "aliases": [],
+    "importance": "extra",
+    "from_clusters": [
+     "c41"
+    ],
+    "evidence_for_canonical": "c41 evidence中包含'宇佐美凛'"
+   },
+   {
+    "canonical_name": "水原百合",
+    "aliases": [],
+    "importance": "extra",
+    "from_clusters": [
+     "c56"
+    ],
+    "evidence_for_canonical": "c56 evidence中包含'水原百合'"
+   },
+   {
+    "canonical_name": "拓哉",
+    "aliases": [],
+    "importance": "extra",
+    "from_clusters": [
+     "c43"
+    ],
+    "evidence_for_canonical": "c43 evidence中包含'拓哉'"
+   },
+   {
+    "canonical_name": "春太",
+    "aliases": [],
+    "importance": "extra",
+    "from_clusters": [
+     "c43"
+    ],
+    "evidence_for_canonical": "c43 evidence中包含'春太'"
+   },
+   {
+    "canonical_name": "绮罗里",
+    "aliases": [],
+    "importance": "extra",
+    "from_clusters": [
+     "c52"
+    ],
+    "evidence_for_canonical": "c52 evidence中包含'绮罗里酱'"
+   },
+   {
+    "canonical_name": "田中",
+    "aliases": [],
+    "importance": "extra",
+    "from_clusters": [
+     "c50"
+    ],
+    "evidence_for_canonical": "c50 evidence中包含'田中也跑来问我'"
+   }
+  ],
+  "dropped": [
+   {
+    "from_clusters": [
+     "c9",
+     "c16",
+     "c20",
+     "c26",
+     "c38"
+    ],
+    "reason": "太宰治、三岛由纪夫、川端、芥川是文中引用的作家,非角色"
+   },
+   {
+    "from_clusters": [
+     "c28"
+    ],
+    "reason": "岩浅氏是编辑,元信息名"
+   },
+   {
+    "from_clusters": [
+     "c31"
+    ],
+    "reason": "雨森是作者,元信息名"
+   },
+   {
+    "from_clusters": [
+     "c32"
+    ],
+    "reason": "小村雏是图源/校对,元信息名"
+   },
+   {
+    "from_clusters": [
+     "c33"
+    ],
+    "reason": "小田和正是歌手,文中引用名人"
+   },
+   {
+    "from_clusters": [
+     "c40",
+     "c53"
+    ],
+    "reason": "哈利、赫敏是哈利波特角色,文中引用"
+   },
+   {
+    "from_clusters": [
+     "c44"
+    ],
+    "reason": "拿破仑是历史人物,文中引用"
+   },
+   {
+    "from_clusters": [
+     "c48"
+    ],
+    "reason": "村上春树是作家,文中引用"
+   },
+   {
+    "from_clusters": [
+     "c54"
+    ],
+    "reason": "麦凯恩是政治家,文中引用"
+   }
+  ]
+ }
+}

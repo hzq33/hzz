@@ -1,0 +1,23 @@
+# Ruff — Wave D CI gate (critical correctness first; style cleanup incremental)
+target-version = "py313"
+line-length = 100
+extend-exclude = [
+  "tests/verify_*.py",
+  "tests/diag_*.py",
+  "tests/dump_*.py",
+  "tests/inspect_*.py",
+  "tests/eval/**",
+]
+
+[lint]
+select = [
+  "E9",   # runtime syntax errors
+  "F63",  # invalid print/assert
+  "F7",   # syntax errors in pyflakes
+  "F82",  # undefined names
+]
+ignore = []
+
+[lint.per-file-ignores]
+# Local imports keep return annotations resolvable at runtime via __future__ annotations
+"src/application/novel/factory.py" = ["F821"]

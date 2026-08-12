@@ -1,0 +1,18 @@
+# Prettier 忽略清单
+dist
+node_modules
+coverage
+playwright-report
+test-results
+*.lock
+*.log
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# 构建产物时间戳文件
+vite.config.ts.timestamp-*
+
+# 第三方模型文件（不应格式化）
+../models
+../venv_qwen

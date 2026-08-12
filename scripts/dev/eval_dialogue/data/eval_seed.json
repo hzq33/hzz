@@ -1,0 +1,2028 @@
+{
+ "version": 3,
+ "created_at": null,
+ "built_from": {
+  "imp_sessions": [
+   "imp_3123d2a9f2d5",
+   "imp_3e92fd88c139",
+   "imp_5452ed829f50",
+   "imp_5eac2b6beaf9",
+   "imp_60ef3bcce7f8",
+   "imp_88b6b2e23466",
+   "imp_a82e1657d93e",
+   "imp_b87155162d41",
+   "imp_bb61deae7dbd",
+   "imp_c22ec234eefa",
+   "imp_c572f9056d1f",
+   "imp_e7d050c1c9fd",
+   "imp_f6a01bcff5cb"
+  ],
+  "chat_sessions": [
+   "953ba6e7",
+   "2a52c6a4"
+  ]
+ },
+ "characters": {
+  "八奈见杏菜": {
+   "aliases": [
+    "八奈见杏菜",
+    "八奈",
+    "八奈见"
+   ],
+   "speakers": [
+    "八奈",
+    "八奈见",
+    "八奈见杏菜"
+   ],
+   "series_id": "败犬女主太多了",
+   "source_work": "败犬女主太多了",
+   "catchphrases": [
+    "就是懂啊！",
+    "温水君，来得正好"
+   ],
+   "source_doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ],
+   "card_dialogues": [
+    {
+     "speaker": "八奈见",
+     "content": "再不去的话,华恋酱就要去英国了。那样就行了吗?",
+     "context": "第12章"
+    },
+    {
+     "speaker": "八奈见",
+     "content": "她说这话不是摆明让你去见她吗!",
+     "context": "第12章"
+    },
+    {
+     "speaker": "八奈见",
+     "content": "为什么,能知道那种事?",
+     "context": "第12章"
+    },
+    {
+     "speaker": "八奈见",
+     "content": "就是懂啊!因为我也一直对草介……",
+     "context": "第12章"
+    },
+    {
+     "speaker": "八奈见",
+     "content": "嗯,这样就好",
+     "context": "第12章"
+    },
+    {
+     "speaker": "八奈见",
+     "content": "快去吧。华恋酱在等着你呢",
+     "context": "第12章"
+    },
+    {
+     "speaker": "八奈见",
+     "content": "华恋酱人很好呢,不让她幸福的话我可不答应噢",
+     "context": "第12章"
+    },
+    {
+     "speaker": "八奈见",
+     "content": "加油喔。被甩了的话,我可以勉为其难听听你的抱怨",
+     "context": "第12章"
+    }
+   ]
+  },
+  "温水佳树": {
+   "aliases": [
+    "佳树",
+    "春树"
+   ],
+   "speakers": [
+    "温水佳树"
+   ],
+   "series_id": "败犬女主太多了",
+   "source_work": "败犬女主太多了",
+   "catchphrases": [],
+   "source_doc_ids": [
+    "败犬女主太多了__vol01"
+   ],
+   "card_dialogues": [
+    {
+     "speaker": "温水佳树",
+     "content": "哥哥大人没什么精神呢。在学校里发生了什么事吗?",
+     "context": "第18章"
+    },
+    {
+     "speaker": "温水佳树",
+     "content": "初次见面,我叫温水佳树。请大家一定要来看7月发售的 『哥哥太多了!』",
+     "context": "第24章"
+    },
+    {
+     "speaker": "温水佳树",
+     "content": "好色……",
+     "context": "第17章"
+    },
+    {
+     "speaker": "温水佳树",
+     "content": "今天也听了不少珍贵的话题。之后还想更多地听一些有关高中的事情请问可以吗?",
+     "context": "第17章"
+    },
+    {
+     "speaker": "温水佳树",
+     "content": "哼哼。难道是被甩了?",
+     "context": "第18章"
+    },
+    {
+     "speaker": "温水佳树",
+     "content": "哥哥大人!?果然是这样,哥哥大人最近的举动让佳树觉得很可疑!",
+     "context": "第18章"
+    },
+    {
+     "speaker": "温水佳树",
+     "content": "难道说对象是在露营地那里一起烤肉的可爱的女孩子吗?",
+     "context": "第18章"
+    },
+    {
+     "speaker": "温水佳树",
+     "content": "对了,强硬地将佳树的嘴巴撬开,也可以喔?",
+     "context": "第18章"
+    }
+   ]
+  },
+  "烧盐柠檬": {
+   "aliases": [
+    "烧盐柠檬",
+    "烧盐"
+   ],
+   "speakers": [
+    "烧盐",
+    "烧盐柠檬"
+   ],
+   "series_id": "败犬女主太多了",
+   "source_work": "败犬女主太多了",
+   "catchphrases": [
+    "毕竟是温温嘛",
+    "欸？",
+    "一起去嘛！"
+   ],
+   "source_doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ],
+   "card_dialogues": [
+    {
+     "speaker": "烧盐柠檬",
+     "content": "谢谢奶奶。我到家之后会给你打电话的",
+     "context": "第20章"
+    },
+    {
+     "speaker": "烧盐柠檬",
+     "content": "为什么你会知道我会来这儿?",
+     "context": "第20章"
+    },
+    {
+     "speaker": "烧盐柠檬",
+     "content": "如果不坐这班车的话,朝云同学之后怎么办?",
+     "context": "第20章"
+    },
+    {
+     "speaker": "烧盐柠檬",
+     "content": "不用了,没事的。我正好有一些事情要花点时间想想",
+     "context": "第20章"
+    },
+    {
+     "speaker": "烧盐柠檬",
+     "content": "真亏你能知道是这个车站。明明你用不着特意跑来这儿,等我回丰桥再说也不迟",
+     "context": "第20章"
+    },
+    {
+     "speaker": "烧盐柠檬",
+     "content": "朝云同学,电车已经来了哦",
+     "context": "第20章"
+    },
+    {
+     "speaker": "烧盐柠檬",
+     "content": "……嗯。是啊",
+     "context": "第20章"
+    },
+    {
+     "speaker": "烧盐柠檬",
+     "content": "……朝云同学",
+     "context": "第20章"
+    }
+   ]
+  },
+  "马剃天爱星": {
+   "aliases": [
+    "马剃天爱星",
+    "天爱",
+    "天爱星",
+    "爱星"
+   ],
+   "speakers": [
+    "天爱",
+    "天爱星",
+    "爱星",
+    "马剃天爱星"
+   ],
+   "series_id": "败犬女主太多了",
+   "source_work": "败犬女主太多了",
+   "catchphrases": [
+    "喵",
+    "不是你想的那样",
+    "都说了不是你想的那样好吗"
+   ],
+   "source_doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ],
+   "card_dialogues": [
+    {
+     "speaker": "马剃天爱星",
+     "content": "咦,等等,在别人面前干这种事情……?",
+     "context": "第17章"
+    },
+    {
+     "speaker": "马剃天爱星",
+     "content": "温水同学。最近你是不是在躲着我?",
+     "context": "第12章"
+    },
+    {
+     "speaker": "马剃天爱星",
+     "content": "没事。你还要说什么事?",
+     "context": "第17章"
+    },
+    {
+     "speaker": "马剃天爱星",
+     "content": "……对了,贵司。你经常跟足球俱乐部的那些朋友在一起吧。",
+     "context": "第17章"
+    },
+    {
+     "speaker": "马剃天爱星",
+     "content": "去年情人节你也收到巧克力了吧?难不成……是俱乐部里面的哪个人送给你的?",
+     "context": "第17章"
+    },
+    {
+     "speaker": "马剃天爱星",
+     "content": "……你果然是在躲着我吧?",
+     "context": "第12章"
+    },
+    {
+     "speaker": "马剃天爱星",
+     "content": "…………保健体育。",
+     "context": "第12章"
+    },
+    {
+     "speaker": "马剃天爱星",
+     "content": "……不是你想的那样。",
+     "context": "第12章"
+    }
+   ]
+  },
+  "温水和彦": {
+   "aliases": [
+    "温水",
+    "温温"
+   ],
+   "speakers": [
+    "温水和彦"
+   ],
+   "series_id": "败犬女主太多了",
+   "source_work": "败犬女主太多了",
+   "catchphrases": [],
+   "source_doc_ids": [
+    "败犬女主太多了__vol01"
+   ],
+   "card_dialogues": [
+    {
+     "speaker": "温水和彦",
+     "content": "额,嗯。八奈见同学,也在啊。完全没注意到呢",
+     "context": "第12章"
+    },
+    {
+     "speaker": "温水和彦",
+     "content": "那个,钱不够吗?",
+     "context": "第12章"
+    },
+    {
+     "speaker": "温水和彦",
+     "content": "再问一次,这份薯条是八奈见同学点的吗?",
+     "context": "第12章"
+    },
+    {
+     "speaker": "温水和彦",
+     "content": "新娘这个,是什么时候的事情了?",
+     "context": "第12章"
+    },
+    {
+     "speaker": "温水和彦",
+     "content": "没在交往吗?那不就不算出轨吗",
+     "context": "第12章"
+    },
+    {
+     "speaker": "温水和彦",
+     "content": "……不,这已经完全分出胜负了吧",
+     "context": "第12章"
+    },
+    {
+     "speaker": "温水和彦",
+     "content": "……我是知道的。如果早点鼓起勇气,结果可能会不一样",
+     "context": "第12章"
+    },
+    {
+     "speaker": "温水和彦",
+     "content": "说,说的也是呢。还要续杯吗?薄荷茶我也很推荐",
+     "context": "第12章"
+    }
+   ]
+  },
+  "袴田草介": {
+   "aliases": [
+    "田草介",
+    "草介"
+   ],
+   "speakers": [
+    "袴田草介"
+   ],
+   "series_id": "败犬女主太多了",
+   "source_work": "败犬女主太多了",
+   "catchphrases": [],
+   "source_doc_ids": [
+    "败犬女主太多了__vol01"
+   ],
+   "card_dialogues": [
+    {
+     "speaker": "袴田草介",
+     "content": "为什么,能知道那种事?",
+     "context": ""
+    },
+    {
+     "speaker": "袴田草介",
+     "content": "……对不起,杏菜",
+     "context": ""
+    },
+    {
+     "speaker": "袴田草介",
+     "content": "对啊,顾虑这些可不像你啊",
+     "context": ""
+    },
+    {
+     "speaker": "袴田草介",
+     "content": "但是华恋她已经和我道别了——",
+     "context": ""
+    },
+    {
+     "speaker": "袴田草介",
+     "content": "谢了。我要去跟她传递我的感情",
+     "context": ""
+    },
+    {
+     "speaker": "袴田草介",
+     "content": "……可以吗?",
+     "context": ""
+    },
+    {
+     "speaker": "袴田草介",
+     "content": "杏菜,我——",
+     "context": ""
+    }
+   ]
+  },
+  "雷姆": {
+   "aliases": [
+    "雷姆",
+    "蕾姆"
+   ],
+   "speakers": [
+    "雷姆"
+   ],
+   "series_id": "Re：从零开始的异世界生活",
+   "source_work": "Re：从零开始的异世界生活",
+   "catchphrases": [],
+   "source_doc_ids": [
+    "Re：从零开始的异世界生活__vol34",
+    "Re：从零开始的异世界生活__vol35"
+   ],
+   "card_dialogues": [
+    {
+     "speaker": "雷姆",
+     "content": "爱蜜莉雅小姐,还有碧翠丝酱……",
+     "context": "第五章『王国与帝国』"
+    },
+    {
+     "speaker": "雷姆",
+     "content": "我想敌人不会只有那头邪龙。跟大家会合比较好吧?",
+     "context": "第六章『贝尔斯特兹•彭达冯』"
+    },
+    {
+     "speaker": "雷姆",
+     "content": "──!我、我只是照着你说的去做而已。",
+     "context": "第三章『两道光芒』"
+    },
+    {
+     "speaker": "雷姆",
+     "content": "你,认识我?",
+     "context": "第三章『决定要去爱』"
+    },
+    {
+     "speaker": "雷姆",
+     "content": "──?请问……",
+     "context": "第二章『巴尔加•克罗姆威尔的计策』"
+    },
+    {
+     "speaker": "雷姆",
+     "content": "……!姊姊。",
+     "context": "第五章『将死之人的愿望』"
+    },
+    {
+     "speaker": "雷姆",
+     "content": "密雅！！",
+     "context": "第一章『原谅』"
+    },
+    {
+     "speaker": "雷姆",
+     "content": "……我很感谢你的搭救，但是我不认识你。",
+     "context": "第一章『原谅』"
+    }
+   ]
+  }
+ },
+ "cases": [
+  {
+   "id": "八奈见杏菜_51",
+   "query": "你平时喜欢吃什么？",
+   "character": "八奈见杏菜",
+   "channel": "dialogue",
+   "intent": "persona",
+   "source": "real_session",
+   "session_id": "imp_c22ec234eefa",
+   "gold_speaker": "八奈见杏菜",
+   "aliases": [
+    "八奈见杏菜",
+    "八奈",
+    "八奈见"
+   ],
+   "gold_keywords": [],
+   "gold_variants": {},
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "八奈见杏菜_53",
+   "query": "你和草芥是分手了，还是怎样",
+   "character": "八奈见杏菜",
+   "channel": "dialogue",
+   "intent": "fact",
+   "source": "real_session",
+   "session_id": "imp_c22ec234eefa",
+   "gold_speaker": "八奈见杏菜",
+   "aliases": [
+    "八奈见杏菜",
+    "八奈",
+    "八奈见"
+   ],
+   "gold_keywords": [
+    "袴田草介"
+   ],
+   "gold_variants": {
+    "袴田草介": [
+     "袴田草介",
+     "草芥",
+     "草介"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "八奈见杏菜_n54",
+   "query": "你和草芥是分手了，还是怎样",
+   "character": "八奈见杏菜",
+   "channel": "narrative",
+   "intent": "fact",
+   "source": "real_session",
+   "session_id": "imp_c22ec234eefa",
+   "gold_speaker": "八奈见杏菜",
+   "aliases": [
+    "八奈见杏菜",
+    "八奈",
+    "八奈见"
+   ],
+   "gold_keywords": [
+    "袴田草介"
+   ],
+   "gold_variants": {
+    "袴田草介": [
+     "袴田草介",
+     "草芥",
+     "草介"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "八奈见杏菜_55",
+   "query": "你喜欢温水君吗",
+   "character": "八奈见杏菜",
+   "channel": "dialogue",
+   "intent": "relationship",
+   "source": "real_session",
+   "session_id": "imp_c22ec234eefa",
+   "gold_speaker": "八奈见杏菜",
+   "aliases": [
+    "八奈见杏菜",
+    "八奈",
+    "八奈见"
+   ],
+   "gold_keywords": [
+    "温水和彦"
+   ],
+   "gold_variants": {
+    "温水和彦": [
+     "温水和彦",
+     "温水君",
+     "温水"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "八奈见杏菜_n56",
+   "query": "你喜欢温水君吗",
+   "character": "八奈见杏菜",
+   "channel": "narrative",
+   "intent": "relationship",
+   "source": "real_session",
+   "session_id": "imp_c22ec234eefa",
+   "gold_speaker": "八奈见杏菜",
+   "aliases": [
+    "八奈见杏菜",
+    "八奈",
+    "八奈见"
+   ],
+   "gold_keywords": [
+    "温水和彦"
+   ],
+   "gold_variants": {
+    "温水和彦": [
+     "温水和彦",
+     "温水君",
+     "温水"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "八奈见杏菜_57",
+   "query": "那你欠的钱还完了吗",
+   "character": "八奈见杏菜",
+   "channel": "dialogue",
+   "intent": "fact",
+   "source": "real_session",
+   "session_id": "imp_c22ec234eefa",
+   "gold_speaker": "八奈见杏菜",
+   "aliases": [
+    "八奈见杏菜",
+    "八奈",
+    "八奈见"
+   ],
+   "gold_keywords": [],
+   "gold_variants": {},
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "八奈见杏菜_n58",
+   "query": "那你欠的钱还完了吗",
+   "character": "八奈见杏菜",
+   "channel": "narrative",
+   "intent": "fact",
+   "source": "real_session",
+   "session_id": "imp_c22ec234eefa",
+   "gold_speaker": "八奈见杏菜",
+   "aliases": [
+    "八奈见杏菜",
+    "八奈",
+    "八奈见"
+   ],
+   "gold_keywords": [],
+   "gold_variants": {},
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "八奈见杏菜_59",
+   "query": "对会长的看法",
+   "character": "八奈见杏菜",
+   "channel": "dialogue",
+   "intent": "relationship",
+   "source": "real_session",
+   "session_id": "imp_c22ec234eefa",
+   "gold_speaker": "八奈见杏菜",
+   "aliases": [
+    "八奈见杏菜",
+    "八奈",
+    "八奈见"
+   ],
+   "gold_keywords": [
+    "月之木古都"
+   ],
+   "gold_variants": {
+    "月之木古都": [
+     "月之木古都",
+     "会长"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "八奈见杏菜_n60",
+   "query": "对会长的看法",
+   "character": "八奈见杏菜",
+   "channel": "narrative",
+   "intent": "relationship",
+   "source": "real_session",
+   "session_id": "imp_c22ec234eefa",
+   "gold_speaker": "八奈见杏菜",
+   "aliases": [
+    "八奈见杏菜",
+    "八奈",
+    "八奈见"
+   ],
+   "gold_keywords": [
+    "月之木古都"
+   ],
+   "gold_variants": {
+    "月之木古都": [
+     "月之木古都",
+     "会长"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "八奈见杏菜_61",
+   "query": "她会是你的情敌吗",
+   "character": "八奈见杏菜",
+   "channel": "dialogue",
+   "intent": "relationship",
+   "source": "real_session",
+   "session_id": "imp_c22ec234eefa",
+   "gold_speaker": "八奈见杏菜",
+   "aliases": [
+    "八奈见杏菜",
+    "八奈",
+    "八奈见"
+   ],
+   "gold_keywords": [],
+   "gold_variants": {},
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "八奈见杏菜_n62",
+   "query": "她会是你的情敌吗",
+   "character": "八奈见杏菜",
+   "channel": "narrative",
+   "intent": "relationship",
+   "source": "real_session",
+   "session_id": "imp_c22ec234eefa",
+   "gold_speaker": "八奈见杏菜",
+   "aliases": [
+    "八奈见杏菜",
+    "八奈",
+    "八奈见"
+   ],
+   "gold_keywords": [],
+   "gold_variants": {},
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "温水佳树_63",
+   "query": "介绍一下你自己",
+   "character": "温水佳树",
+   "channel": "dialogue",
+   "intent": "persona",
+   "source": "real_session",
+   "session_id": "imp_60ef3bcce7f8",
+   "gold_speaker": "温水佳树",
+   "aliases": [
+    "温水佳树",
+    "佳树",
+    "佳樹"
+   ],
+   "gold_keywords": [],
+   "gold_variants": {},
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "温水佳树_65",
+   "query": "那你喜欢你的哥哥吗",
+   "character": "温水佳树",
+   "channel": "dialogue",
+   "intent": "relationship",
+   "source": "real_session",
+   "session_id": "imp_60ef3bcce7f8",
+   "gold_speaker": "温水佳树",
+   "aliases": [
+    "温水佳树",
+    "佳树",
+    "佳樹"
+   ],
+   "gold_keywords": [
+    "温水和彦"
+   ],
+   "gold_variants": {
+    "温水和彦": [
+     "温水和彦",
+     "温水君",
+     "温水"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "温水佳树_n66",
+   "query": "那你喜欢你的哥哥吗",
+   "character": "温水佳树",
+   "channel": "narrative",
+   "intent": "relationship",
+   "source": "real_session",
+   "session_id": "imp_60ef3bcce7f8",
+   "gold_speaker": "温水佳树",
+   "aliases": [
+    "温水佳树",
+    "佳树",
+    "佳樹"
+   ],
+   "gold_keywords": [
+    "温水和彦"
+   ],
+   "gold_variants": {
+    "温水和彦": [
+     "温水和彦",
+     "温水君",
+     "温水"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "温水佳树_67",
+   "query": "你和八奈见学姐关系好吗？",
+   "character": "温水佳树",
+   "channel": "dialogue",
+   "intent": "relationship",
+   "source": "real_session",
+   "session_id": "imp_60ef3bcce7f8",
+   "gold_speaker": "温水佳树",
+   "aliases": [
+    "温水佳树",
+    "佳树",
+    "佳樹"
+   ],
+   "gold_keywords": [
+    "八奈见杏菜"
+   ],
+   "gold_variants": {
+    "八奈见杏菜": [
+     "八奈见杏菜",
+     "八奈",
+     "八奈见"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "温水佳树_n68",
+   "query": "你和八奈见学姐关系好吗？",
+   "character": "温水佳树",
+   "channel": "narrative",
+   "intent": "relationship",
+   "source": "real_session",
+   "session_id": "imp_60ef3bcce7f8",
+   "gold_speaker": "温水佳树",
+   "aliases": [
+    "温水佳树",
+    "佳树",
+    "佳樹"
+   ],
+   "gold_keywords": [
+    "八奈见杏菜"
+   ],
+   "gold_variants": {
+    "八奈见杏菜": [
+     "八奈见杏菜",
+     "八奈",
+     "八奈见"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "温水佳树_69",
+   "query": "哥哥最近有没有又做什么奇怪的事？",
+   "character": "温水佳树",
+   "channel": "dialogue",
+   "intent": "fact",
+   "source": "real_session",
+   "session_id": "imp_60ef3bcce7f8",
+   "gold_speaker": "温水佳树",
+   "aliases": [
+    "温水佳树",
+    "佳树",
+    "佳樹"
+   ],
+   "gold_keywords": [
+    "温水和彦"
+   ],
+   "gold_variants": {
+    "温水和彦": [
+     "温水和彦",
+     "温水君",
+     "温水"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "温水佳树_n70",
+   "query": "哥哥最近有没有又做什么奇怪的事？",
+   "character": "温水佳树",
+   "channel": "narrative",
+   "intent": "fact",
+   "source": "real_session",
+   "session_id": "imp_60ef3bcce7f8",
+   "gold_speaker": "温水佳树",
+   "aliases": [
+    "温水佳树",
+    "佳树",
+    "佳樹"
+   ],
+   "gold_keywords": [
+    "温水和彦"
+   ],
+   "gold_variants": {
+    "温水和彦": [
+     "温水和彦",
+     "温水君",
+     "温水"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "烧盐柠檬_71",
+   "query": "你对佳树有什么看法",
+   "character": "烧盐柠檬",
+   "channel": "dialogue",
+   "intent": "relationship",
+   "source": "real_session",
+   "session_id": "imp_f6a01bcff5cb",
+   "gold_speaker": "烧盐柠檬",
+   "aliases": [
+    "烧盐柠檬",
+    "烧盐"
+   ],
+   "gold_keywords": [
+    "温水佳树"
+   ],
+   "gold_variants": {
+    "温水佳树": [
+     "温水佳树",
+     "佳树",
+     "佳樹"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "烧盐柠檬_n72",
+   "query": "你对佳树有什么看法",
+   "character": "烧盐柠檬",
+   "channel": "narrative",
+   "intent": "relationship",
+   "source": "real_session",
+   "session_id": "imp_f6a01bcff5cb",
+   "gold_speaker": "烧盐柠檬",
+   "aliases": [
+    "烧盐柠檬",
+    "烧盐"
+   ],
+   "gold_keywords": [
+    "温水佳树"
+   ],
+   "gold_variants": {
+    "温水佳树": [
+     "温水佳树",
+     "佳树",
+     "佳樹"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "烧盐柠檬_73",
+   "query": "会不会佳树以为你喜欢她哥哥",
+   "character": "烧盐柠檬",
+   "channel": "dialogue",
+   "intent": "relationship",
+   "source": "real_session",
+   "session_id": "imp_f6a01bcff5cb",
+   "gold_speaker": "烧盐柠檬",
+   "aliases": [
+    "烧盐柠檬",
+    "烧盐"
+   ],
+   "gold_keywords": [
+    "温水佳树",
+    "温水和彦"
+   ],
+   "gold_variants": {
+    "温水佳树": [
+     "温水佳树",
+     "佳树",
+     "佳樹"
+    ],
+    "温水和彦": [
+     "温水和彦",
+     "温水君",
+     "温水"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "烧盐柠檬_n74",
+   "query": "会不会佳树以为你喜欢她哥哥",
+   "character": "烧盐柠檬",
+   "channel": "narrative",
+   "intent": "relationship",
+   "source": "real_session",
+   "session_id": "imp_f6a01bcff5cb",
+   "gold_speaker": "烧盐柠檬",
+   "aliases": [
+    "烧盐柠檬",
+    "烧盐"
+   ],
+   "gold_keywords": [
+    "温水佳树",
+    "温水和彦"
+   ],
+   "gold_variants": {
+    "温水佳树": [
+     "温水佳树",
+     "佳树",
+     "佳樹"
+    ],
+    "温水和彦": [
+     "温水和彦",
+     "温水君",
+     "温水"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "烧盐柠檬_75",
+   "query": "你为什么叫温水和彦叫温温",
+   "character": "烧盐柠檬",
+   "channel": "dialogue",
+   "intent": "fact",
+   "source": "real_session",
+   "session_id": "imp_f6a01bcff5cb",
+   "gold_speaker": "烧盐柠檬",
+   "aliases": [
+    "烧盐柠檬",
+    "烧盐"
+   ],
+   "gold_keywords": [
+    "温水和彦"
+   ],
+   "gold_variants": {
+    "温水和彦": [
+     "温水和彦",
+     "温水君",
+     "温水"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "烧盐柠檬_n76",
+   "query": "你为什么叫温水和彦叫温温",
+   "character": "烧盐柠檬",
+   "channel": "narrative",
+   "intent": "fact",
+   "source": "real_session",
+   "session_id": "imp_f6a01bcff5cb",
+   "gold_speaker": "烧盐柠檬",
+   "aliases": [
+    "烧盐柠檬",
+    "烧盐"
+   ],
+   "gold_keywords": [
+    "温水和彦"
+   ],
+   "gold_variants": {
+    "温水和彦": [
+     "温水和彦",
+     "温水君",
+     "温水"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "烧盐柠檬_77",
+   "query": "怪不得佳树看你的眼神很奇怪",
+   "character": "烧盐柠檬",
+   "channel": "dialogue",
+   "intent": "fact",
+   "source": "real_session",
+   "session_id": "imp_f6a01bcff5cb",
+   "gold_speaker": "烧盐柠檬",
+   "aliases": [
+    "烧盐柠檬",
+    "烧盐"
+   ],
+   "gold_keywords": [
+    "温水佳树"
+   ],
+   "gold_variants": {
+    "温水佳树": [
+     "温水佳树",
+     "佳树",
+     "佳樹"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "烧盐柠檬_n78",
+   "query": "怪不得佳树看你的眼神很奇怪",
+   "character": "烧盐柠檬",
+   "channel": "narrative",
+   "intent": "fact",
+   "source": "real_session",
+   "session_id": "imp_f6a01bcff5cb",
+   "gold_speaker": "烧盐柠檬",
+   "aliases": [
+    "烧盐柠檬",
+    "烧盐"
+   ],
+   "gold_keywords": [
+    "温水佳树"
+   ],
+   "gold_variants": {
+    "温水佳树": [
+     "温水佳树",
+     "佳树",
+     "佳樹"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "马剃天爱星_79",
+   "query": "简单介绍一下你自己",
+   "character": "马剃天爱星",
+   "channel": "dialogue",
+   "intent": "persona",
+   "source": "real_session",
+   "session_id": "imp_88b6b2e23466",
+   "gold_speaker": "马剃天爱星",
+   "aliases": [
+    "马剃天爱星",
+    "天爱",
+    "天爱星",
+    "爱星"
+   ],
+   "gold_keywords": [],
+   "gold_variants": {},
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "马剃天爱星_81",
+   "query": "你是会长吗",
+   "character": "马剃天爱星",
+   "channel": "dialogue",
+   "intent": "fact",
+   "source": "real_session",
+   "session_id": "imp_88b6b2e23466",
+   "gold_speaker": "马剃天爱星",
+   "aliases": [
+    "马剃天爱星",
+    "天爱",
+    "天爱星",
+    "爱星"
+   ],
+   "gold_keywords": [
+    "月之木古都"
+   ],
+   "gold_variants": {
+    "月之木古都": [
+     "月之木古都",
+     "会长"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "马剃天爱星_n82",
+   "query": "你是会长吗",
+   "character": "马剃天爱星",
+   "channel": "narrative",
+   "intent": "fact",
+   "source": "real_session",
+   "session_id": "imp_88b6b2e23466",
+   "gold_speaker": "马剃天爱星",
+   "aliases": [
+    "马剃天爱星",
+    "天爱",
+    "天爱星",
+    "爱星"
+   ],
+   "gold_keywords": [
+    "月之木古都"
+   ],
+   "gold_variants": {
+    "月之木古都": [
+     "月之木古都",
+     "会长"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "马剃天爱星_83",
+   "query": "会长是谁",
+   "character": "马剃天爱星",
+   "channel": "dialogue",
+   "intent": "fact",
+   "source": "real_session",
+   "session_id": "imp_88b6b2e23466",
+   "gold_speaker": "马剃天爱星",
+   "aliases": [
+    "马剃天爱星",
+    "天爱",
+    "天爱星",
+    "爱星"
+   ],
+   "gold_keywords": [
+    "月之木古都"
+   ],
+   "gold_variants": {
+    "月之木古都": [
+     "月之木古都",
+     "会长"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "马剃天爱星_84",
+   "query": "你感觉会长会和温水在一起吗",
+   "character": "马剃天爱星",
+   "channel": "dialogue",
+   "intent": "fact",
+   "source": "real_session",
+   "session_id": "imp_88b6b2e23466",
+   "gold_speaker": "马剃天爱星",
+   "aliases": [
+    "马剃天爱星",
+    "天爱",
+    "天爱星",
+    "爱星"
+   ],
+   "gold_keywords": [
+    "月之木古都",
+    "温水和彦"
+   ],
+   "gold_variants": {
+    "月之木古都": [
+     "月之木古都",
+     "会长"
+    ],
+    "温水和彦": [
+     "温水和彦",
+     "温水君",
+     "温水"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "马剃天爱星_n85",
+   "query": "你感觉会长会和温水在一起吗",
+   "character": "马剃天爱星",
+   "channel": "narrative",
+   "intent": "fact",
+   "source": "real_session",
+   "session_id": "imp_88b6b2e23466",
+   "gold_speaker": "马剃天爱星",
+   "aliases": [
+    "马剃天爱星",
+    "天爱",
+    "天爱星",
+    "爱星"
+   ],
+   "gold_keywords": [
+    "月之木古都",
+    "温水和彦"
+   ],
+   "gold_variants": {
+    "月之木古都": [
+     "月之木古都",
+     "会长"
+    ],
+    "温水和彦": [
+     "温水和彦",
+     "温水君",
+     "温水"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "马剃天爱星_86",
+   "query": "八奈见杏菜同学怎么样",
+   "character": "马剃天爱星",
+   "channel": "dialogue",
+   "intent": "fact",
+   "source": "real_session",
+   "session_id": "imp_88b6b2e23466",
+   "gold_speaker": "马剃天爱星",
+   "aliases": [
+    "马剃天爱星",
+    "天爱",
+    "天爱星",
+    "爱星"
+   ],
+   "gold_keywords": [
+    "八奈见杏菜"
+   ],
+   "gold_variants": {
+    "八奈见杏菜": [
+     "八奈见杏菜",
+     "八奈",
+     "八奈见"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "马剃天爱星_n87",
+   "query": "八奈见杏菜同学怎么样",
+   "character": "马剃天爱星",
+   "channel": "narrative",
+   "intent": "fact",
+   "source": "real_session",
+   "session_id": "imp_88b6b2e23466",
+   "gold_speaker": "马剃天爱星",
+   "aliases": [
+    "马剃天爱星",
+    "天爱",
+    "天爱星",
+    "爱星"
+   ],
+   "gold_keywords": [
+    "八奈见杏菜"
+   ],
+   "gold_variants": {
+    "八奈见杏菜": [
+     "八奈见杏菜",
+     "八奈",
+     "八奈见"
+    ]
+   },
+   "doc_prefix": "败犬女主太多了",
+   "doc_ids": [
+    "败犬女主太多了__vol01",
+    "败犬女主太多了__vol02",
+    "败犬女主太多了__vol03",
+    "败犬女主太多了__vol04",
+    "败犬女主太多了__vol05",
+    "败犬女主太多了"
+   ]
+  },
+  {
+   "id": "温水和彦_01",
+   "query": "你妹妹是谁",
+   "channel": "dialogue",
+   "intent": "fact",
+   "character": "温水和彦",
+   "aliases": [
+    "温水",
+    "温温"
+   ],
+   "doc_ids": [
+    "败犬女主太多了__vol01"
+   ],
+   "doc_prefix": "败犬女主太多了",
+   "gold_keywords": [
+    "温水佳树"
+   ],
+   "gold_speaker": "温水和彦",
+   "gold_variants": {
+    "温水佳树": [
+     "温水佳树",
+     "佳树",
+     "佳樹"
+    ]
+   },
+   "session_id": "imp_e7d050c1c9fd",
+   "source": "real_session"
+  },
+  {
+   "id": "温水和彦_02",
+   "query": "你和你妹妹关系怎么样",
+   "channel": "dialogue",
+   "intent": "relationship",
+   "character": "温水和彦",
+   "aliases": [
+    "温水",
+    "温温"
+   ],
+   "doc_ids": [
+    "败犬女主太多了__vol01"
+   ],
+   "doc_prefix": "败犬女主太多了",
+   "gold_keywords": [
+    "温水佳树"
+   ],
+   "gold_speaker": "温水和彦",
+   "gold_variants": {
+    "温水佳树": [
+     "温水佳树",
+     "佳树",
+     "佳樹"
+    ]
+   },
+   "session_id": "imp_e7d050c1c9fd",
+   "source": "real_session"
+  },
+  {
+   "id": "温水和彦_03",
+   "query": "你和八奈见杏菜怎么认识的",
+   "channel": "dialogue",
+   "intent": "relationship",
+   "character": "温水和彦",
+   "aliases": [
+    "温水",
+    "温温"
+   ],
+   "doc_ids": [
+    "败犬女主太多了__vol01"
+   ],
+   "doc_prefix": "败犬女主太多了",
+   "gold_keywords": [
+    "八奈见杏菜"
+   ],
+   "gold_speaker": "温水和彦",
+   "gold_variants": {
+    "八奈见杏菜": [
+     "八奈见杏菜",
+     "八奈",
+     "八奈见"
+    ]
+   },
+   "session_id": "imp_e7d050c1c9fd",
+   "source": "real_session"
+  },
+  {
+   "id": "温水和彦_04",
+   "query": "你知道学生会会长吗",
+   "channel": "dialogue",
+   "intent": "fact",
+   "character": "温水和彦",
+   "aliases": [
+    "温水",
+    "温温"
+   ],
+   "doc_ids": [
+    "败犬女主太多了__vol01"
+   ],
+   "doc_prefix": "败犬女主太多了",
+   "gold_keywords": [
+    "月之木古都"
+   ],
+   "gold_speaker": "温水和彦",
+   "gold_variants": {
+    "月之木古都": [
+     "月之木古都",
+     "会长"
+    ]
+   },
+   "session_id": "imp_e7d050c1c9fd",
+   "source": "real_session"
+  },
+  {
+   "id": "温水和彦_05",
+   "query": "学生会副会长你应该认识吧",
+   "channel": "dialogue",
+   "intent": "fact",
+   "character": "温水和彦",
+   "aliases": [
+    "温水",
+    "温温"
+   ],
+   "doc_ids": [
+    "败犬女主太多了__vol01"
+   ],
+   "doc_prefix": "败犬女主太多了",
+   "gold_keywords": [
+    "马剃天爱星"
+   ],
+   "gold_speaker": "温水和彦",
+   "gold_variants": {
+    "马剃天爱星": [
+     "马剃天爱星",
+     "马剃"
+    ]
+   },
+   "session_id": "imp_e7d050c1c9fd",
+   "source": "real_session"
+  },
+  {
+   "id": "温水和彦_06",
+   "query": "你平常都在做什么",
+   "channel": "dialogue",
+   "intent": "persona",
+   "character": "温水和彦",
+   "aliases": [
+    "温水",
+    "温温"
+   ],
+   "doc_ids": [
+    "败犬女主太多了__vol01"
+   ],
+   "doc_prefix": "败犬女主太多了",
+   "gold_keywords": [],
+   "gold_speaker": "温水和彦",
+   "gold_variants": {},
+   "session_id": "imp_e7d050c1c9fd",
+   "source": "real_session"
+  },
+  {
+   "id": "温水和彦_07",
+   "query": "你最喜欢看的书是什么",
+   "channel": "dialogue",
+   "intent": "persona",
+   "character": "温水和彦",
+   "aliases": [
+    "温水",
+    "温温"
+   ],
+   "doc_ids": [
+    "败犬女主太多了__vol01"
+   ],
+   "doc_prefix": "败犬女主太多了",
+   "gold_keywords": [],
+   "gold_speaker": "温水和彦",
+   "gold_variants": {},
+   "session_id": "imp_e7d050c1c9fd",
+   "source": "real_session"
+  },
+  {
+   "id": "袴田草介_01",
+   "query": "你女朋友是谁",
+   "channel": "dialogue",
+   "intent": "fact",
+   "character": "袴田草介",
+   "aliases": [
+    "草介",
+    "袴田"
+   ],
+   "doc_ids": [
+    "败犬女主太多了__vol01"
+   ],
+   "doc_prefix": "败犬女主太多了",
+   "gold_keywords": [
+    "八奈见杏菜"
+   ],
+   "gold_speaker": "袴田草介",
+   "gold_variants": {
+    "八奈见杏菜": [
+     "八奈见杏菜",
+     "八奈",
+     "八奈见"
+    ]
+   },
+   "session_id": "imp_c572f9056d1f",
+   "source": "real_session"
+  },
+  {
+   "id": "袴田草介_02",
+   "query": "你青梅竹马是谁",
+   "channel": "dialogue",
+   "intent": "fact",
+   "character": "袴田草介",
+   "aliases": [
+    "草介",
+    "袴田"
+   ],
+   "doc_ids": [
+    "败犬女主太多了__vol01"
+   ],
+   "doc_prefix": "败犬女主太多了",
+   "gold_keywords": [
+    "八奈见杏菜"
+   ],
+   "gold_speaker": "袴田草介",
+   "gold_variants": {
+    "八奈见杏菜": [
+     "八奈见杏菜",
+     "八奈",
+     "八奈见"
+    ]
+   },
+   "session_id": "imp_c572f9056d1f",
+   "source": "real_session"
+  },
+  {
+   "id": "袴田草介_03",
+   "query": "你和你的青梅竹马关系怎么样",
+   "channel": "dialogue",
+   "intent": "relationship",
+   "character": "袴田草介",
+   "aliases": [
+    "草介",
+    "袴田"
+   ],
+   "doc_ids": [
+    "败犬女主太多了__vol01"
+   ],
+   "doc_prefix": "败犬女主太多了",
+   "gold_keywords": [
+    "八奈见杏菜"
+   ],
+   "gold_speaker": "袴田草介",
+   "gold_variants": {
+    "八奈见杏菜": [
+     "八奈见杏菜",
+     "八奈",
+     "八奈见"
+    ]
+   },
+   "session_id": "imp_c572f9056d1f",
+   "source": "real_session"
+  },
+  {
+   "id": "袴田草介_04",
+   "query": "你知道她喜欢你吗",
+   "channel": "dialogue",
+   "intent": "relationship",
+   "character": "袴田草介",
+   "aliases": [
+    "草介",
+    "袴田"
+   ],
+   "doc_ids": [
+    "败犬女主太多了__vol01"
+   ],
+   "doc_prefix": "败犬女主太多了",
+   "gold_keywords": [
+    "八奈见杏菜"
+   ],
+   "gold_speaker": "袴田草介",
+   "gold_variants": {
+    "八奈见杏菜": [
+     "八奈见杏菜",
+     "八奈",
+     "八奈见"
+    ]
+   },
+   "session_id": "imp_c572f9056d1f",
+   "source": "real_session"
+  },
+  {
+   "id": "温水佳树_01",
+   "query": "请自我介绍一下",
+   "channel": "dialogue",
+   "intent": "persona",
+   "character": "温水佳树",
+   "aliases": [
+    "佳树"
+   ],
+   "doc_ids": [
+    "败犬女主太多了__vol01"
+   ],
+   "doc_prefix": "败犬女主太多了",
+   "gold_keywords": [],
+   "gold_speaker": "温水佳树",
+   "gold_variants": {},
+   "session_id": "imp_3123d2a9f2d5",
+   "source": "real_session"
+  },
+  {
+   "id": "温水佳树_02",
+   "query": "那你知道你哥哥喜欢谁吗",
+   "channel": "dialogue",
+   "intent": "relationship",
+   "character": "温水佳树",
+   "aliases": [
+    "佳树"
+   ],
+   "doc_ids": [
+    "败犬女主太多了__vol01"
+   ],
+   "doc_prefix": "败犬女主太多了",
+   "gold_keywords": [
+    "温水和彦"
+   ],
+   "gold_speaker": "温水佳树",
+   "gold_variants": {
+    "温水和彦": [
+     "温水和彦",
+     "温水君",
+     "温水"
+    ]
+   },
+   "session_id": "imp_3123d2a9f2d5",
+   "source": "real_session"
+  },
+  {
+   "id": "温水佳树_03",
+   "query": "你认识你哥哥身边的女生吗",
+   "channel": "dialogue",
+   "intent": "fact",
+   "character": "温水佳树",
+   "aliases": [
+    "佳树"
+   ],
+   "doc_ids": [
+    "败犬女主太多了__vol01"
+   ],
+   "doc_prefix": "败犬女主太多了",
+   "gold_keywords": [
+    "温水和彦",
+    "八奈见杏菜"
+   ],
+   "gold_speaker": "温水佳树",
+   "gold_variants": {
+    "温水和彦": [
+     "温水和彦",
+     "温水君",
+     "温水"
+    ],
+    "八奈见杏菜": [
+     "八奈见杏菜",
+     "八奈",
+     "八奈见"
+    ]
+   },
+   "session_id": "imp_3123d2a9f2d5",
+   "source": "real_session"
+  },
+  {
+   "id": "雷姆_01",
+   "query": "请自我介绍一下",
+   "channel": "dialogue",
+   "intent": "persona",
+   "character": "雷姆",
+   "aliases": [],
+   "doc_ids": [
+    "Re：从零开始的异世界生活__vol34",
+    "Re：从零开始的异世界生活__vol35"
+   ],
+   "doc_prefix": "Re：从零开始的异世界生活",
+   "gold_keywords": [],
+   "gold_speaker": "雷姆",
+   "gold_variants": {},
+   "session_id": "imp_3e92fd88c139",
+   "source": "real_session"
+  },
+  {
+   "id": "雷姆_02",
+   "query": "你平常都在做什么",
+   "channel": "dialogue",
+   "intent": "persona",
+   "character": "雷姆",
+   "aliases": [],
+   "doc_ids": [
+    "Re：从零开始的异世界生活__vol34",
+    "Re：从零开始的异世界生活__vol35"
+   ],
+   "doc_prefix": "Re：从零开始的异世界生活",
+   "gold_keywords": [],
+   "gold_speaker": "雷姆",
+   "gold_variants": {},
+   "session_id": "imp_3e92fd88c139",
+   "source": "real_session"
+  },
+  {
+   "id": "雷姆_03",
+   "query": "你喜欢的事物",
+   "channel": "dialogue",
+   "intent": "persona",
+   "character": "雷姆",
+   "aliases": [],
+   "doc_ids": [
+    "Re：从零开始的异世界生活__vol34",
+    "Re：从零开始的异世界生活__vol35"
+   ],
+   "doc_prefix": "Re：从零开始的异世界生活",
+   "gold_keywords": [],
+   "gold_speaker": "雷姆",
+   "gold_variants": {},
+   "session_id": "imp_3e92fd88c139",
+   "source": "real_session"
+  },
+  {
+   "id": "雷姆_04",
+   "query": "你喜欢的人",
+   "channel": "dialogue",
+   "intent": "relationship",
+   "character": "雷姆",
+   "aliases": [],
+   "doc_ids": [
+    "Re：从零开始的异世界生活__vol34",
+    "Re：从零开始的异世界生活__vol35"
+   ],
+   "doc_prefix": "Re：从零开始的异世界生活",
+   "gold_keywords": [
+    "菜月•昴"
+   ],
+   "gold_speaker": "雷姆",
+   "gold_variants": {
+    "菜月•昴": [
+     "菜月•昴",
+     "菜月·昴",
+     "菜月昴",
+     "昴",
+     "巴鲁斯"
+    ]
+   },
+   "session_id": "imp_3e92fd88c139",
+   "source": "real_session"
+  }
+ ],
+ "updated_at": "2026-08-08"
+}

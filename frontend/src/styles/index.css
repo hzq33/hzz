@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════
+   Aurora Agent — Design Tokens（深/浅双主题）
+   语义色由 CSS 变量驱动；dark 模式用 .dark class 切换
+   ═══════════════════════════════════════════════════ */
+
+@layer base {
+  :root {
+    /* 浅色主题 */
+    --bg: 247 248 252;            /* 页面背景 淡蓝灰 */
+    --surface: 255 255 255;       /* 卡片/面板 */
+    --surface-2: 244 246 251;     /* 次级面板 */
+    --surface-3: 236 239 247;     /* 三级/悬浮 */
+    --line: 226 230 240;          /* 边框 */
+    --ink: 30 36 54;              /* 主文本 */
+    --muted: 100 110 134;         /* 次级文本 */
+    --faint: 148 158 180;         /* 弱文本 */
+    --brand: 99 102 241;          /* 主色 indigo-500 */
+    --brand-strong: 79 70 229;    /* indigo-600 */
+    --brand-soft: 224 226 254;    /* indigo-100 */
+    --brand-tint: 238 239 255;    /* indigo-50 */
+    --accent: 168 85 247;         /* violet-500 */
+    --accent-soft: 243 232 255;   /* violet-100 */
+    --ok: 22 163 74;              /* green-600 */
+    --warn: 217 119 6;            /* amber-600 */
+    --danger: 220 38 38;          /* red-600 */
+    --info: 2 132 199;            /* sky-600 */
+    color-scheme: light;
+  }
+
+  .dark {
+    /* 深色主题 —— 深蓝紫底 + 亮紫青主色 */
+    --bg: 9 12 22;                /* 页面背景 深蓝黑 */
+    --surface: 16 20 33;          /* 卡片 */
+    --surface-2: 22 27 43;        /* 次级面板 */
+    --surface-3: 30 36 56;        /* 三级/悬浮 */
+    --line: 40 47 70;             /* 边框 */
+    --ink: 224 230 244;           /* 主文本 */
+    --muted: 150 158 180;         /* 次级文本 */
+    --faint: 105 114 138;         /* 弱文本 */
+    --brand: 129 140 248;         /* indigo-400 */
+    --brand-strong: 165 180 252;  /* indigo-300 */
+    --brand-soft: 45 51 89;       /* indigo-900 半透明感 */
+    --brand-tint: 31 36 64;       /* indigo-950 */
+    --accent: 192 132 252;        /* violet-400 */
+    --accent-soft: 60 44 90;
+    --ok: 74 222 128;             /* green-400 */
+    --warn: 251 191 36;           /* amber-400 */
+    --danger: 248 113 113;        /* red-400 */
+    --info: 56 189 248;           /* sky-400 */
+    color-scheme: dark;
+  }
+
+  * {
+    border-color: rgb(var(--line));
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply min-h-screen bg-bg text-ink antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-faint/40 rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-faint/70; }
+
+  ::selection { @apply bg-brand/20 text-ink; }
+}
+
+/* ═══════════════════════════════════════════════════
+   Component Classes
+   ═══════════════════════════════════════════════════ */
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-1.5 px-3.5 py-2
+           text-sm font-medium rounded-xl
+           transition-all duration-200 ease-out
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/50
+           disabled:opacity-40 disabled:cursor-not-allowed
+           active:scale-[0.97] select-none whitespace-nowrap;
+  }
+  .btn-primary { @apply btn bg-brand text-white hover:bg-brand-strong shadow-sm shadow-brand/30; }
+  .btn-soft { @apply btn bg-brand-soft text-brand-strong hover:bg-brand/15 dark:text-brand; }
+  .btn-ghost { @apply btn text-muted hover:text-ink hover:bg-surface-3; }
+  .btn-outline { @apply btn bg-transparent text-ink border border-line hover:border-brand/50 hover:text-brand; }
+  .btn-danger { @apply btn bg-danger/10 text-danger hover:bg-danger/20; }
+  .btn-sm { @apply px-2.5 py-1.5 text-xs rounded-lg; }
+  .btn-lg { @apply px-5 py-2.5 text-base rounded-xl; }
+
+  .card {
+    @apply bg-surface border border-line rounded-2xl shadow-card;
+  }
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-card-hover hover:border-brand/30 hover:-translate-y-0.5;
+  }
+
+  .input {
+    @apply w-full px-3 py-2 text-sm bg-surface-2 border border-line rounded-xl
+           placeholder:text-faint text-ink
+           focus:outline-none focus:border-brand/60 focus:ring-2 focus:ring-brand/20
+           transition-all duration-200;
+  }
+  .input-label {
+    @apply block text-xs font-medium text-muted mb-1.5;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-full
+           bg-surface-3 text-muted border border-line;
+  }
+  .chip-brand { @apply chip bg-brand-tint text-brand-strong border-brand/20 dark:text-brand; }
+  .chip-ok { @apply chip bg-ok/10 text-ok border-ok/20; }
+  .chip-warn { @apply chip bg-warn/10 text-warn border-warn/20; }
+  .chip-danger { @apply chip bg-danger/10 text-danger border-danger/20; }
+  .chip-accent { @apply chip bg-accent/10 text-accent border-accent/20; }
+
+  .tab {
+    @apply px-4 py-2 text-sm font-medium rounded-xl text-muted transition-all duration-200
+           hover:text-ink hover:bg-surface-3 cursor-pointer select-none;
+  }
+  .tab-active {
+    @apply tab bg-surface-3 text-ink shadow-soft dark:bg-surface-3;
+  }
+
+  .skeleton {
+    @apply rounded-lg bg-surface-3 relative overflow-hidden;
+  }
+  .skeleton::after {
+    content: '';
+    @apply absolute inset-0 animate-shimmer;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(var(--brand) / 0.08),
+      transparent
+    );
+    background-size: 200% 100%;
+  }
+}

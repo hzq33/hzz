@@ -1,0 +1,137 @@
+{
+  "entities": [
+    {
+      "canonical_name": "八奈见杏菜",
+      "aliases": [
+        "八奈见",
+        "八奈酱",
+        "杏菜"
+      ],
+      "importance": "main",
+      "mention_count": 1063
+    },
+    {
+      "canonical_name": "小鞠知花",
+      "aliases": [
+        "小抜",
+        "小鞠"
+      ],
+      "importance": "main",
+      "mention_count": 617
+    },
+    {
+      "canonical_name": "烧盐柠檬",
+      "aliases": [
+        "柠檬",
+        "柠檬酱",
+        "烧盐"
+      ],
+      "importance": "main",
+      "mention_count": 511
+    },
+    {
+      "canonical_name": "温水和彦",
+      "aliases": [
+        "温水",
+        "温水君"
+      ],
+      "importance": "main",
+      "mention_count": 354
+    },
+    {
+      "canonical_name": "月之木古都",
+      "aliases": [
+        "月之木",
+        "月之木学姐"
+      ],
+      "importance": "main",
+      "mention_count": 208
+    },
+    {
+      "canonical_name": "温水佳树",
+      "aliases": [
+        "佳树"
+      ],
+      "importance": "supporting",
+      "mention_count": 172
+    },
+    {
+      "canonical_name": "袴田草介",
+      "aliases": [
+        "袴田"
+      ],
+      "importance": "supporting",
+      "mention_count": 114
+    },
+    {
+      "canonical_name": "绫野光希",
+      "aliases": [
+        "光希",
+        "绫野"
+      ],
+      "importance": "supporting",
+      "mention_count": 88
+    },
+    {
+      "canonical_name": "甘夏古奈美",
+      "aliases": [
+        "甘夏"
+      ],
+      "importance": "supporting",
+      "mention_count": 76
+    },
+    {
+      "canonical_name": "姬宫华恋",
+      "aliases": [
+        "华恋",
+        "姬宫"
+      ],
+      "importance": "supporting",
+      "mention_count": 68
+    },
+    {
+      "canonical_name": "志喜屋梦子",
+      "aliases": [
+        "志喜屋"
+      ],
+      "importance": "supporting",
+      "mention_count": 48
+    },
+    {
+      "canonical_name": "玉木慎太郎",
+      "aliases": [
+        "慎太郎",
+        "玉木"
+      ],
+      "importance": "supporting",
+      "mention_count": 26
+    },
+    {
+      "canonical_name": "朝云千早",
+      "aliases": [
+        "千早",
+        "朝云"
+      ],
+      "importance": "supporting",
+      "mention_count": 7
+    },
+    {
+      "canonical_name": "小抜小夜",
+      "aliases": [],
+      "importance": "supporting",
+      "mention_count": 2
+    },
+    {
+      "canonical_name": "放虎原云雀",
+      "aliases": [],
+      "importance": "supporting",
+      "mention_count": 2
+    }
+  ],
+  "updated_at": "2026-08-11T18:58:49.192937+00:00",
+  "meta": {
+    "total": 15,
+    "llm_skipped": false
+  },
+  "series_id": "败犬女主太多了"
+}

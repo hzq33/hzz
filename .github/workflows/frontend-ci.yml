@@ -1,0 +1,241 @@
+# Frontend CI/CD Pipeline
+# 触发条件：push 到 main/develop，或针对 main 的 PR
+name: Frontend CI
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend-ci.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend-ci.yml'
+
+# 同分支并发推送时取消旧的运行
+concurrency:
+  group: frontend-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+# 权限最小化
+permissions:
+  contents: read
+
+jobs:
+  # ─────────────────────────────────────
+  # Job 1: 代码质量检查（lint + typecheck + 单元测试）
+  # ─────────────────────────────────────
+  quality:
+    name: Lint & TypeCheck & Unit Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: 'frontend/.nvmrc'
+          cache: 'npm'
+          cache-dependency-path: 'frontend/package-lock.json'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: ESLint Check
+        run: npm run lint
+
+      - name: Prettier Format Check
+        run: npm run format:check
+
+      - name: Type Check
+        run: npm run typecheck
+
+      - name: Unit Tests with coverage
+        run: npm run test:coverage
+        env:
+          NODE_ENV: test
+
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: frontend/coverage/
+          if-no-files-found: error
+          retention-days: 7
+
+  # ─────────────────────────────────────
+  # Job 2: 构建验证
+  # ─────────────────────────────────────
+  build:
+    name: Build (Production)
+    runs-on: ubuntu-latest
+    needs: quality
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: 'frontend/.nvmrc'
+          cache: 'npm'
+          cache-dependency-path: 'frontend/package-lock.json'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Build
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Bundle size report
+        run: |
+          echo "## Bundle Size Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| File | Size (KB) |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|-----------|" >> $GITHUB_STEP_SUMMARY
+          du -ak dist/assets/*.js 2>/dev/null | awk '{printf "| %s | %.2f |\n", $2, $1/1}' >> $GITHUB_STEP_SUMMARY
+
+      - name: Bundle size check (gzip)
+        run: |
+          # 检查首屏 gzip 体积阈值（150KB for C端）
+          MAX_SIZE=153600  # 150KB in bytes
+          for f in dist/assets/vendor-*.js dist/assets/index-*.js; do
+            if [ -f "$f" ]; then
+              SIZE=$(gzip -c "$f" | wc -c)
+              echo "$f: $(echo "scale=2; $SIZE/1024" | bc) KB (gzip)"
+              if [ "$SIZE" -gt "$MAX_SIZE" ]; then
+                echo "::error::Bundle $f exceeds 150KB gzip threshold ($SIZE bytes)"
+                exit 1
+              fi
+            fi
+          done
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: frontend/dist/
+          retention-days: 3
+
+  # ─────────────────────────────────────
+  # Job 2b: Playwright smoke (SPA shell)
+  # ─────────────────────────────────────
+  e2e:
+    name: Playwright Smoke
+    runs-on: ubuntu-latest
+    needs: quality
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: 'frontend/.nvmrc'
+          cache: 'npm'
+          cache-dependency-path: 'frontend/package-lock.json'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run smoke E2E
+        run: npm run test:e2e
+        env:
+          CI: true
+          AGENT_API_TOKEN: ci-test-token
+
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: frontend/playwright-report/
+          retention-days: 7
+
+  # ─────────────────────────────────────
+  # Job 3: 构建 Docker 镜像（main + develop push）
+  # ─────────────────────────────────────
+  docker:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    needs: [build, e2e]
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build image
+        uses: docker/build-push-action@v6
+        with:
+          context: frontend
+          push: false
+          tags: agent-frontend:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          load: true
+
+      - name: Smoke test — image runs
+        run: |
+          docker run -d --name smoke -e AGENT_API_TOKEN=ci-smoke-token -p 8080:8080 agent-frontend:${{ github.sha }}
+          sleep 3
+          curl -fsS http://localhost:8080/ | grep -q '<div id="root"></div>' \
+            && echo "Smoke test passed" \
+            || { echo "Smoke test failed"; docker logs smoke; exit 1; }
+          docker stop smoke
+
+  # ─────────────────────────────────────
+  # Job 4: Staging deploy gate（develop）
+  # ─────────────────────────────────────
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: docker
+    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+    environment:
+      name: staging
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Staging deploy checklist
+        run: |
+          echo "## Staging deploy" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Image tag: \`agent-frontend:${{ github.sha }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Compose stack: \`docker compose up -d --build\` with volume \`makers-agent-data\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Probes: live=/api/v1/agent/health/live ready=/api/v1/agent/health/ready metrics=/metrics" >> "$GITHUB_STEP_SUMMARY"
+          echo "::notice::Staging gate passed for ${{ github.sha }} — wire remote host deploy when ready"
+          # Example (uncomment when host credentials are available):
+          # ssh deploy@staging "cd /opt/agent && git pull && docker compose up -d --build"

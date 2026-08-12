@@ -1,0 +1,64 @@
+# ── 唯一依赖文件（已合并 requirements / requirements-ci / requirements-eval）──
+# 安装: pip install -r requirements.txt
+# Docker 与 CI 均使用本文件；含全量依赖，安装较慢但保证环境一致。
+# 使用清华 PyPI 镜像加速（与 Dockerfile apt 源同理，面向国内网络）。
+
+--index-url https://pypi.tuna.tsinghua.edu.cn/simple
+--trusted-host pypi.tuna.tsinghua.edu.cn
+
+# ── Core (Agent Framework) ──
+openai>=1.0.0
+pyyaml>=6.0
+httpx>=0.28.0
+pydantic>=2.0.0
+python-dotenv>=1.0.0
+langgraph>=1.2.0
+langgraph-swarm>=0.1.0
+
+# ── Testing ──
+pytest>=7.0
+pytest-asyncio>=0.21.0
+
+# ── RAG System ──
+numpy>=1.24.0
+sentence-transformers>=2.2.0
+modelscope>=1.31.0
+fastapi>=0.120.0
+uvicorn[standard]>=0.38.0
+sse-starlette>=2.0.0
+python-multipart>=0.0.9
+faiss-cpu>=1.7.4
+torch>=2.0.0
+transformers>=4.30.0
+lancedb>=0.8.0
+
+# ── Local LLM (Qwen-1.8B 4-bit quantization) ──
+bitsandbytes>=0.43.0
+accelerate>=0.20.0
+
+# ── Encoding & Text ──
+chardet>=5.0.0
+# Untrusted XML parsing (epub OPF) — XXE / entity-expansion protection
+defusedxml>=0.7.1
+opencc-python-reimplemented>=0.1.7
+pypinyin>=0.51.0
+
+# ── Observability (optional; fail-open when unused) ──
+opentelemetry-api>=1.20.0
+opentelemetry-sdk>=1.20.0
+opentelemetry-exporter-otlp>=1.20.0
+opentelemetry-instrumentation-fastapi>=0.41b0
+langfuse>=3.0.0
+prometheus-client>=0.20.0
+
+# ── Optional: LLM-judge 评估栈（仅 EVAL_LLM_JUDGE=1 时启用，烧 DeepSeek token）──
+# 需要时取消注释后安装：
+# ragas>=0.4.0
+# deepeval>=4.0.0
+# datasets>=3.0.0
+# langchain-openai>=0.2.0
+# langchain-community>=0.3.0,<0.4.0
+
+# ── Document Upload / Parse（历史路径已删除，勿启用）──
+# 旧 upload_serve / RAG_Parser_Serve 已移除；入库走 src/application/novel/ingest.py
+# PyMuPDF / python-docx 等如需本地转换可按需自行安装，不在默认依赖中。
