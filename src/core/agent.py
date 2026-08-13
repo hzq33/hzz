@@ -130,54 +130,19 @@ class Agent:
         """上下文压缩：token 估算超阈值时把最早轮次折叠为摘要。
 
         每轮 run 结束后调用；压缩失败静默降级（下轮重试）。
+        委托 src.core.compaction.compact_memory（先摘要成功再删除）。
         """
         if not self.enable_summarization:
             return False
-        mem = self.memory
-        threshold_tokens = max(100, int(mem.max_tokens * self.summarize_threshold))
-        if mem.estimate_tokens() <= threshold_tokens:
-            return False
-        turn_msgs = [m for m in mem.get_messages() if m.get("role") in ("user", "assistant")]
-        keep_count = self.summarize_keep_turns * 2
-        if len(turn_msgs) <= keep_count + 2:
-            return False
-        removed = mem.drop_oldest(keep=keep_count)
-        if not removed:
-            return False
-        removed_turns = sum(1 for m in removed if m.get("role") == "user")
-        try:
-            from src.core.impersonation.summarizer import summarize_dialogue
+        from src.core.compaction import compact_memory
 
-            summary = await summarize_dialogue(
-                self._shared_llm,
-                character=self.config.name,
-                messages=removed,
-                existing_summary=mem.get_summary(),
-            )
-        except Exception as exc:  # noqa: BLE001 - 压缩失败不影响主链路
-            logger.warning("Context compaction failed: %s", exc)
-            return False
-        if not summary:
-            mem.restore_dropped(removed)
-            hard_limit = max(2000, mem.max_tokens * 4)
-            if mem.estimate_tokens() > hard_limit:
-                logger.warning(
-                    "Context compaction failing repeatedly; hard-trim to %d tokens",
-                    mem.max_tokens,
-                )
-                mem.drop_oldest(keep=keep_count)
-                mem.add_summarized_turns(removed_turns)
-                return True
-            return False
-        prev = mem.get_summary()
-        merged = f"{prev}\n{summary}".strip() if prev else summary
-        mem.set_summary(merged)
-        mem.add_summarized_turns(removed_turns)
-        logger.info(
-            "Context compacted (agent): turns=%d tokens_est=%d summary_len=%d",
-            removed_turns, mem.estimate_tokens(), len(merged),
+        return await compact_memory(
+            mem=self.memory,
+            llm=self._shared_llm,
+            character=self.config.name,
+            summarize_threshold=self.summarize_threshold,
+            keep_turns=self.summarize_keep_turns,
         )
-        return True
 
     def _build_tools_description(self) -> str:
         """Build a human-readable summary of available tools.

@@ -23,17 +23,31 @@ class TestDropOldest:
         assert removed == []
 
 
-class TestRestoreDropped:
-    def test_restore_reinserts(self):
+class TestPeekOldest:
+    def test_peek_does_not_remove(self):
         mem = ConversationMemory(max_tokens=10000)
         mem.set_system_message("sys")
         for i in range(6):
             mem.add_message("user" if i % 2 == 0 else "assistant", f"msg{i}")
+        peeked = mem.peek_oldest(keep=2)
+        assert len(peeked) == 4
+        # 窥视不删除：消息仍为 system + 6
+        assert len(mem.get_messages()) == 7
+
+    def test_peek_matches_drop(self):
+        mem = ConversationMemory(max_tokens=10000)
+        mem.set_system_message("sys")
+        for i in range(6):
+            mem.add_message("user" if i % 2 == 0 else "assistant", f"msg{i}")
+        peeked = mem.peek_oldest(keep=2)
         removed = mem.drop_oldest(keep=2)
-        mem.restore_dropped(removed)
-        msgs = mem.get_messages()
-        assert len(msgs) == 7  # system + 6
-        assert msgs[0]["role"] == "system"
+        assert [m["content"] for m in peeked] == [m["content"] for m in removed]
+
+    def test_peek_under_keep_returns_empty(self):
+        mem = ConversationMemory(max_tokens=10000)
+        mem.set_system_message("sys")
+        mem.add_message("user", "hi")
+        assert mem.peek_oldest(keep=4) == []
 
 
 class TestTruncate:

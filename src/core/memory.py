@@ -99,6 +99,18 @@ class ConversationMemory:
         """Total turns collapsed into the summary so far."""
         return self._summarized_turns
 
+    def peek_oldest(self, keep: int) -> list[dict[str, str]]:
+        """Return the messages ``drop_oldest(keep)`` would remove, without removing.
+
+        供"先摘要成功再删除"的压缩流程使用：摘要失败时消息原封不动，
+        无需回滚（替代旧的 drop→restore 模式）。
+        """
+        start = 1 if (self._messages and self._messages[0]["role"] == "system") else 0
+        removable = self._messages[start:]
+        if len(removable) <= keep:
+            return []
+        return list(removable[:-keep])
+
     def drop_oldest(self, keep: int) -> list[dict[str, str]]:
         """Remove oldest non-system messages beyond the newest ``keep``.
 
@@ -117,19 +129,6 @@ class ConversationMemory:
             len(removed), keep, len(self._messages),
         )
         return removed
-
-    def restore_dropped(self, messages: list[dict[str, str]]) -> None:
-        """Re-insert messages previously removed by :meth:`drop_oldest`.
-
-        Used when summarization fails so context is never silently lost.
-        Messages are re-inserted in their original position (right after the
-        system message, before whatever was kept).
-        """
-        if not messages:
-            return
-        start = 1 if (self._messages and self._messages[0]["role"] == "system") else 0
-        self._messages = self._messages[:start] + list(messages) + self._messages[start:]
-        logger.debug("Restored %d dropped messages", len(messages))
 
     def clear(self) -> None:
         """Remove all messages from history."""

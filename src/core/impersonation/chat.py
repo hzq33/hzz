@@ -90,60 +90,19 @@ class ImpersonationChatMixin:
         """上下文压缩：token 估算超阈值时，把最早轮次折叠为摘要。
 
         每轮 chat 结束后调用；压缩失败静默降级（下轮重试），不影响回复。
+        委托 src.core.compaction.compact_memory（先摘要成功再删除）。
         """
         if not getattr(self, "enable_summarization", False):
             return False
-        mem = self.memory
-        threshold_tokens = max(100, int(mem.max_tokens * self.summarize_threshold))
-        if mem.estimate_tokens() <= threshold_tokens:
-            return False
-        msgs = mem.get_messages()
-        # 按对话轮次分组：user+assistant 为一轮；system 不动
-        turn_msgs = [m for m in msgs if m.get("role") in ("user", "assistant")]
-        keep_count = self.summarize_keep_turns * 2  # 每轮 user+assistant 两条
-        if len(turn_msgs) <= keep_count + 2:
-            # 轮次太少不足以压缩（避免刚超阈值就压到只剩两轮）
-            return False
-        # 决定保留最近 keep_count 条，其余进摘要
-        removed = mem.drop_oldest(keep=keep_count)
-        if not removed:
-            return False
-        removed_turns = sum(1 for m in removed if m.get("role") == "user")
-        try:
-            from src.core.impersonation.summarizer import summarize_dialogue
+        from src.core.compaction import compact_memory
 
-            summary = await summarize_dialogue(
-                self._llm,
-                character=self.character,
-                messages=removed,
-                existing_summary=mem.get_summary(),
-            )
-        except Exception as exc:  # noqa: BLE001 - 压缩失败不影响主链路
-            logger.warning("Context compaction failed: %s", exc)
-            return False
-        if not summary:
-            # 摘要失败：把消息放回，下轮再试（避免静默丢上下文）
-            mem.restore_dropped(removed)
-            # 硬性兜底：连续失败导致消息无界增长时，退回丢弃策略防内存膨胀
-            hard_limit = max(2000, mem.max_tokens * 4)
-            if mem.estimate_tokens() > hard_limit:
-                logger.warning(
-                    "Context compaction failing repeatedly; hard-trim to %d tokens",
-                    mem.max_tokens,
-                )
-                mem.drop_oldest(keep=keep_count)
-                mem.add_summarized_turns(removed_turns)
-                return True
-            return False
-        prev = mem.get_summary()
-        merged = f"{prev}\n{summary}".strip() if prev else summary
-        mem.set_summary(merged)
-        mem.add_summarized_turns(removed_turns)
-        logger.info(
-            "Context compacted: char=%s turns=%d tokens_est=%d summary_len=%d",
-            self.character, removed_turns, mem.estimate_tokens(), len(merged),
+        return await compact_memory(
+            mem=self.memory,
+            llm=self._llm,
+            character=self.character,
+            summarize_threshold=self.summarize_threshold,
+            keep_turns=self.summarize_keep_turns,
         )
-        return True
 
     def _append_citations(
         self, items: list[Citation], *, role: str | None = None
