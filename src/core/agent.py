@@ -6,6 +6,7 @@ from openai import AsyncOpenAI
 
 from src.core.executor import ExecutionResult, TaskExecutor
 from src.core.memory import ConversationMemory, WorkingMemory
+from src.core.native_tooling import build_native_messages, execute_tool_safely
 from src.core.planner import TaskPlan, TaskPlanner
 from src.shared.llm_factory import create_shared_llm
 from src.shared.defaults import max_tool_rounds
@@ -195,38 +196,15 @@ class Agent:
         self.refresh_system_prompt_for_tools()
 
         tools = self.tool_registry.get_openai_functions()
-        messages = [
-            m for m in self.memory.get_messages()
-            if m.get("role") in ("system", "user", "assistant")
-        ]
-        # 注入上下文压缩摘要（防遗忘/防跨轮矛盾）
-        summary = self.memory.get_summary()
-        if summary:
-            messages.append({
-                "role": "system",
-                "content": (
-                    "## 更早的对话摘要（已确认事实，回答时不得与之矛盾；"
-                    "摘要之外未提及的细节不要自行补充）\n" + summary
-                ),
-            })
+        messages = build_native_messages(memory=self.memory)
 
         async def execute_tool(name: str, args: dict) -> str:
-            from src.shared.tool_approvals import gate_tool_execution
-
-            tool = self.tool_registry.get(name)
-            if tool is None:
-                return f"Error: tool '{name}' not found"
-            denied = await gate_tool_execution(
+            return await execute_tool_safely(
+                name,
+                args,
+                registry=self.tool_registry,
                 session_id="",
-                tool_name=name,
-                tool_args=args or {},
             )
-            if denied:
-                return f"Error: {denied}"
-            result = await tool.execute(**args)
-            if result.success:
-                return result.output or ""
-            return f"Error: {result.error}"
 
         try:
             loop = await self._shared_llm.achat_with_tools(

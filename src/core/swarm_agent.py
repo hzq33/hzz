@@ -34,6 +34,7 @@ from langgraph.graph import END, START, StateGraph
 
 from src.core.agent import Agent
 from src.core.executor import ExecutionResult
+from src.core.native_tooling import build_native_messages, execute_tool_safely
 from src.core.planner import TaskPlan
 from src.shared.llm import ToolInvocation, ToolLoopResult
 from src.shared.defaults import max_tool_rounds
@@ -178,43 +179,23 @@ class SwarmAgent:
         })
 
         tools = self.agent.tool_registry.get_openai_functions()
-        # Drop prior tool-protocol messages; keep user/assistant/system turns.
-        messages = [
-            m for m in self.agent.memory.get_messages()
-            if m.get("role") in ("system", "user", "assistant")
-        ]
-        # 检索范围注入：告知 LLM 当前作品，引导 novel_search 带 series/doc_id
-        scope_note = self._scope_prompt()
-        if scope_note:
-            messages = [
-                {"role": "system", "content": scope_note},
-                *messages,
-            ]
+        # role 过滤 + 检索范围注入 + 摘要注入（见 build_native_messages）
+        messages = build_native_messages(
+            memory=self.agent.memory,
+            scope_note=self._scope_prompt(),
+        )
 
         plan_steps: list[dict[str, Any]] = []
 
         async def execute_tool(name: str, args: dict) -> str:
-            from src.shared.tool_approvals import gate_tool_execution
-
-            tool = self.agent.tool_registry.get(name)
-            if tool is None:
-                return f"Error: tool '{name}' not found"
-            # ── Scope 强制注入：novel_search 检索不得越出当前作品/系列 ──
-            # 即使 LLM 未传 series/doc_id，也自动限定（根治跨作品污染）。
-            if name == "novel_search" and self._novel_scope is not None:
-                args = self._apply_scope_to_tool_args(args)
-            denied = await gate_tool_execution(
+            return await execute_tool_safely(
+                name,
+                args,
+                registry=self.agent.tool_registry,
                 session_id=self.session_id,
-                tool_name=name,
-                tool_args=args or {},
                 emit=self._emit,
+                adjust_args=self._adjust_tool_args,
             )
-            if denied:
-                return f"Error: {denied}"
-            result = await tool.execute(**args)
-            if result.success:
-                return result.output or ""
-            return f"Error: {result.error}"
 
         async def on_tool(inv: ToolInvocation) -> None:
             step_id = len(plan_steps) + 1
@@ -293,6 +274,11 @@ class SwarmAgent:
                 await self._emit("reply_chunk", {"token": full_reply})
 
         self.agent.memory.add_message("assistant", full_reply)
+        # 上下文压缩（异步）：SSE 长对话超阈值时折叠最早轮次，与 Agent 路径一致
+        try:
+            await self.agent.maybe_compact()
+        except Exception as exc:  # noqa: BLE001
+            logger.debug("Context compaction skipped: %s", exc)
         return {"reply": full_reply, "detected_char": detected}
 
     async def _plan_node(self, state: GraphState) -> dict[str, Any]:
@@ -449,6 +435,15 @@ class SwarmAgent:
                 else:
                     out["series"] = _series_of_doc_id(doc_ids[0])
         return out
+
+    def _adjust_tool_args(self, name: str, args: dict) -> dict:
+        """execute_tool_safely 的参数修正回调：强制 novel_search 限定检索范围。
+
+        即使 LLM 未传 series/doc_id，也自动限定（根治跨作品污染）。
+        """
+        if name == "novel_search" and self._novel_scope is not None:
+            return self._apply_scope_to_tool_args(args)
+        return args
 
     async def _emit(self, event_type: str, data: dict) -> None:
         if self._event_queue is not None:
