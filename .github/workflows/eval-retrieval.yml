@@ -1,0 +1,73 @@
+# 生产同构检索评估（L2）—— 手动触发
+#
+# 与离线 CI 门禁（tests/requirements/test_D_retrieval.py 等，标准 runner 可跑、
+# 挡 PR）不同，本 workflow 跑 scripts/dev/eval_dialogue/run_eval.py 的「生产检索
+# + 代理指标」评估，需要本地 LanceDB 数据与 Qwen 模型，因此必须运行在带 data/
+# 的 self-hosted runner 上，不挡 PR、仅手动触发。
+#
+# 前置条件（见 docs/RETRIEVAL_EVAL_CI.md）：
+#   1. runner 上已入库小说数据（data/novel_lance）
+#   2. 已生成评估集 scripts/dev/eval_dialogue/data/eval_seed.json
+#   3. secrets.DEEPSEEK_API_KEY 已配置
+name: Retrieval Eval (L2)
+
+on:
+  workflow_dispatch:
+    inputs:
+      seed:
+        description: 评估集文件名（相对 scripts/dev/eval_dialogue/data/）
+        required: false
+        default: eval_seed.json
+
+jobs:
+  eval:
+    name: Run production retrieval eval
+    runs-on: [self-hosted]
+    timeout-minutes: 120
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Verify prerequisites
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: |
+          test -f "scripts/dev/eval_dialogue/data/${{ inputs.seed }}" || {
+            echo "::error::评估集 scripts/dev/eval_dialogue/data/${{ inputs.seed }} 不存在；请先运行 build_seed.py 生成"
+            exit 1
+          }
+          test -d data/novel_lance || {
+            echo "::error::data/novel_lance 不存在；请先在 runner 上入库小说数据"
+            exit 1
+          }
+          test -n "$DEEPSEEK_API_KEY" || {
+            echo "::error::DEEPSEEK_API_KEY 未配置"
+            exit 1
+          }
+
+      - name: Run retrieval eval
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          RAG_TRACE_ENABLED: '0'
+        run: |
+          python scripts/dev/eval_dialogue/run_eval.py
+
+      - name: Summarize
+        if: always()
+        run: |
+          echo "## Retrieval Eval (L2)" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 生产同构检索评估（LanceDB + Qwen embedding + reranker）" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 结果写入 scripts/dev/eval_dialogue/data/results/（本地留存，不入库）" >> "$GITHUB_STEP_SUMMARY"
