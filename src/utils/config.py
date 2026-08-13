@@ -11,7 +11,11 @@ import yaml
 
 from src.utils.errors import ConfigurationError
 
-from src.shared.defaults import DEFAULT_DEEPSEEK_BASE_URL, DEFAULT_DEEPSEEK_MODEL
+from src.shared.defaults import (
+    DEFAULT_DEEPSEEK_BASE_URL,
+    DEFAULT_DEEPSEEK_MODEL,
+    load_yaml_cached,
+)
 
 
 @dataclass
@@ -96,24 +100,14 @@ class AgentConfig:
 
 
 def _resolve_env_var(value: str) -> str:
-    """Resolve environment variable placeholders like ${VAR_NAME} in a string value.
+    """Resolve ${VAR} placeholders in a string value (delegates to shared impl).
 
-    Args:
-        value: The raw string possibly containing ${...} placeholders.
-
-    Returns:
-        The string with placeholders resolved to environment variable values.
+    缺失的环境变量替换为空字符串；api_key 等必填项的严格校验由 load_config
+    后续的 validate 阶段负责。
     """
-    if isinstance(value, str) and value.startswith("${") and value.endswith("}"):
-        env_var = value[2:-1]
-        resolved = os.environ.get(env_var, "")
-        if not resolved:
-            raise ConfigurationError(
-                f"Environment variable '{env_var}' is not set or empty.",
-                missing_key=env_var,
-            )
-        return resolved
-    return value
+    from src.shared.defaults import resolve_env_placeholders
+
+    return resolve_env_placeholders(value)
 
 
 def load_config(config_path: str) -> AgentConfig:
@@ -139,8 +133,7 @@ def load_config(config_path: str) -> AgentConfig:
         )
 
     try:
-        with open(config_path, encoding="utf-8") as f:
-            raw: dict[str, Any] = yaml.safe_load(f)
+        raw: dict[str, Any] = load_yaml_cached(config_path)
     except yaml.YAMLError as e:
         raise ConfigurationError(f"Failed to parse YAML: {e}") from e
 
@@ -189,7 +182,7 @@ def load_config(config_path: str) -> AgentConfig:
         model=model,
         fallback_model=str(agent_section.get("fallback_model", "") or ""),
         api_key=api_key,
-        base_url=agent_section.get("base_url", "https://api.openai.com/v1"),
+        base_url=agent_section.get("base_url", DEFAULT_DEEPSEEK_BASE_URL),
         temperature=float(agent_section.get("temperature", 0.7)),
         max_tokens=int(agent_section.get("max_tokens", 4096)),
         max_retries=int(agent_section.get("max_retries", 3)),

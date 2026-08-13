@@ -68,18 +68,17 @@ def reset_factory_caches() -> None:
 
 
 def _load_raw_config(path: str = "config.yaml") -> dict:
-    """Load raw YAML config (no env var substitution)."""
-    with open(path, encoding="utf-8") as f:
-        return yaml.safe_load(f) or {}
+    """Load raw YAML config (no env var substitution), cached by mtime."""
+    from src.shared.defaults import load_yaml_cached
+
+    return load_yaml_cached(path) or {}
 
 
 def _substitute_env(value: str) -> str:
-    """Replace ${VAR} with environment variable."""
-    import re
-    def replacer(m):
-        var = m.group(1)
-        return os.getenv(var, "")
-    return re.sub(r"\$\{(\w+)\}", replacer, value)
+    """Replace ${VAR} with environment variable (delegates to shared impl)."""
+    from src.shared.defaults import resolve_env_placeholders
+
+    return resolve_env_placeholders(value)
 
 
 def create_embedding_provider(
