@@ -9,7 +9,7 @@ from __future__ import annotations
 import logging
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import ClassVar
+from typing import Any, ClassVar
 
 logger = logging.getLogger("agent")
 
@@ -113,29 +113,51 @@ class OpenAIEmbeddingProvider(EmbeddingProvider):
         self.model = model
         self.dimensions = dimensions
         self.timeout = timeout
+        self._client: Any = None
 
-    async def embed_texts(self, texts: list[str]) -> EmbeddingResult:
+    def _build_client(self) -> Any:
+        """Lazily build (and reuse) the async client.
 
+        ``trust_env=False`` 禁用系统代理：与 LLM 层一致，避免 Windows 系统代理
+        （Clash 等）把请求转发到本地端口导致 Connection error。
+        """
         from openai import AsyncOpenAI
 
-        client_kwargs = {"api_key": self.api_key}
+        client_kwargs = {
+            "api_key": self.api_key,
+            "timeout": self.timeout,
+            "max_retries": 0,
+        }
         if self.base_url:
             client_kwargs["base_url"] = self.base_url
-
-        client = AsyncOpenAI(**client_kwargs)
         try:
-            resp = await client.embeddings.create(
-                model=self.model,
-                input=texts,
+            import httpx
+
+            client_kwargs["http_client"] = httpx.AsyncClient(
+                timeout=self.timeout, trust_env=False
             )
-            embeddings = [d.embedding for d in resp.data]
-            return EmbeddingResult(
-                embeddings=embeddings,
-                dimensions=len(embeddings[0]) if embeddings else 0,
-                model_name=self.model,
-            )
-        finally:
-            await client.close()
+        except Exception:  # noqa: BLE001 - 不支持时回退默认客户端
+            pass
+        return AsyncOpenAI(**client_kwargs)
+
+    async def embed_texts(self, texts: list[str]) -> EmbeddingResult:
+        if self._client is None:
+            self._client = self._build_client()
+        resp = await self._client.embeddings.create(
+            model=self.model,
+            input=texts,
+        )
+        embeddings = [d.embedding for d in resp.data]
+        return EmbeddingResult(
+            embeddings=embeddings,
+            dimensions=len(embeddings[0]) if embeddings else 0,
+            model_name=self.model,
+        )
+
+    async def close(self) -> None:
+        if self._client is not None:
+            await self._client.close()
+            self._client = None
 
 
 # ── Concrete: Qwen3 (local) ──────────────────────────────────

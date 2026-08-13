@@ -103,7 +103,9 @@ class ToolApprovalService:
         ):
             return
         self._last_cleanup = now
-        self.cleanup_older_than(max_age_seconds=self._CLEANUP_INTERVAL)
+        self.cleanup_older_than(
+            max_age_seconds=self._CLEANUP_INTERVAL, skip_decided=True
+        )
 
     # Sweep interval (seconds) — expired records are reaped at most this often.
     _CLEANUP_INTERVAL: float = 300.0
@@ -171,17 +173,27 @@ class ToolApprovalService:
     def get(self, approval_id: str) -> PendingApproval | None:
         return self._pending.get(approval_id)
 
-    def cleanup_older_than(self, max_age_seconds: float = 3600.0) -> int:
+    def cleanup_older_than(
+        self, max_age_seconds: float = 3600.0, *, skip_decided: bool = False
+    ) -> int:
         """Drop records older than ``max_age_seconds`` (synchronous, atomic).
 
         Runs without awaiting in the asyncio single-threaded loop, so the
         dict mutation cannot interleave with decide()/wait(). Called from
-        ``_maybe_cleanup`` and from server startup maintenance.
+        ``_maybe_cleanup`` (expired sweep, ``skip_decided=True``) and from
+        server startup maintenance (full sweep, reaping decided records too).
+
+        ``skip_decided=True`` keeps approved/denied records: a ``wait()``
+        coroutine may still be between ``event.wait()`` returning and reading
+        ``self._pending`` — deleting the record in that window would make
+        ``wait`` return False for an already-approved request.
         """
         cutoff = time.time() - max_age_seconds
         removed = 0
         for aid, rec in list(self._pending.items()):
             if rec.created_at < cutoff:
+                if skip_decided and rec.status in {"approved", "denied"}:
+                    continue
                 self._pending.pop(aid, None)
                 self._events.pop(aid, None)
                 removed += 1
@@ -212,6 +224,13 @@ async def gate_tool_execution(
     """
     if not requires_approval(tool_name, tool_args):
         return None
+    if emit is None:
+        # 无 SSE 事件通道（CLI / 后台任务 / 扮演链路）时无法推送审批请求，
+        # 直接拒绝而非挂起等待超时（否则会阻塞 hitl_timeout_seconds 秒）。
+        return (
+            f"Tool '{tool_name}' requires human approval, but no approval "
+            f"channel (SSE) is available in this context. Denied automatically."
+        )
     svc = get_approval_service()
     pending = await svc.request(
         session_id=session_id, tool_name=tool_name, tool_args=tool_args

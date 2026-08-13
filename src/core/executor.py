@@ -72,7 +72,7 @@ class TaskExecutor:
         self,
         tool_registry: ToolRegistry,
         llm_client: Any,
-        model: str = "gpt-4o-mini",
+        model: str = "deepseek-v4-flash",
         max_retries: int = 3,
     ) -> None:
         """Initialize the executor.

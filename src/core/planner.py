@@ -113,7 +113,7 @@ class TaskPlanner:
     def __init__(
         self,
         llm_client: AsyncOpenAI | SharedLLMClient,
-        model: str = "gpt-4o-mini",
+        model: str = "deepseek-v4-flash",
         temperature: float = 0.7,
         max_tokens: int = 4096,
     ) -> None:
@@ -165,6 +165,9 @@ class TaskPlanner:
         history = memory.get_last_n(6)
         for msg in history:
             if msg["role"] == "tool":
+                continue
+            # 末尾会统一追加 user_input，跳过历史里同一条用户输入，避免重复注入
+            if msg["role"] == "user" and msg.get("content") == user_input:
                 continue
             messages.append({"role": msg["role"], "content": msg["content"]})  # type: ignore[arg-type]
 

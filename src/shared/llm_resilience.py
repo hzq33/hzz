@@ -18,8 +18,6 @@ from openai import APIStatusError, OpenAI, RateLimitError
 logger = logging.getLogger("agent")
 
 _RETRYABLE: Tuple[Type[BaseException], ...] = (
-    APIStatusError,
-    RateLimitError,
     TimeoutError,
     ConnectionError,
 )
@@ -31,11 +29,12 @@ class LLMResilienceMixin:
 
     @staticmethod
     def _is_retryable(exc: BaseException) -> bool:
-        if isinstance(exc, _RETRYABLE):
+        # 429（限流）与 5xx（服务端错误）可重试；4xx 客户端错误不可恢复，不重试。
+        if isinstance(exc, RateLimitError):
             return True
-        if isinstance(exc, APIStatusError) and exc.status_code >= 500:
-            return True
-        return False
+        if isinstance(exc, APIStatusError):
+            return exc.status_code >= 500
+        return isinstance(exc, _RETRYABLE)
 
     def _switch_to_fallback(self):
         if self._using_fallback:
