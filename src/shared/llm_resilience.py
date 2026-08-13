@@ -23,6 +23,25 @@ _RETRYABLE: Tuple[Type[BaseException], ...] = (
 )
 
 
+def _extract_cached_tokens(usage_obj) -> int:
+    """提取缓存命中的输入 token 数（DeepSeek / OpenAI 兼容两种字段）。
+
+    DeepSeek 返回 ``prompt_cache_hit_tokens``；OpenAI 兼容实现把命中数放在
+    ``prompt_tokens_details.cached_tokens``。都取不到时返回 0（不改变旧行为）。
+    """
+    if usage_obj is None:
+        return 0
+    hit = getattr(usage_obj, "prompt_cache_hit_tokens", None)
+    if hit is not None:
+        return int(hit or 0)
+    details = getattr(usage_obj, "prompt_tokens_details", None)
+    if details is not None:
+        hit = getattr(details, "cached_tokens", None)
+        if hit is not None:
+            return int(hit or 0)
+    return 0
+
+
 class LLMResilienceMixin:
     """Circuit breaker / fallback / retry / usage-tracking methods."""
 
@@ -256,6 +275,7 @@ class LLMResilienceMixin:
                 "prompt_tokens": usage.prompt_tokens,
                 "completion_tokens": usage.completion_tokens,
                 "total_tokens": getattr(usage, "total_tokens", 0),
+                "cached_tokens": _extract_cached_tokens(usage),
             },
             model=self.model,
         )
@@ -296,6 +316,7 @@ class LLMResilienceMixin:
                 "prompt_tokens": usage_obj.prompt_tokens,
                 "completion_tokens": usage_obj.completion_tokens,
                 "total_tokens": getattr(usage_obj, "total_tokens", 0),
+                "cached_tokens": _extract_cached_tokens(usage_obj),
             },
             model=self.model,
         )
