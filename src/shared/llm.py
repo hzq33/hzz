@@ -21,6 +21,8 @@ from openai import AsyncOpenAI, OpenAI
 
 from src.shared.llm_resilience import LLMResilienceMixin
 
+from src.shared.defaults import DEFAULT_DEEPSEEK_BASE_URL, DEFAULT_DEEPSEEK_MODEL
+
 logger = logging.getLogger("agent")
 
 
@@ -73,16 +75,16 @@ class SharedLLMClient(LLMResilienceMixin):
 
         if not self._primary_config:
             self._primary_config = {
-                "base_url": "https://api.deepseek.com",
+                "base_url": DEFAULT_DEEPSEEK_BASE_URL,
                 "api_key": "",
-                "model": "deepseek-v4-flash",
+                "model": DEFAULT_DEEPSEEK_MODEL,
             }
 
         self.temperature = temperature
         self.max_tokens = max_tokens
         self.timeout = float(timeout)
         self.max_retries = max(0, int(max_retries))
-        self.model = self._primary_config.get("model", "deepseek-v4-flash")
+        self.model = self._primary_config.get("model", DEFAULT_DEEPSEEK_MODEL)
         # None → auto-detect DeepSeek endpoints; True/False → explicit override.
         self._thinking_disabled = thinking_disabled
 

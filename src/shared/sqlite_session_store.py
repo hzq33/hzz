@@ -13,7 +13,9 @@ from src.shared.session_store import sanitize_session_id
 
 logger = logging.getLogger("agent_server")
 
-DEFAULT_DB_PATH = Path(__file__).resolve().parents[2] / "data" / "sessions" / "sessions.db"
+from src.domain.novel.series_paths import data_root
+
+DEFAULT_DB_PATH = data_root() / "sessions" / "sessions.db"
 
 
 class SqliteSessionStore:

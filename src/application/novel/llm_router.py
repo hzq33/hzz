@@ -14,6 +14,8 @@ import os
 import re
 from typing import TYPE_CHECKING, Any, ClassVar
 
+from src.shared.defaults import DEFAULT_DEEPSEEK_BASE_URL, DEFAULT_DEEPSEEK_MODEL
+
 from src.application.novel.intent_router import IntentResult
 from src.domain.novel.models import (
     BLOCK_CHARACTER,
@@ -62,7 +64,7 @@ _ALIAS_HINTS_SECTION = """
 {alias_hints}
 """
 
-_ROUTER_MODEL = "deepseek-v4-flash"
+_ROUTER_MODEL = DEFAULT_DEEPSEEK_MODEL
 _ROUTER_MAX_TOKENS = 400  # 推理模型思维链消耗，需足够配额
 _ROUTER_TEMPERATURE = 0.0
 
@@ -107,7 +109,7 @@ def _build_client():
     if not api_key:
         raise RuntimeError("DEEPSEEK_API_KEY not set")
     base_url = (ep.get("base_url") or "").strip() or os.getenv(
-        "DEEPSEEK_BASE_URL", "https://api.deepseek.com"
+        "DEEPSEEK_BASE_URL", DEFAULT_DEEPSEEK_BASE_URL
     ).strip().rstrip("/")
     _http_kwargs: dict[str, Any] = {}
     try:
@@ -132,7 +134,7 @@ def _build_async_client():
     if not api_key:
         raise RuntimeError("DEEPSEEK_API_KEY not set")
     base_url = (ep.get("base_url") or "").strip() or os.getenv(
-        "DEEPSEEK_BASE_URL", "https://api.deepseek.com"
+        "DEEPSEEK_BASE_URL", DEFAULT_DEEPSEEK_BASE_URL
     ).strip().rstrip("/")
     _http_kwargs: dict[str, Any] = {}
     try:

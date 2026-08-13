@@ -21,7 +21,9 @@ import networkx as nx
 
 logger = logging.getLogger("agent.graph_rag")
 
-_DATA_ROOT = Path(__file__).resolve().parents[3] / "data"
+from src.domain.novel.series_paths import data_root
+
+_DATA_ROOT = data_root()
 _GRAPH_RAG_DIR = _DATA_ROOT / "graph_rag"
 _GRAPH_DIR = _DATA_ROOT / "graphs"
 

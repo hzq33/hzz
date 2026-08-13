@@ -18,7 +18,9 @@ from src.domain.novel.story_analysis.models import StoryAnalysisSnapshot, _PROMP
 
 logger = logging.getLogger("agent")
 
-_ANALYSIS_DIR = Path(__file__).resolve().parents[4] / "data" / "story_analyses"
+from src.domain.novel.series_paths import data_root
+
+_ANALYSIS_DIR = data_root() / "story_analyses"
 _DEFAULT_MAX_CHAPTERS = 40
 _DEFAULT_MAP_CONCURRENCY = 3
 _DEFAULT_MAP_MAX_CHARS = 5000

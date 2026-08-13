@@ -20,7 +20,9 @@ from typing import Any
 
 logger = logging.getLogger("agent")
 
-_JOB_ROOT = Path(__file__).resolve().parents[2] / "data" / "jobs"
+from src.domain.novel.series_paths import data_root
+
+_JOB_ROOT = data_root() / "jobs"
 
 
 def _now() -> str:

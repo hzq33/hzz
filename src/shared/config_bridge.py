@@ -17,6 +17,12 @@ from typing import Any
 import yaml
 from dotenv import load_dotenv
 
+from src.shared.defaults import (
+    DEFAULT_DEEPSEEK_BASE_URL,
+    DEFAULT_DEEPSEEK_FALLBACK_MODEL,
+    DEFAULT_DEEPSEEK_MODEL,
+)
+
 # Project root (two levels up from src/shared/)
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 
@@ -25,9 +31,9 @@ PROJECT_ROOT = Path(__file__).parent.parent.parent
 class LLMProviderConfig:
     """Configuration for an LLM provider endpoint."""
 
-    model: str = "deepseek-v4-flash"
+    model: str = DEFAULT_DEEPSEEK_MODEL
     api_key: str = ""
-    base_url: str = "https://api.deepseek.com"
+    base_url: str = DEFAULT_DEEPSEEK_BASE_URL
     temperature: float = 0.7
     max_tokens: int = 4096
 
@@ -50,9 +56,9 @@ class AgentLLMConfig:
     """Agent Framework LLM configuration."""
 
     name: str = "ModularAgent"
-    model: str = "deepseek-v4-flash"
+    model: str = DEFAULT_DEEPSEEK_MODEL
     api_key: str = ""
-    base_url: str = "https://api.deepseek.com"
+    base_url: str = DEFAULT_DEEPSEEK_BASE_URL
     temperature: float = 0.7
     max_tokens: int = 4096
     max_retries: int = 3
@@ -182,9 +188,9 @@ def load_shared_config(yaml_path: str | None = None) -> SharedConfig:
     # Build Agent LLM config
     llm = AgentLLMConfig(
         name=agent_section.get("name", "ModularAgent"),
-        model=agent_section.get("model", "deepseek-v4-flash"),
+        model=agent_section.get("model", DEFAULT_DEEPSEEK_MODEL),
         api_key=agent_section.get("api_key", ""),
-        base_url=agent_section.get("base_url", "https://api.deepseek.com"),
+        base_url=agent_section.get("base_url", DEFAULT_DEEPSEEK_BASE_URL),
         temperature=float(agent_section.get("temperature", 0.7)),
         max_tokens=int(agent_section.get("max_tokens", 4096)),
         max_retries=int(agent_section.get("max_retries", 3)),
@@ -195,13 +201,13 @@ def load_shared_config(yaml_path: str | None = None) -> SharedConfig:
     rag_primary = LLMProviderConfig(
         model=runtime_settings.get("model")
         or rag_section.get("primary", {}).get("model")
-        or os.getenv("DEEPSEEK_MODEL", "deepseek-r1:1.5b"),
+        or os.getenv("DEEPSEEK_MODEL", DEFAULT_DEEPSEEK_MODEL),
         api_key=runtime_settings.get("api_key")
         or rag_section.get("primary", {}).get("api_key")
         or os.getenv("DEEPSEEK_API_KEY", ""),
         base_url=runtime_settings.get("api_base")
         or rag_section.get("primary", {}).get("base_url")
-        or os.getenv("DEEPSEEK_BASE_URL", "http://localhost:9527/api/v1"),
+        or os.getenv("DEEPSEEK_BASE_URL", DEFAULT_DEEPSEEK_BASE_URL),
         temperature=float(runtime_settings.get("temperature", 0.7)),
         max_tokens=512,
     )
@@ -209,13 +215,13 @@ def load_shared_config(yaml_path: str | None = None) -> SharedConfig:
     # Build RAG fallback LLM config
     rag_fallback = LLMProviderConfig(
         model=rag_section.get("fallback", {}).get("model")
-        or os.getenv("DEEPSEEK_FALLBACK_MODEL", "deepseek-v4-pro"),
+        or os.getenv("DEEPSEEK_FALLBACK_MODEL", DEFAULT_DEEPSEEK_FALLBACK_MODEL),
         api_key=runtime_settings.get("fallback_api_key")
         or rag_section.get("fallback", {}).get("api_key")
         or os.getenv("DEEPSEEK_FALLBACK_API_KEY", ""),
         base_url=runtime_settings.get("fallback_api_base")
         or rag_section.get("fallback", {}).get("base_url")
-        or os.getenv("DEEPSEEK_FALLBACK_BASE_URL", "https://api.deepseek.com"),
+        or os.getenv("DEEPSEEK_FALLBACK_BASE_URL", DEFAULT_DEEPSEEK_BASE_URL),
         temperature=float(runtime_settings.get("temperature", 0.7)),
         max_tokens=1024,
     )

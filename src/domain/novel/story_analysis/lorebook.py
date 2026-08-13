@@ -21,7 +21,9 @@ from typing import Any
 
 logger = logging.getLogger("agent")
 
-_LOREBOOK_DIR = Path(__file__).resolve().parents[4] / "data" / "lorebooks"
+from src.domain.novel.series_paths import data_root
+
+_LOREBOOK_DIR = data_root() / "lorebooks"
 
 # era 相对顺序（同 timeline._ERA_ORDER）
 _ERA_ORDER: dict[str, int] = {

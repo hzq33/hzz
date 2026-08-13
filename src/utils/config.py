@@ -11,6 +11,8 @@ import yaml
 
 from src.utils.errors import ConfigurationError
 
+from src.shared.defaults import DEFAULT_DEEPSEEK_BASE_URL, DEFAULT_DEEPSEEK_MODEL
+
 
 @dataclass
 class MemoryConfig:
@@ -58,10 +60,10 @@ class AgentConfig:
     """
 
     name: str = "ModularAgent"
-    model: str = "gpt-4o-mini"
+    model: str = DEFAULT_DEEPSEEK_MODEL
     fallback_model: str = ""
     api_key: str = ""
-    base_url: str = "https://api.openai.com/v1"
+    base_url: str = DEFAULT_DEEPSEEK_BASE_URL
     temperature: float = 0.7
     max_tokens: int = 4096
     max_retries: int = 3
@@ -175,7 +177,7 @@ def load_config(config_path: str) -> AgentConfig:
             missing_key="api_key",
         )
 
-    model = agent_section.get("model", "gpt-4o-mini")
+    model = agent_section.get("model", DEFAULT_DEEPSEEK_MODEL)
     if not model:
         raise ConfigurationError(
             "Missing required field: agent.model.",

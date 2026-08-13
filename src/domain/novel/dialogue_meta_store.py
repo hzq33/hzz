@@ -14,7 +14,9 @@ from typing import Any
 
 logger = logging.getLogger("agent")
 
-_META_DIR = Path(__file__).resolve().parents[3] / "data" / "dialogue_meta"
+from src.domain.novel.series_paths import data_root
+
+_META_DIR = data_root() / "dialogue_meta"
 
 
 def _safe_name(doc_id: str) -> str:

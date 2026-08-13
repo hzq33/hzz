@@ -16,7 +16,9 @@ from typing import Any
 
 logger = logging.getLogger("agent.llm_config")
 
-_CONFIG_PATH = Path(__file__).resolve().parents[2] / "data" / "llm_config.json"
+from src.domain.novel.series_paths import data_root
+
+_CONFIG_PATH = data_root() / "llm_config.json"
 
 # ── 服务商预设 ───────────────────────────────────────────
 PROVIDERS: dict[str, dict[str, Any]] = {

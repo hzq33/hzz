@@ -5,11 +5,16 @@ from __future__ import annotations
 import os
 from typing import Any
 
-# Default DeepSeek-ish list prices (USD / 1M tokens). Override with env.
+# Default DeepSeek list prices (USD / 1M tokens). Override with env.
+# 官方定价区分「缓存命中输入 / 未命中输入 / 输出」三档，这里取未命中输入价
+# + 输出价（命中缓存的实际成本更低，估算偏保守）。汇率按 7.14 折算：
+#   V4-flash：1 / 2 元 → 0.14 / 0.28
+#   V4-pro：  3 / 6 元 → 0.42 / 0.84
+# deepseek-chat / deepseek-reasoner 为兼容别名，价格随官方调整。
 _DEFAULT_PRICES: dict[str, tuple[float, float]] = {
     # model substring -> (prompt_per_m, completion_per_m)
     "deepseek-v4-flash": (0.14, 0.28),
-    "deepseek-v4-pro": (0.55, 2.19),
+    "deepseek-v4-pro": (0.42, 0.84),
     "deepseek-chat": (0.14, 0.28),
     "deepseek-reasoner": (0.55, 2.19),
     "default": (0.5, 1.5),

@@ -13,6 +13,14 @@ _PROJECT_ROOT = Path(__file__).resolve().parents[3]
 _DATA = _PROJECT_ROOT / "data"
 
 
+def data_root() -> Path:
+    """Canonical project data directory (single source of truth).
+
+    各模块不要再手数 ``parents[N]`` 计算 data 根，统一从这里取。
+    """
+    return _DATA
+
+
 def safe_series_stem(series_id: str) -> str:
     """Primary stem used by catalog / roster / alias_map / purge."""
     return re.sub(r"[^\w\u4e00-\u9fff\-]+", "_", (series_id or "").strip()) or "unknown"

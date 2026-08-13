@@ -12,6 +12,8 @@ import zipfile
 from pathlib import Path
 from typing import Any
 
+from src.shared.defaults import DEFAULT_DEEPSEEK_BASE_URL, DEFAULT_DEEPSEEK_MODEL
+
 ProgressCallback = Any  # re-exported by package __init__
 
 logger = logging.getLogger("agent")
@@ -126,7 +128,7 @@ def _build_shared_llm(
         agent_cfg = cfg.get("agent", {})
         api_key = _substitute_env(agent_cfg.get("api_key", ""))
         base_url = _substitute_env(agent_cfg.get("base_url", ""))
-        model = agent_cfg.get("model", "deepseek-v4-flash")
+        model = agent_cfg.get("model", DEFAULT_DEEPSEEK_MODEL)
         fallback_model = _substitute_env(agent_cfg.get("fallback_model", ""))
 
         # 前端 llm-config 覆盖（endpoint 指定时）
@@ -155,7 +157,7 @@ def _build_shared_llm(
 
         if not api_key:
             return None
-        base_url = base_url or "https://api.deepseek.com"
+        base_url = base_url or DEFAULT_DEEPSEEK_BASE_URL
 
         thinking_disabled = None  # None → auto（DeepSeek 自动禁用）
         if endpoint:

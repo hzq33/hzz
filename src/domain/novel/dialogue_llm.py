@@ -16,6 +16,7 @@ from collections.abc import Sequence
 from typing import Any
 
 from src.domain.novel.models import BLOCK_DIALOGUE, DialogueTurn, NovelBlock
+from src.shared.defaults import DEFAULT_DEEPSEEK_MODEL
 
 logger = logging.getLogger("agent")
 
@@ -274,7 +275,7 @@ class LLMDialogueExtractor:
                 return str(model)
         except Exception:
             pass
-        return "deepseek-v4-flash"
+        return DEFAULT_DEEPSEEK_MODEL
 
     async def _achat(
         self,

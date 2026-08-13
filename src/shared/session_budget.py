@@ -20,7 +20,9 @@ logger = logging.getLogger("agent.budget")
 
 _lock = threading.Lock()
 
-_DATA_DIR = Path(__file__).resolve().parents[2] / "data"
+from src.domain.novel.series_paths import data_root
+
+_DATA_DIR = data_root()
 _DB_PATH = _DATA_DIR / "budget.db"
 
 # 允许测试覆盖数据库路径（如 tmp_path）

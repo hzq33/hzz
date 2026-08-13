@@ -31,7 +31,9 @@ from src.domain.novel.story_analysis.models import (
 
 logger = logging.getLogger("agent")
 
-_TIMELINE_DIR = Path(__file__).resolve().parents[4] / "data" / "timelines"
+from src.domain.novel.series_paths import data_root
+
+_TIMELINE_DIR = data_root() / "timelines"
 
 # 阶段枚举（无 year 时的相对顺序兜底）
 _ERA_ORDER: dict[str, int] = {

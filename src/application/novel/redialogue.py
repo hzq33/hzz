@@ -28,8 +28,10 @@ from typing import Any
 logger = logging.getLogger("agent")
 
 _PROJECT_ROOT = Path(__file__).resolve().parents[3]
-_REDIALOGUE_DIR = _PROJECT_ROOT / "data" / "redialogue"
-_INVENTORY_DIR = _PROJECT_ROOT / "data" / "inventories"
+from src.domain.novel.series_paths import data_root
+
+_REDIALOGUE_DIR = data_root() / "redialogue"
+_INVENTORY_DIR = data_root() / "inventories"
 
 
 class InventoryMissingError(FileNotFoundError):

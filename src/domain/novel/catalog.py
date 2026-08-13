@@ -25,7 +25,9 @@ def _default_catalog_dir() -> Path:
     env_dir = os.getenv("AGENT_CATALOG_DIR", "").strip()
     if env_dir:
         return Path(env_dir)
-    return Path(__file__).resolve().parents[3] / "data" / "catalogs"
+    from src.domain.novel.series_paths import data_root
+
+    return data_root() / "catalogs"
 
 
 _CATALOG_DIR = _default_catalog_dir()

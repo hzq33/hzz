@@ -7,6 +7,8 @@ import uuid
 from pathlib import Path
 from typing import Any
 
+from src.domain.novel.series_paths import data_root
+
 _PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -106,13 +108,13 @@ def check_readiness(
         "config_ok": {"ok": config_ok, "error": config_error},
     }
 
-    data_root = _PROJECT_ROOT / "data"
-    ok, err = _probe_writable_dir(data_root)
-    checks["data_dir_writable"] = {"ok": ok, "path": str(data_root), "error": None if ok else err}
+    data_dir = data_root()
+    ok, err = _probe_writable_dir(data_dir)
+    checks["data_dir_writable"] = {"ok": ok, "path": str(data_dir), "error": None if ok else err}
 
     session_backend = os.getenv("AGENT_SESSION_BACKEND", "sqlite").strip().lower()
     if session_backend in {"json", "file"}:
-        sess_dir = _PROJECT_ROOT / "data" / "sessions"
+        sess_dir = data_root() / "sessions"
         ok, err = _probe_writable_dir(sess_dir)
         checks["session_store"] = {
             "ok": ok,
@@ -122,7 +124,7 @@ def check_readiness(
         }
     else:
         db_env = os.getenv("AGENT_SESSION_DB", "").strip()
-        db_path = Path(db_env) if db_env else (_PROJECT_ROOT / "data" / "sessions" / "sessions.db")
+        db_path = Path(db_env) if db_env else (data_root() / "sessions" / "sessions.db")
         if not db_path.is_absolute():
             db_path = _PROJECT_ROOT / db_path
         ok, err = _probe_sqlite(db_path)
@@ -135,7 +137,7 @@ def check_readiness(
 
     job_backend = os.getenv("AGENT_JOB_BACKEND", "sqlite").strip().lower()
     if job_backend in {"json", "file"}:
-        job_dir = _PROJECT_ROOT / "data" / "jobs"
+        job_dir = data_root() / "jobs"
         ok, err = _probe_writable_dir(job_dir)
         checks["job_store"] = {
             "ok": ok,
@@ -145,7 +147,7 @@ def check_readiness(
         }
     else:
         job_db_env = os.getenv("AGENT_JOB_DB", "").strip()
-        job_db = Path(job_db_env) if job_db_env else (_PROJECT_ROOT / "data" / "jobs" / "jobs.db")
+        job_db = Path(job_db_env) if job_db_env else (data_root() / "jobs" / "jobs.db")
         if not job_db.is_absolute():
             job_db = _PROJECT_ROOT / job_db
         ok, err = _probe_sqlite(job_db)

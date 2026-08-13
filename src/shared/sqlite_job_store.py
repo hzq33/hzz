@@ -15,7 +15,9 @@ from src.shared.async_jobs import JobRecord, re_sub_type
 
 logger = logging.getLogger("agent")
 
-DEFAULT_JOB_DB = Path(__file__).resolve().parents[2] / "data" / "jobs" / "jobs.db"
+from src.domain.novel.series_paths import data_root
+
+DEFAULT_JOB_DB = data_root() / "jobs" / "jobs.db"
 
 
 def _now() -> str:

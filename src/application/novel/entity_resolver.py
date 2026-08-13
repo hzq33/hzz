@@ -27,8 +27,10 @@ from src.domain.novel.alias_map import AliasEntity, AliasMap, load_alias_map
 
 logger = logging.getLogger("agent.entity_resolver")
 
-_ROSTER_DIR = Path(__file__).resolve().parents[3] / "data" / "rosters"
-_CHARACTER_DIR = Path(__file__).resolve().parents[3] / "data" / "characters"
+from src.domain.novel.series_paths import data_root
+
+_ROSTER_DIR = data_root() / "rosters"
+_CHARACTER_DIR = data_root() / "characters"
 
 
 @dataclass

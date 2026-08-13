@@ -34,7 +34,9 @@ def _trace_dir() -> Path:
     env = os.getenv("RAG_TRACE_DIR", "").strip()
     if env:
         return Path(env)
-    return Path(__file__).resolve().parents[2] / "data" / "traces"
+    from src.domain.novel.series_paths import data_root
+
+    return data_root() / "traces"
 
 
 def _enabled() -> bool:

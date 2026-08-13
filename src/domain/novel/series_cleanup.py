@@ -11,6 +11,8 @@ from src.domain.novel.series_paths import series_stem_aliases
 
 logger = logging.getLogger("agent")
 
+from src.domain.novel.series_paths import data_root
+
 _PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 
@@ -86,14 +88,14 @@ def purge_series_artifacts(series_id: str) -> dict[str, Any]:
             f"data/graphs/{stem}.json",
         ):
             _unlink(_PROJECT_ROOT / relative, stats)
-        graphs_dir = _PROJECT_ROOT / "data" / "graphs"
+        graphs_dir = data_root() / "graphs"
         if graphs_dir.exists():
             for path in graphs_dir.glob(f"{stem}__*.json"):
                 _unlink(path, stats)
 
     # Content-based sweep (files that embed series_id)
     for sub in ("rosters", "inventories", "catalogs", "story_analyses"):
-        folder = _PROJECT_ROOT / "data" / sub
+        folder = data_root() / sub
         if not folder.exists():
             continue
         for path in folder.glob("*.json"):

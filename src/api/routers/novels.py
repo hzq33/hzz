@@ -19,8 +19,9 @@ from src.api.schemas import SeriesRenameRequest, StoryAnalysisRequest
 logger = logging.getLogger("agent_server")
 router = APIRouter(prefix="/api/v1/agent")
 
-_PROJECT_ROOT = Path(__file__).resolve().parents[3]
-_UPLOAD_TMP = _PROJECT_ROOT / "data" / "upload_tmp"
+from src.domain.novel.series_paths import data_root
+
+_UPLOAD_TMP = data_root() / "upload_tmp"
 
 
 # 上传临时文件保留时长：超过即视为孤儿（导入中断/失败遗留），上传时惰性清理。

@@ -8,6 +8,7 @@ from src.core.executor import ExecutionResult, TaskExecutor
 from src.core.memory import ConversationMemory, WorkingMemory
 from src.core.planner import TaskPlan, TaskPlanner
 from src.shared.llm_factory import create_shared_llm
+from src.shared.defaults import max_tool_rounds
 from src.tools.registry import ToolRegistry
 from src.utils.config import AgentConfig
 from src.utils.errors import ExecutionError, PlanningError
@@ -232,7 +233,6 @@ class Agent:
         messages = [
             m for m in self.memory.get_messages()
             if m.get("role") in ("system", "user", "assistant")
-            and "tool_calls" not in m
         ]
         # 注入上下文压缩摘要（防遗忘/防跨轮矛盾）
         summary = self.memory.get_summary()
@@ -268,7 +268,7 @@ class Agent:
                 messages,
                 tools=tools,
                 execute_tool=execute_tool,
-                max_rounds=5,
+                max_rounds=max_tool_rounds(),
                 temperature=self.config.temperature,
                 max_tokens=self.config.max_tokens,
             )

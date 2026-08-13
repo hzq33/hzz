@@ -36,6 +36,7 @@ from src.core.agent import Agent
 from src.core.executor import ExecutionResult
 from src.core.planner import TaskPlan
 from src.shared.llm import ToolInvocation, ToolLoopResult
+from src.shared.defaults import max_tool_rounds
 
 logger = logging.getLogger("agent")
 
@@ -181,7 +182,6 @@ class SwarmAgent:
         messages = [
             m for m in self.agent.memory.get_messages()
             if m.get("role") in ("system", "user", "assistant")
-            and "tool_calls" not in m
         ]
         # 检索范围注入：告知 LLM 当前作品，引导 novel_search 带 series/doc_id
         scope_note = self._scope_prompt()
@@ -243,7 +243,7 @@ class SwarmAgent:
                 tools=tools,
                 execute_tool=execute_tool,
                 on_tool=on_tool,
-                max_rounds=5,
+                max_rounds=max_tool_rounds(),
                 temperature=self.agent.config.temperature,
                 max_tokens=self.agent.config.max_tokens,
             )

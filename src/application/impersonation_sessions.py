@@ -21,7 +21,9 @@ from src.utils.config import AgentConfig
 
 logger = logging.getLogger("agent_server")
 
-_DEFAULT_SESSION_DIR = Path(__file__).resolve().parents[2] / "data" / "sessions" / "imp"
+from src.domain.novel.series_paths import data_root
+
+_DEFAULT_SESSION_DIR = data_root() / "sessions" / "imp"
 
 
 def _configured_max_sessions(default: int = 20) -> int:

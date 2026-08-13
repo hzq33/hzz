@@ -22,8 +22,9 @@ from typing import Any
 logger = logging.getLogger("agent")
 
 # 项目根（data/world_kb.sqlite）
-_PROJECT_ROOT = Path(__file__).resolve().parents[4]
-_DB_PATH = _PROJECT_ROOT / "data" / "world_kb.sqlite"
+from src.domain.novel.series_paths import data_root
+
+_DB_PATH = data_root() / "world_kb.sqlite"
 
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS world_relations (

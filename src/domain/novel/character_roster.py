@@ -12,7 +12,9 @@ from typing import Any
 
 logger = logging.getLogger("agent")
 
-_ROSTER_DIR = Path(__file__).resolve().parents[3] / "data" / "rosters"
+from src.domain.novel.series_paths import data_root
+
+_ROSTER_DIR = data_root() / "rosters"
 
 
 @dataclass

@@ -13,6 +13,7 @@ import re
 from collections import Counter, defaultdict
 
 from src.domain.name_resolver import NameResolver
+from src.shared.defaults import DEFAULT_DEEPSEEK_BASE_URL, DEFAULT_DEEPSEEK_MODEL
 from src.domain.novel.character_builder_profile import CharacterBuilderProfileMixin
 from src.domain.novel.models import (
     BLOCK_CHARACTER,
@@ -526,7 +527,7 @@ async def _llm_filter_characters(char_stats: dict) -> dict:
         raise RuntimeError("no API key")
     from src.shared.llm import SharedLLMClient
     llm = SharedLLMClient(
-        primary={"api_key": key, "base_url": "https://api.deepseek.com", "model": "deepseek-v4-flash"},
+        primary={"api_key": key, "base_url": DEFAULT_DEEPSEEK_BASE_URL, "model": DEFAULT_DEEPSEEK_MODEL},
         temperature=0.1, max_tokens=500,
     )
     resp = await llm.achat([

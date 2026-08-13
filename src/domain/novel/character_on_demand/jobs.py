@@ -17,7 +17,9 @@ from src.domain.novel.character_on_demand.models import CharacterBuildJob
 logger = logging.getLogger("agent")
 
 _JOB_TYPE = "character_build"
-_JOB_DIR = Path(__file__).resolve().parents[4] / "data" / "character_jobs"  # legacy JSON fallback
+from src.domain.novel.series_paths import data_root
+
+_JOB_DIR = data_root() / "character_jobs"  # legacy JSON fallback
 _JOBS: dict[str, CharacterBuildJob] = {}
 _JOB_STORE_OVERRIDE: Any = None  # tests inject a temp SqliteJobStore / AsyncJobStore
 

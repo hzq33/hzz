@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import os
 from pathlib import Path
 
 from fastapi import HTTPException
@@ -38,7 +39,9 @@ def reset_runtime_state() -> None:
     cached_tools = None
     config_loaded = False
     event_bus = EventBus()
-    conversation = ConversationService(max_sessions=5, event_bus=event_bus)
+    conversation = ConversationService(
+        max_sessions=int(os.getenv("AGENT_MAX_SESSIONS", "5")), event_bus=event_bus
+    )
     imp_sessions = ImpersonationSessionService()
     imp_store = None
     event_bus.subscribe(

@@ -14,6 +14,8 @@ import os
 import re
 from typing import TYPE_CHECKING
 
+from src.shared.defaults import DEFAULT_DEEPSEEK_BASE_URL, DEFAULT_DEEPSEEK_MODEL
+
 if TYPE_CHECKING:
     from src.application.novel.entity_resolver import QueryContext
 
@@ -56,8 +58,7 @@ _ALIAS_HINTS_SECTION = """
 {alias_hints}
 """
 
-_REWRITE_MODEL = "deepseek-v4-flash"
-_REWRITE_BASE_URL = "https://api.deepseek.com/v1"
+_REWRITE_MODEL = DEFAULT_DEEPSEEK_MODEL
 _REWRITE_MAX_TOKENS = 800
 _REWRITE_TEMPERATURE = 0.3
 
@@ -77,7 +78,7 @@ def _build_client():
     if not api_key:
         raise RuntimeError("DEEPSEEK_API_KEY not set")
     base_url = (ep.get("base_url") or "").strip() or os.getenv(
-        "DEEPSEEK_BASE_URL", "https://api.deepseek.com"
+        "DEEPSEEK_BASE_URL", DEFAULT_DEEPSEEK_BASE_URL
     ).strip().rstrip("/")
     return AsyncOpenAI(
         api_key=api_key,
