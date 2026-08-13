@@ -118,7 +118,11 @@ def _run_startup_maintenance() -> None:
     try:
         from src.shared.tool_approvals import get_approval_service
 
-        stale = get_approval_service().cleanup_older_than(max_age_seconds=3600.0)
+        svc = get_approval_service()
+        expired = svc.expire_stale_pending()
+        if expired:
+            logger.info("Expired %d stale pending tool-approval records (restart)", expired)
+        stale = svc.cleanup_older_than(max_age_seconds=3600.0)
         if stale:
             logger.info("Pruned %d stale tool-approval records", stale)
     except Exception as exc:

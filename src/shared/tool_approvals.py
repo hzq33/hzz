@@ -3,12 +3,18 @@
 from __future__ import annotations
 
 import asyncio
+import json
 import logging
 import os
+import sqlite3
+import threading
 import time
 import uuid
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any
+
+from src.domain.novel.series_paths import data_root
 
 logger = logging.getLogger("agent.hitl")
 
@@ -81,6 +87,101 @@ class ToolApprovalService:
         self._events: dict[str, asyncio.Event] = {}
         self._lock = asyncio.Lock()
         self._last_cleanup = 0.0
+        self._db_lock = threading.Lock()
+
+    # ── SQLite 持久化（重启后审批记录不丢，多 worker 共享）──────────────
+
+    def _db(self) -> sqlite3.Connection:
+        p = Path(data_root()) / "approvals.db"
+        p.parent.mkdir(parents=True, exist_ok=True)
+        conn = sqlite3.connect(str(p), timeout=10.0)
+        conn.execute("PRAGMA journal_mode=WAL")
+        conn.execute("PRAGMA busy_timeout=5000")
+        conn.execute(
+            "CREATE TABLE IF NOT EXISTS approvals ("
+            " approval_id TEXT PRIMARY KEY,"
+            " session_id TEXT NOT NULL DEFAULT '',"
+            " tool_name TEXT NOT NULL,"
+            " tool_args TEXT NOT NULL DEFAULT '{}',"
+            " status TEXT NOT NULL DEFAULT 'pending',"
+            " reason TEXT NOT NULL DEFAULT '',"
+            " created_at REAL NOT NULL DEFAULT 0,"
+            " updated_at REAL NOT NULL DEFAULT 0)"
+        )
+        return conn
+
+    def _persist(self, rec: PendingApproval) -> None:
+        try:
+            with self._db_lock:
+                conn = self._db()
+                try:
+                    conn.execute(
+                        "INSERT OR REPLACE INTO approvals "
+                        "(approval_id, session_id, tool_name, tool_args, status, reason, created_at, updated_at) "
+                        "VALUES (?,?,?,?,?,?,?,?)",
+                        (
+                            rec.approval_id,
+                            rec.session_id,
+                            rec.tool_name,
+                            json.dumps(rec.tool_args, ensure_ascii=False),
+                            rec.status,
+                            rec.reason,
+                            rec.created_at,
+                            time.time(),
+                        ),
+                    )
+                    conn.commit()
+                finally:
+                    conn.close()
+        except Exception as exc:  # noqa: BLE001 - 持久化失败不阻塞审批主链路
+            logger.warning("approval persist failed: %s", exc)
+
+    def _load_db(self, approval_id: str) -> PendingApproval | None:
+        try:
+            with self._db_lock:
+                conn = self._db()
+                try:
+                    row = conn.execute(
+                        "SELECT approval_id, session_id, tool_name, tool_args, status, reason, created_at "
+                        "FROM approvals WHERE approval_id = ?",
+                        (approval_id,),
+                    ).fetchone()
+                finally:
+                    conn.close()
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("approval load failed: %s", exc)
+            return None
+        if row is None:
+            return None
+        rec = PendingApproval(
+            approval_id=row[0],
+            session_id=row[1],
+            tool_name=row[2],
+            tool_args=json.loads(row[3] or "{}"),
+            created_at=row[6],
+        )
+        rec.status = row[4]
+        rec.reason = row[5]
+        return rec
+
+    def expire_stale_pending(self) -> int:
+        """重启后把 DB 里残留的 pending 标记 expired（进程内 Event 已丢失）。"""
+        try:
+            with self._db_lock:
+                conn = self._db()
+                try:
+                    cur = conn.execute(
+                        "UPDATE approvals SET status='expired', reason='expired (restart)', updated_at=? "
+                        "WHERE status='pending'",
+                        (time.time(),),
+                    )
+                    conn.commit()
+                    return cur.rowcount
+                finally:
+                    conn.close()
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("approval expire sweep failed: %s", exc)
+            return 0
 
     async def _maybe_cleanup(self) -> None:
         """Periodically drop expired records (rate-limited).
@@ -130,6 +231,7 @@ class ToolApprovalService:
         async with self._lock:
             self._pending[aid] = rec
             self._events[aid] = asyncio.Event()
+        self._persist(rec)
         return rec
 
     async def wait(self, approval_id: str, timeout: float | None = None) -> bool:
@@ -146,6 +248,7 @@ class ToolApprovalService:
                 if rec and rec.status == "pending":
                     rec.status = "expired"
                     rec.reason = "timeout"
+                    self._persist(rec)
             return False
         rec = self._pending.get(approval_id)
         return bool(rec and rec.status == "approved")
@@ -168,10 +271,15 @@ class ToolApprovalService:
             ev = self._events.get(approval_id)
             if ev:
                 ev.set()
+            self._persist(rec)
             return rec
 
     def get(self, approval_id: str) -> PendingApproval | None:
-        return self._pending.get(approval_id)
+        rec = self._pending.get(approval_id)
+        if rec is not None:
+            return rec
+        # 内存未命中则回退 DB（重启后内存丢失，历史审批仍可查）
+        return self._load_db(approval_id)
 
     def cleanup_older_than(
         self, max_age_seconds: float = 3600.0, *, skip_decided: bool = False
@@ -197,6 +305,26 @@ class ToolApprovalService:
                 self._pending.pop(aid, None)
                 self._events.pop(aid, None)
                 removed += 1
+        # DB 同步清理（镜像维护；返回值仍以内存删除数为准，保持向后兼容）
+        try:
+            with self._db_lock:
+                conn = self._db()
+                try:
+                    if skip_decided:
+                        conn.execute(
+                            "DELETE FROM approvals WHERE created_at < ? "
+                            "AND status NOT IN ('approved','denied')",
+                            (cutoff,),
+                        )
+                    else:
+                        conn.execute(
+                            "DELETE FROM approvals WHERE created_at < ?", (cutoff,)
+                        )
+                    conn.commit()
+                finally:
+                    conn.close()
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("approval db cleanup failed: %s", exc)
         return removed
 
 
