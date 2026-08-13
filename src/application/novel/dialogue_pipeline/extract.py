@@ -13,9 +13,7 @@ from src.application.novel.dialogue_pipeline.config import _attr_config
 from src.application.novel.dialogue_pipeline.legacy import _extract_legacy_window
 from src.application.novel.dialogue_pipeline.models import DialoguePipelineResult
 from src.application.novel.dialogue_pipeline.tools import (
-    _high_confidence_seeds,
     _turns_to_blocks,
-    _window_local_candidates,
     assemble_prompt_candidates,
 )
 

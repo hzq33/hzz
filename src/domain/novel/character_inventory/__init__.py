@@ -13,9 +13,6 @@ Public API is unchanged.
 from __future__ import annotations
 
 from src.domain.novel.character_inventory.builder import (
-    _fallback_from_clusters,
-    _llm_normalize_global,
-    _parse_llm_json,
     build_character_inventory,
 )
 from src.domain.novel.character_inventory.candidates import (

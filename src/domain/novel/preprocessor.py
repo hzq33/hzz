@@ -58,7 +58,6 @@ def _cjk_char_ratio(text: str) -> float:
 def detect_and_transcode(raw: bytes) -> tuple[str, PreprocessMetrics]:
     """Detect encoding and transcode to UTF-8 string."""
     metrics = PreprocessMetrics(stage="encoding", bytes_in=len(raw))
-    detected = "utf-8"
 
     try:
         import chardet

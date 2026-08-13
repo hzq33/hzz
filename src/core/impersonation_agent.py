@@ -15,16 +15,14 @@ Split into mixins (logic unchanged):
 from __future__ import annotations
 
 import logging
-from collections.abc import AsyncGenerator
-from typing import Any
 
 from src.core.impersonation.chat import ImpersonationChatMixin
-from src.core.impersonation.models import Citation, _hit_similarity, _hit_to_citation
+from src.core.impersonation.models import Citation
 from src.core.impersonation.retrieval import ImpersonationRetrievalMixin
 from src.core.memory import ConversationMemory
 from src.domain.character_card import CharacterCard
 from src.shared.llm import SharedLLMClient
-from src.tools.base import BaseTool, ToolResult
+from src.tools.base import BaseTool
 from src.tools.registry import ToolRegistry
 
 logger = logging.getLogger("agent")

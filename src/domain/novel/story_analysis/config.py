@@ -14,7 +14,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-from src.domain.novel.story_analysis.models import StoryAnalysisSnapshot, _PROMPT_VERSION
+from src.domain.novel.story_analysis.models import StoryAnalysisSnapshot
 
 logger = logging.getLogger("agent")
 

@@ -14,7 +14,6 @@ system prompt（酒馆式动态注入）。
 from __future__ import annotations
 
 import logging
-from typing import Any
 
 logger = logging.getLogger("agent")
 

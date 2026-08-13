@@ -7,9 +7,7 @@ from __future__ import annotations
 
 import json
 import logging
-import uuid
 from datetime import UTC, datetime
-from pathlib import Path
 from typing import Any
 
 from src.domain.novel.character_on_demand.models import CharacterBuildJob

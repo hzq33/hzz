@@ -562,7 +562,7 @@ class HierarchicalChunker:
             pos = parent.narrative_text.find(text[: min(40, len(text))], offset)
             if pos < 0:
                 pos = offset
-            start, end = pos, pos + len(text)
+            end = pos + len(text)
             offset = end
 
             prefix = f"【{chapter}】" if self.chapter_prefix_in_vec and chapter else ""

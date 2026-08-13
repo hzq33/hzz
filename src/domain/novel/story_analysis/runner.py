@@ -14,7 +14,6 @@ from src.domain.novel.story_analysis.config import (
     _resolve_run_settings,
     load_analysis,
     select_chapters_balanced,
-    _PROMPT_VERSION,
 )
 from src.domain.novel.story_analysis.indexer import (
     ProgressCallback,
@@ -27,7 +26,7 @@ from src.domain.novel.story_analysis.map_reduce import (
     _collect_chapter_text,
     _map_chapter_with_retry,
 )
-from src.domain.novel.story_analysis.models import StoryAnalysisSnapshot, StoryEvidence
+from src.domain.novel.story_analysis.models import StoryAnalysisSnapshot, StoryEvidence, _PROMPT_VERSION
 from src.domain.novel.story_analysis.reduce import (
     _reduce_snapshot,
     merge_volume_into_snapshot,

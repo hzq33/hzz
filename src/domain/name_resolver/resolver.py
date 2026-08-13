@@ -10,7 +10,6 @@ from collections import Counter, defaultdict
 
 from src.domain.name_resolver.helpers import (
     _NON_NAME_WORDS,
-    _edit_distance,
     _is_structural_match,
     _is_substring_or_similar,
     _strip_honorific,

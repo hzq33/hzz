@@ -127,7 +127,7 @@ async def chat_stream(req: ChatRequest, request: Request):
                             if usage is not None:
                                 payload["usage"] = usage
                         yield JSONServerSentEvent(payload)
-            except Exception as exc:
+            except Exception:
                 logger.exception("Stream error")
                 yield JSONServerSentEvent(
                     {

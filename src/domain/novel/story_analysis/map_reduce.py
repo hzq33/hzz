@@ -5,26 +5,20 @@ Extracted from the former monolithic ``story_analysis.py``; logic unchanged.
 
 from __future__ import annotations
 
-import asyncio
 import hashlib
 import json
 import logging
-import time
 from typing import Any
 
 from src.domain.novel.story_analysis.config import (
     _build_map_system,
-    _canon_name,
-    _load_alias_map,
     _looks_like_cut_json,
     _parse_json_object,
-    _resolve_run_settings,
     _DEFAULT_MAX_TOKENS,
     _DEFAULT_PER_TYPE_CAP,
     _DEFAULT_SUMMARY_MAX_CHARS,
-    _PROMPT_VERSION,
 )
-from src.domain.novel.story_analysis.models import StoryEvidence
+from src.domain.novel.story_analysis.models import StoryEvidence, _PROMPT_VERSION
 
 logger = logging.getLogger("agent")
 

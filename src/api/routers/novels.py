@@ -10,7 +10,7 @@ import uuid
 from collections.abc import Awaitable, Callable
 from pathlib import Path
 
-from fastapi import APIRouter, File, Form, HTTPException, Query, Request, UploadFile
+from fastapi import APIRouter, File, HTTPException, Query, Request, UploadFile
 from pydantic import BaseModel, Field
 
 from src.api.errors import raise_internal_error
@@ -400,7 +400,6 @@ async def delete_novel(
     from src.application.novel.services.catalog_service import (
         delete_volume_from_catalog,
         list_catalogs,
-        load_catalog,
         purge_series_artifacts,
     )
 

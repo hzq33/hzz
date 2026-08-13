@@ -12,9 +12,7 @@ extend-exclude = [
 [lint]
 select = [
   "E9",   # runtime syntax errors
-  "F63",  # invalid print/assert
-  "F7",   # syntax errors in pyflakes
-  "F82",  # undefined names
+  "F",    # pyflakes: unused imports/vars, undefined names, redefinition, etc.
 ]
 ignore = []
 

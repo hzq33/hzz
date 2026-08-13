@@ -7,8 +7,7 @@ Mixin methods share instance state (``self._store`` / ``self.character`` etc.).
 from __future__ import annotations
 
 import logging
-from collections import Counter, defaultdict
-from typing import Any
+from collections import Counter
 
 from src.domain.novel.models import PersonalityProfile, SpeechStyle
 
@@ -119,7 +118,6 @@ class CharacterBuilderProfileMixin:
             elif isinstance(item, str):
                 contents.append(item)
 
-        all_text = " ".join(contents)
         avg_len = sum(len(c) for c in contents) / max(len(contents), 1) if contents else 0
 
         speech = SpeechStyle(

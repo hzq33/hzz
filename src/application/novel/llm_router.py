@@ -12,7 +12,7 @@ import json
 import logging
 import os
 import re
-from typing import TYPE_CHECKING, Any, ClassVar
+from typing import TYPE_CHECKING, Any
 
 from src.shared.defaults import DEFAULT_DEEPSEEK_BASE_URL, DEFAULT_DEEPSEEK_MODEL
 
@@ -21,7 +21,6 @@ from src.domain.novel.models import (
     BLOCK_CHARACTER,
     BLOCK_DIALOGUE,
     BLOCK_NARRATIVE,
-    BLOCK_QA,
 )
 
 if TYPE_CHECKING:
@@ -295,7 +294,6 @@ class LLMIntentRouter:
         与 LLM 输出合并（EntityResolver 确定性解析的实体优先，LLM 输出补充）。
         """
         raw = raw or ""
-        finish = ""
 
         if not raw.strip():
             logger.warning("LLM router returned empty content; falling back to regex")

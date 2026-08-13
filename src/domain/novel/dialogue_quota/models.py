@@ -6,7 +6,7 @@ Extracted from the former monolithic ``dialogue_quota.py``; logic unchanged.
 from __future__ import annotations
 
 from collections import defaultdict
-from dataclasses import asdict, dataclass, field
+from dataclasses import dataclass, field
 from typing import Any
 
 from src.domain.novel.dialogue_quota.merge import (

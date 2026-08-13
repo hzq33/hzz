@@ -12,7 +12,6 @@ import logging
 import math
 import os
 import re
-import statistics
 from collections.abc import Sequence
 from dataclasses import dataclass, field
 from datetime import UTC, datetime

@@ -20,7 +20,6 @@ from src.domain.novel.models import (
     CharacterIdentity,
     NovelBlock,
     PersonalityProfile,
-    SpeechStyle,
 )
 
 logger = logging.getLogger("agent")

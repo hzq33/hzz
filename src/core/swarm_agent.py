@@ -379,7 +379,6 @@ class SwarmAgent:
 
     async def _exit_role_node(self, state: GraphState) -> dict[str, Any]:
         """Leave roleplay mode, return to normal planning."""
-        user_input = state["user_input"]
         char = self._rag_character
         self._rag_character = None
         self._imp_agent = None
@@ -597,7 +596,6 @@ async def _enter_impersonation(swarm: SwarmAgent, character: str) -> bool:
     """Initialize ImpersonationAgent for a character (replaces legacy _enter_rag)."""
     try:
         from src.core.impersonation_agent import create_impersonation_agent
-        from src.shared.llm import SharedLLMClient
 
         store = swarm._store
         if store is None:

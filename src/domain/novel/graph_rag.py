@@ -13,8 +13,6 @@ from __future__ import annotations
 
 import json
 import logging
-import re
-from pathlib import Path
 from typing import Any
 
 import networkx as nx
@@ -300,7 +298,6 @@ async def build_graph_rag(
     global_overview = ""
     if len(summaries) > 1 and llm_client is not None:
         try:
-            from src.domain.novel.story_analysis.config import load_analysis
             from src.application.novel.retrieval import _clip  # noqa: F401
 
             overview_user = (

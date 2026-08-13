@@ -12,18 +12,13 @@ from typing import Any
 from src.domain.novel.dialogue_quota.models import CharacterQuotaTarget, QuotaTracker
 from src.domain.novel.dialogue_quota.merge import (
     DEFAULT_QUOTAS,
-    _absorb_into,
     _char_aliases,
     _char_mentions,
     _char_name,
-    _host_score,
-    _set_char_aliases,
     _set_char_importance,
-    _set_char_mentions,
     assign_importance_by_mentions,
     merge_alias_collisions,
     merge_near_duplicates,
-    normalize_character_name,
 )
 
 logger = logging.getLogger("agent")

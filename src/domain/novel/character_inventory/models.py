@@ -5,8 +5,7 @@ Extracted from the former monolithic ``character_inventory.py``; logic unchanged
 
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass, field
-from typing import Any
+from dataclasses import dataclass, field
 
 
 @dataclass

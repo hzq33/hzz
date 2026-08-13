@@ -11,7 +11,7 @@ import logging
 import os
 import random
 import time
-from typing import Any, Tuple, Type
+from typing import Tuple, Type
 
 from openai import APIStatusError, OpenAI, RateLimitError
 
@@ -77,7 +77,6 @@ class LLMResilienceMixin:
             pass
 
     def _circuit_threshold(self) -> int:
-        import os
 
         try:
             return max(1, int(os.getenv("AGENT_LLM_CIRCUIT_FAILURES", "3")))
@@ -91,7 +90,6 @@ class LLMResilienceMixin:
         primary; only sustained failures (default 2 in a row) trigger the
         expensive fallback switch.
         """
-        import os
 
         try:
             return max(1, int(os.getenv("AGENT_LLM_FALLBACK_FAILURES", "2")))
@@ -99,7 +97,6 @@ class LLMResilienceMixin:
             return 2
 
     def _circuit_open_sec(self) -> float:
-        import os
 
         try:
             return max(0.0, float(os.getenv("AGENT_LLM_CIRCUIT_OPEN_SEC", "30")))
@@ -107,7 +104,6 @@ class LLMResilienceMixin:
             return 30.0
 
     def _jitter_enabled(self) -> bool:
-        import os
 
         return os.getenv("AGENT_LLM_RETRY_JITTER", "1").strip().lower() not in {
             "0",
@@ -185,7 +181,6 @@ class LLMResilienceMixin:
     def _backoff_seconds(
         self, attempt: int, exc: BaseException | None = None
     ) -> float:
-        import random
 
         retry_after = self._retry_after_seconds(exc) if exc is not None else None
         if retry_after is not None:

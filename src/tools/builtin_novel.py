@@ -13,14 +13,6 @@ from typing import Any
 
 from src.application.novel.impersonation import ImpersonationService
 from src.application.novel.intent_router import IntentRouter
-from src.application.novel.query_parse import (
-    is_toc_intent,
-    list_ordered_chapter_titles,
-    parse_section_hint,
-    parse_volume_hint,
-    resolve_chapter_by_ordinal,
-    resolve_doc_id_for_volume,
-)
 from src.application.novel.retrieval import NovelRetrieval
 from src.tools.novel_search_handlers import NovelSearchHandlersMixin
 from src.tools.base import BaseTool, ToolResult

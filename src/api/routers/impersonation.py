@@ -157,7 +157,7 @@ async def impersonate_chat_stream(req: ImpersonateRequest, request: Request):
                     )
                 finally:
                     request.app.state.imp_sessions.persist(session["session_id"])
-        except Exception as exc:
+        except Exception:
             logger.exception("Impersonation stream error")
             yield JSONServerSentEvent(
                 {
@@ -289,7 +289,7 @@ async def impersonate_regenerate(
                     )
                 finally:
                     service.persist(req.session_id)
-        except Exception as exc:
+        except Exception:
             logger.exception("Impersonation regenerate error")
             yield JSONServerSentEvent(
                 {

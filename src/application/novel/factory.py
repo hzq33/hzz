@@ -12,7 +12,6 @@ import os
 import threading
 from typing import Any
 
-import yaml
 
 from src.application.novel.impersonation import ImpersonationService
 from src.application.novel.retrieval import NovelRetrieval

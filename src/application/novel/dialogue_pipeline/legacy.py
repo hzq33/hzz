@@ -9,7 +9,6 @@ import logging
 from collections.abc import Sequence
 from typing import Any
 
-from src.application.novel.dialogue_pipeline.config import _attr_config
 from src.application.novel.dialogue_pipeline.models import DialoguePipelineResult
 from src.application.novel.dialogue_pipeline.tools import (
     _high_confidence_seeds,

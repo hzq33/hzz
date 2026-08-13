@@ -11,7 +11,6 @@ import re
 import time
 from typing import Any
 
-from src.domain.character_card import _curate_dialogue_samples
 from src.domain.novel.character_on_demand.models import (
     EvidencePack,
     NormalizeResult,
@@ -20,7 +19,6 @@ from src.domain.novel.character_roster import (
     CharacterRoster,
     character_id_for,
     load_roster,
-    save_roster,
 )
 
 logger = logging.getLogger("agent")
@@ -118,7 +116,6 @@ def normalize_name(
 
     scored: list[tuple[float, Any]] = []
     for e in roster.characters:
-        names = {e.name, *e.aliases_observed}
         score = 0.0
         if raw == e.name or raw in e.aliases_observed:
             score = 1.0

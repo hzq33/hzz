@@ -35,8 +35,6 @@ def validate(characters: list[dict], series_hint: str = "") -> list[str]:
     """返回错误列表。空列表 = 通过。"""
     errors: list[str] = []
 
-    canons = {c.get("canonical_name", "").strip() for c in characters if c.get("canonical_name")}
-
     # R1: 别名唯一性 — 同一 alias 不能属于两个 canonical
     alias_to_owners: dict[str, set[str]] = {}
     for c in characters:

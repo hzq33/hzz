@@ -19,7 +19,6 @@ from src.domain.novel.character_on_demand.builder import (
     normalize_name,
 )
 from src.domain.novel.character_on_demand.jobs import (
-    _save_job,
     get_job,
     list_jobs,
 )

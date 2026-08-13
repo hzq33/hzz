@@ -15,7 +15,6 @@ from src.domain.novel.story_analysis.config import (
     _load_alias_map,
     _DEFAULT_REJECT_SUBSTRINGS,
     _DEFAULT_SUMMARY_MAX_CHARS,
-    _PROMPT_VERSION,
 )
 from src.domain.novel.story_analysis.models import (
     ForeshadowRecord,
@@ -23,6 +22,7 @@ from src.domain.novel.story_analysis.models import (
     StoryAnalysisSnapshot,
     StoryEvent,
     StoryEvidence,
+    _PROMPT_VERSION,
 )
 
 logger = logging.getLogger("agent")

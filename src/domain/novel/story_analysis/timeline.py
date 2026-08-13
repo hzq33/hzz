@@ -24,7 +24,6 @@ from pathlib import Path
 from typing import Any
 
 from src.domain.novel.story_analysis.models import (
-    RelationChange,
     StoryAnalysisSnapshot,
     StoryEvent,
 )

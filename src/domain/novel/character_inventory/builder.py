@@ -13,11 +13,7 @@ from typing import Any
 
 from src.domain.novel.character_inventory.candidates import (
     _inventory_config,
-    filter_seed_characters,
     load_inventory_candidates,
-    median_mention_threshold,
-    normalize_character_name,
-    resolve_seed_min_mentions,
 )
 from src.domain.novel.character_inventory.models import InventoryCharacter, InventoryResult
 
@@ -315,7 +311,6 @@ async def build_character_inventory(
 
     max_chars = int(cfg.get("max_chars", 80000))
     min_m = int(cfg.get("min_cluster_mentions", 2))
-    batch = int(cfg.get("llm_batch_size", 30))
     device = str(cfg.get("device") or "cpu")
     max_for_llm = int(cfg.get("max_clusters_for_llm", 60))
 
@@ -380,7 +375,6 @@ async def build_character_inventory(
             name_texts = [
                 d["name"] for d in names if (d.get("name") or "").strip()
             ]
-            from collections import Counter as _NameTypeCounter
 
             name_types: dict[str, dict[str, int]] = {}
             name_attributes: dict[str, list[dict]] = {}

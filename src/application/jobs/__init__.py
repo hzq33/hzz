@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import logging
 import os
-from typing import Optional
 
 from src.application.jobs.registry import ensure_builtin_handlers, get_handler
 from src.shared.async_jobs import JobHandler, JobRecord, get_job_runner, get_job_store

@@ -5,10 +5,8 @@ Extracted from the former monolithic ``character_on_demand.py``; logic unchanged
 
 from __future__ import annotations
 
-import asyncio
 import logging
 import uuid
-from typing import Any
 
 from src.domain.novel.character_on_demand.builder import (
     _MIN_DIALOGUES_DEFAULT,
@@ -17,12 +15,9 @@ from src.domain.novel.character_on_demand.builder import (
     normalize_name,
 )
 from src.domain.novel.character_on_demand.jobs import (
-    _get_job_store,
     _now,
     _save_job,
     _to_job_record,
-    get_job,
-    list_jobs,
 )
 from src.domain.novel.character_on_demand.models import CharacterBuildJob
 from src.domain.novel.character_on_demand.persist import persist_card

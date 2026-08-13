@@ -14,7 +14,6 @@ from __future__ import annotations
 
 from src.domain.novel.dialogue_quota.merge import (
     DEFAULT_IMPORTANCE_BLACKLIST,
-    DEFAULT_QUOTAS,
     assign_importance_by_mentions,
     load_importance_tier_settings,
     merge_alias_collisions,
@@ -46,4 +45,5 @@ __all__ = [
     "interleave_indices",
     "order_windows_quota",
     "filter_turns_for_index",
+    "DEFAULT_IMPORTANCE_BLACKLIST",
 ]
