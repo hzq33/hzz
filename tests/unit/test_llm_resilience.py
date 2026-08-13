@@ -75,3 +75,103 @@ class TestFallbackSwitch:
         assert client._on_failure(RuntimeError("boom")) is False
         assert client._on_failure(RuntimeError("boom")) is False
         assert client.is_using_fallback() is False
+
+
+class TestBackoffSeconds:
+    def test_exponential_no_jitter(self, monkeypatch):
+        monkeypatch.setenv("AGENT_LLM_RETRY_JITTER", "0")
+        client = SharedLLMClient(
+            primary={
+                "api_key": "k",
+                "base_url": "https://api.deepseek.com",
+                "model": "deepseek-v4-flash",
+            },
+        )
+        assert client._backoff_seconds(0) == 1.0
+        assert client._backoff_seconds(1) == 2.0
+        assert client._backoff_seconds(2) == 4.0
+        assert client._backoff_seconds(3) == 4.0  # 封顶 4
+
+    def test_retry_after_header(self, monkeypatch):
+        monkeypatch.setenv("AGENT_LLM_RETRY_JITTER", "0")
+        client = SharedLLMClient(
+            primary={
+                "api_key": "k",
+                "base_url": "https://api.deepseek.com",
+                "model": "deepseek-v4-flash",
+            },
+        )
+        req = httpx.Request("POST", "https://api.deepseek.com")
+        resp = httpx.Response(500, request=req, headers={"Retry-After": "7"})
+        exc = APIStatusError("err", response=resp, body=None)
+        assert client._backoff_seconds(0, exc) == 7.0
+
+    def test_jitter_range(self, monkeypatch):
+        monkeypatch.setenv("AGENT_LLM_RETRY_JITTER", "1")
+        client = SharedLLMClient(
+            primary={
+                "api_key": "k",
+                "base_url": "https://api.deepseek.com",
+                "model": "deepseek-v4-flash",
+            },
+        )
+        for _ in range(20):
+            v = client._backoff_seconds(0)
+            assert 0.5 <= v <= 1.5
+
+
+class TestTryRevert:
+    def _client_in_fallback(self):
+        import time
+
+        client = SharedLLMClient(
+            primary={
+                "api_key": "k",
+                "base_url": "https://api.deepseek.com",
+                "model": "deepseek-v4-flash",
+            },
+            fallback={
+                "api_key": "k",
+                "base_url": "https://api.deepseek.com",
+                "model": "deepseek-v4-pro",
+            },
+        )
+        client._using_fallback = True
+        client._fallback_since = time.time() - 100  # 超过 probe backoff
+        return client
+
+    def test_probe_success_reverts(self, monkeypatch):
+        client = self._client_in_fallback()
+
+        class _FakeModels:
+            def list(self):
+                return []
+
+        class _FakeOpenAI:
+            def __init__(self, **kwargs):
+                pass
+
+            @property
+            def models(self):
+                return _FakeModels()
+
+        monkeypatch.setattr("src.shared.llm_resilience.OpenAI", _FakeOpenAI)
+        client._try_revert()
+        assert client._using_fallback is False
+        assert client._fallback_since is None
+
+    def test_probe_failure_stays_on_fallback(self, monkeypatch):
+        client = self._client_in_fallback()
+
+        class _FakeOpenAI:
+            def __init__(self, **kwargs):
+                pass
+
+            @property
+            def models(self):
+                raise RuntimeError("probe failed")
+
+        monkeypatch.setattr("src.shared.llm_resilience.OpenAI", _FakeOpenAI)
+        client._try_revert()
+        assert client._using_fallback is True
+        assert client._probe_failures == 1
