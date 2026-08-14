@@ -36,6 +36,7 @@ from src.core.agent import Agent
 from src.core.executor import ExecutionResult
 from src.core.native_tooling import build_native_messages, execute_tool_safely
 from src.core.planner import TaskPlan
+from src.core.prompts import reply_prompt_for
 from src.shared.llm import ToolInvocation, ToolLoopResult
 from src.shared.defaults import max_tool_rounds
 
@@ -671,8 +672,7 @@ async def _stream_reply(swarm, plan, exec_result, success):
     for sr in getattr(exec_result, 'step_results', []):
         (summaries if getattr(sr, 'success', True) else failed).append(
             f"Step {getattr(sr, 'step_id', '?')}: {getattr(sr, 'output', '')[:200]}")
-    sp = ("You are a helpful assistant. Summarize execution results clearly."
-          if tools_used else "You are a helpful, friendly assistant. Respond directly.")
+    sp = reply_prompt_for(tools_used=tools_used, success=success)
     # Deep-copy each message dict — get_messages() shares dict objects with
     # memory; mutating them here would corrupt the session's system prompt
     # and user messages.

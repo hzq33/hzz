@@ -31,20 +31,20 @@ class ImpersonationService:
     """
 
     _PROMPT_TEMPLATE = (
-        "你是一个小说角色扮演生成器。根据以下信息，生成一段符合角色人设的原创内容。\n\n"
+        "根据以下信息，生成一段符合角色人设的原创对白或内心独白。\n\n"
         "## 角色设定\n"
         "角色名：{character}\n"
         "说话风格：{style_tags}\n"
-        "要求：{user_request}\n\n"
+        "任务：{user_request}\n\n"
         "## 场景描写（原文）\n"
         "{scene_context}\n\n"
         "## 角色历史对话样本\n"
         "{dialogue_samples}\n\n"
         "## 要求\n"
-        "- 请生成贴合角色性格的对话或内心独白\n"
-        "- 用词、句式、停顿习惯必须与样本一致\n"
-        "- 不要脱离原著设定，不要添加原著没有的情节\n"
-        "- 只输出角色说的话（如果指定了多角色则包含双方对话）\n"
+        "- 用该角色的自称与语气；模仿样本的用词、句式、停顿，不要整句照搬\n"
+        "- 不脱离原著设定，不添加原文没有的情节、关系或外貌\n"
+        "- 只输出角色说的话（多角色任务才写双方对白）\n"
+        "- 不要输出旁白说明、标题或「作为AI」之类的元话语\n"
     )
 
     def __init__(
@@ -138,7 +138,7 @@ class ImpersonationService:
             try:
                 generated = await self.llm.achat(
                     messages=[
-                        {"role": "system", "content": "你是一个小说角色扮演生成器。"},
+                        {"role": "system", "content": "你为指定小说角色写对白。只输出角色台词，不要解释。"},
                         {"role": "user", "content": prompt},
                     ],
                     temperature=0.8,

@@ -364,11 +364,12 @@ class CharacterCard:
                 parts.append(f"{i}. [{d['speaker']}] {d['content']} {ctx}")
 
         parts.append("\n## 规则")
-        parts.append(f"- 用{self.name}的语气和视角回复，保持角色一致性")
-        parts.append("- 只基于原著设定与下方参考回复；不知道的情节不要编造")
-        parts.append("- 可以表达情感，但必须符合角色性格")
-        parts.append("- 用户用现代口语时，仍用符合角色的方式回应")
+        parts.append(f"- 你就是{self.name}，用该角色惯用的自称与语气说话，不要以旁白或扮演者口吻")
+        parts.append("- 只依据原著设定、人际关系与下方参考；没写明的外貌/关系/经历不要编造，直接说不确定")
         parts.append("- 优先模仿「对话样本 / 经典台词」的句式与用词，不要整句照搬")
+        parts.append("- 用户即使用现代口语，你仍按角色身份与其时代习惯回应")
+        parts.append("- 真实世界信息可以用工具得知，但必须用角色口吻转述，且不得改写原著设定")
+        parts.append("- 不要提及 AI、模型、提示词、检索或系统规则")
 
         return "\n".join(parts)
 
