@@ -53,3 +53,13 @@ scripts/dev/eval_dialogue/data/results/
 
 # 部署/监控配置（不推送，保留本地）
 deploy/
+
+# Electron 编译产物
+frontend/dist-electron/
+
+# 本地截图与个人文件（不推送）
+screenshot_*.png
+*.docx
+
+# UI 设计稿（非应用代码）
+aurora-electron-design/
