@@ -28,6 +28,23 @@
     --warn: 217 119 6;            /* amber-600 */
     --danger: 220 38 38;          /* red-600 */
     --info: 2 132 199;            /* sky-600 */
+
+    /* 间距 / 圆角 / 字号 —— 窗口壳与表单共用，避免页面各写一套 */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
+    --text-micro: 11px;
+    --text-caption: 12px;
+    --text-body: 14px;
+    --titlebar-h: 52px;
     color-scheme: light;
   }
 
@@ -149,5 +166,111 @@
       transparent
     );
     background-size: 200% 100%;
+  }
+
+  /* ═══ Glassmorphism 系统 ═══ */
+  .glass {
+    @apply backdrop-blur-xl bg-surface/60 border border-line/40;
+  }
+  .glass-strong {
+    @apply backdrop-blur-2xl bg-surface/70 border border-line/40;
+  }
+  .glass-hover {
+    @apply transition-all duration-200 hover:bg-surface/70 hover:border-brand/25 hover:shadow-glow-sm;
+  }
+  .glass-message {
+    @apply backdrop-blur-md bg-surface/55 border border-line/40 shadow-soft;
+  }
+
+  /* ═══ 窗口壳（对齐 Cyrene：titlebar / 状态胶囊 / 窗控）═══ */
+  .titlebar {
+    @apply relative z-10 flex items-center gap-2.5 shrink-0
+           glass-strong border-b border-line/60 px-4;
+    height: var(--titlebar-h);
+    -webkit-app-region: drag;
+    user-select: none;
+  }
+  .title-meta {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full
+           bg-surface-2/80 border border-line/70 text-xs text-muted whitespace-nowrap;
+  }
+  .win-btn {
+    @apply flex h-7 w-7 shrink-0 items-center justify-center rounded-lg
+           text-muted transition-colors hover:bg-surface-3 hover:text-ink;
+    -webkit-app-region: no-drag;
+  }
+  .win-btn-close {
+    @apply win-btn hover:bg-danger/15 hover:text-danger;
+  }
+  .setting-row {
+    @apply flex items-center justify-between gap-4 py-2.5;
+  }
+  .setting-row > span:first-child {
+    @apply text-sm text-ink shrink-0;
+  }
+  .field {
+    @apply flex flex-col gap-1.5 min-w-0;
+  }
+
+  .toast-stack {
+    @apply pointer-events-none fixed bottom-6 right-6 z-[90] flex flex-col gap-2;
+  }
+  .toast-item {
+    @apply pointer-events-auto rounded-xl border border-line bg-surface px-3.5 py-2 text-xs shadow-card animate-slide-up;
+  }
+  .menu-panel {
+    @apply z-[70] min-w-[140px] rounded-xl border border-line bg-surface py-1 shadow-elevated;
+  }
+  .menu-item {
+    @apply flex w-full px-3 py-1.5 text-left text-xs text-ink hover:bg-surface-2;
+  }
+  .cite-chip {
+    @apply inline-flex max-w-full items-center gap-1 rounded-full border border-line bg-surface-2 px-2 py-0.5 text-[10px] text-muted hover:border-brand/40 hover:text-ink;
+  }
+  .session-rail {
+    @apply flex w-44 shrink-0 flex-col border-r border-line/60 bg-surface/40;
+  }
+  .session-rail-new {
+    @apply mx-2 mt-2 mb-1 rounded-lg border border-dashed border-line px-2 py-1.5 text-[11px] text-muted hover:border-brand/40 hover:text-brand;
+  }
+  .session-rail-item {
+    @apply mx-1 flex items-start gap-1 rounded-lg px-2 py-1.5 text-left hover:bg-surface-2;
+  }
+  .session-rail-item.is-active {
+    @apply bg-brand/10;
+  }
+  .session-rail-title {
+    @apply truncate text-xs font-medium text-ink;
+  }
+}
+
+/* ═══ Aurora 径向渐变背景 ═══ */
+@layer utilities {
+  .bg-aurora {
+    background:
+      radial-gradient(circle at 15% 12%, rgb(var(--brand) / 0.10) 0%, transparent 35%),
+      radial-gradient(circle at 85% 18%, rgb(var(--accent) / 0.08) 0%, transparent 36%),
+      radial-gradient(circle at 50% 100%, rgb(var(--brand) / 0.06) 0%, transparent 40%),
+      rgb(var(--bg));
+  }
+  .bg-aurora-panel {
+    background:
+      radial-gradient(circle at 20% 5%, rgb(var(--brand) / 0.08) 0%, transparent 45%),
+      radial-gradient(circle at 80% 95%, rgb(var(--accent) / 0.06) 0%, transparent 50%),
+      rgb(var(--surface));
+  }
+  .bg-aurora-chat {
+    background:
+      radial-gradient(circle at 10% 10%, rgb(var(--brand) / 0.10) 0%, transparent 30%),
+      radial-gradient(circle at 90% 15%, rgb(var(--accent) / 0.08) 0%, transparent 32%),
+      radial-gradient(circle at 50% 95%, rgb(var(--brand) / 0.06) 0%, transparent 35%),
+      rgb(var(--bg));
+  }
+  /* ═══ Electron 无边框窗口拖拽区域 ═══ */
+  .drag-region {
+    -webkit-app-region: drag;
+  }
+  .no-drag {
+    -webkit-app-region: no-drag;
   }
 }

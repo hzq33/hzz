@@ -5,7 +5,8 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { fetchHealth } from '@/api/health';
 import { fetchLlmConfig, saveLlmEndpoint, testLlmEndpoint, fetchMemoryConfig, saveMemoryConfig } from '@/api/settings';
-import { Badge, SectionCard, Spinner } from '@/components/ui/aura';
+import { Badge, Button, SectionCard, SelectInput, SettingRow, Spinner, TextInput, Toggle } from '@/components/ui';
+import { useToast } from '@/components/ui/Toast';
 import { toUserErrorMessage } from '@/lib/errors';
 import type { LlmConfigResponse, LlmEndpointInfo, LlmEndpointEdit, MemoryConfig } from '@/types';
 
@@ -30,6 +31,7 @@ function EndpointCard({
   const [saving, setSaving] = useState(false);
   const [testing, setTesting] = useState(false);
   const [msg, setMsg] = useState('');
+  const toast = useToast();
 
   const providerMeta = providers.find((p) => p.key === edit.provider);
   const baseUrl = edit.base_url ?? providerMeta?.base_url ?? '';
@@ -52,6 +54,7 @@ function EndpointCard({
       await saveLlmEndpoint(ep.key, buildPayload());
       setKeyDirty(false);
       setMsg('已保存 ✓');
+      toast.push('调用点已保存', 'ok');
       onSaved();
     } catch (e) {
       setMsg(`保存失败: ${toUserErrorMessage(e)}`);
@@ -73,86 +76,87 @@ function EndpointCard({
     }
   };
 
-  const inputCls = 'input text-xs';
-  const labelCls = 'input-label';
-
   return (
     <div className="rounded-xl border border-line bg-surface-2 p-4 space-y-3 card-hover">
-      <div className="flex items-center justify-between gap-2">
-        <div className="text-sm font-medium text-ink">{ep.label}</div>
-        <div className="flex items-center gap-2 text-xs text-muted">
-          <Badge tone={edit.enabled ? 'ok' : 'neutral'}>{edit.enabled ? '启用' : '停用'}</Badge>
-          <input
-            type="checkbox"
-            className="accent-[rgb(var(--brand))]"
-            checked={!!edit.enabled}
-            onChange={(e) => setEdit((v) => ({ ...v, enabled: e.target.checked }))}
-          />
-        </div>
-      </div>
+      <SettingRow label={ep.label}>
+        <Badge tone={edit.enabled ? 'ok' : 'neutral'}>{edit.enabled ? '启用' : '停用'}</Badge>
+        <Toggle
+          checked={!!edit.enabled}
+          onChange={(enabled) => setEdit((v) => ({ ...v, enabled }))}
+          label="启用该调用点"
+        />
+      </SettingRow>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <div>
-          <label className={labelCls}>服务商</label>
-          <select
-            className={inputCls}
-            value={edit.provider}
-            onChange={(e) => setEdit((v) => ({ ...v, provider: e.target.value }))}
-          >
-            {providers.map((p) => <option key={p.key} value={p.key}>{p.label}</option>)}
-          </select>
-        </div>
-        <div>
-          <label className={labelCls}>模型</label>
-          <input className={inputCls} value={edit.model ?? ''} onChange={(e) => setEdit((v) => ({ ...v, model: e.target.value }))} placeholder="model id" />
-        </div>
-        {providerMeta?.base_url && (
+        <SelectInput
+          label="服务商"
+          value={edit.provider}
+          onChange={(e) => setEdit((v) => ({ ...v, provider: e.target.value }))}
+        >
+          {providers.map((p) => (
+            <option key={p.key} value={p.key}>{p.label}</option>
+          ))}
+        </SelectInput>
+        <TextInput
+          label="模型"
+          value={edit.model ?? ''}
+          onChange={(e) => setEdit((v) => ({ ...v, model: e.target.value }))}
+          placeholder="model id"
+        />
+        {providerMeta?.base_url ? (
           <div className="md:col-span-2">
-            <label className={labelCls}>Base URL</label>
-            <input className={`${inputCls} font-mono text-[10px]`} value={baseUrl} disabled />
+            <TextInput
+              label="Base URL"
+              className="font-mono text-[10px]"
+              value={baseUrl}
+              disabled
+            />
           </div>
-        )}
-        <div>
-          <label className={labelCls}>API Key（留空保持不变）</label>
-          <input
-            className={inputCls}
-            type="password"
-            placeholder={ep.config.has_api_key ? '••••••••（已配置）' : '未配置'}
-            onChange={(e) => {
-              setEdit((v) => ({ ...v, api_key: e.target.value }));
-              setKeyDirty(true);
-            }}
+        ) : null}
+        <TextInput
+          label="API Key（留空保持不变）"
+          type="password"
+          placeholder={ep.config.has_api_key ? '••••••••（已配置）' : '未配置'}
+          onChange={(e) => {
+            setEdit((v) => ({ ...v, api_key: e.target.value }));
+            setKeyDirty(true);
+          }}
+        />
+        <div className="grid grid-cols-2 gap-2">
+          <TextInput
+            label="Temperature"
+            type="number"
+            step="0.1"
+            value={edit.temperature ?? 0}
+            onChange={(e) => setEdit((v) => ({ ...v, temperature: Number(e.target.value) }))}
+          />
+          <TextInput
+            label="Max Tokens"
+            type="number"
+            value={edit.max_tokens ?? 0}
+            onChange={(e) => setEdit((v) => ({ ...v, max_tokens: Number(e.target.value) }))}
           />
         </div>
-        <div className="grid grid-cols-2 gap-2">
-          <div>
-            <label className={labelCls}>Temperature</label>
-            <input className={inputCls} type="number" step="0.1" value={edit.temperature ?? 0} onChange={(e) => setEdit((v) => ({ ...v, temperature: Number(e.target.value) }))} />
-          </div>
-          <div>
-            <label className={labelCls}>Max Tokens</label>
-            <input className={inputCls} type="number" value={edit.max_tokens ?? 0} onChange={(e) => setEdit((v) => ({ ...v, max_tokens: Number(e.target.value) }))} />
-          </div>
-        </div>
-        <div>
-          <label className={labelCls}>思考模式</label>
-          <select className={inputCls} value={edit.thinking ?? 'auto'} onChange={(e) => setEdit((v) => ({ ...v, thinking: e.target.value as 'auto' | 'on' | 'off' }))}>
-            <option value="auto">自动</option>
-            <option value="on">开启</option>
-            <option value="off">关闭</option>
-          </select>
-        </div>
+        <SelectInput
+          label="思考模式"
+          value={edit.thinking ?? 'auto'}
+          onChange={(e) => setEdit((v) => ({ ...v, thinking: e.target.value as 'auto' | 'on' | 'off' }))}
+        >
+          <option value="auto">自动</option>
+          <option value="on">开启</option>
+          <option value="off">关闭</option>
+        </SelectInput>
       </div>
 
       <div className="flex items-center gap-2">
-        <button type="button" className="btn-primary btn-sm" disabled={saving} onClick={() => void save()}>
+        <Button size="sm" disabled={saving} onClick={() => void save()}>
           {saving ? <Spinner size={11} className="text-white" /> : null}
           保存
-        </button>
-        <button type="button" className="btn-soft btn-sm" disabled={testing} onClick={() => void test()}>
+        </Button>
+        <Button tone="soft" size="sm" disabled={testing} onClick={() => void test()}>
           {testing ? <Spinner size={11} className="text-brand" /> : null}
           测试连接
-        </button>
+        </Button>
         {msg && <span className={`text-xs ${msg.includes('失败') ? 'text-danger' : 'text-ok'}`}>{msg}</span>}
       </div>
     </div>
@@ -218,77 +222,69 @@ export default function SettingsPage() {
               <SectionCard title="记忆与上下文" desc="角色扮演会话的上下文窗口与自动压缩">
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <label className="space-y-1">
-                      <span className="input-label">上下文上限 (tokens)</span>
-                      <input
-                        type="number"
-                        min={100}
-                        max={200000}
-                        step={100}
-                        className="input text-xs"
-                        value={memCfg?.max_history_tokens ?? ''}
-                        onChange={(e) =>
-                          setMemCfg((s) => (s ? { ...s, max_history_tokens: Number(e.target.value) } : s))
-                        }
-                      />
-                    </label>
-                    <label className="space-y-1">
-                      <span className="input-label">保留最近完整轮数</span>
-                      <input
-                        type="number"
-                        min={1}
-                        max={100}
-                        className="input text-xs"
-                        value={memCfg?.summarize_keep_turns ?? ''}
-                        onChange={(e) =>
-                          setMemCfg((s) => (s ? { ...s, summarize_keep_turns: Number(e.target.value) } : s))
-                        }
-                      />
-                    </label>
-                    <label className="space-y-1">
-                      <span className="input-label">压缩阈值 (0.1-1.0)</span>
-                      <input
-                        type="number"
-                        min={0.1}
-                        max={1}
-                        step={0.05}
-                        className="input text-xs"
-                        value={memCfg?.summarize_threshold ?? ''}
-                        onChange={(e) =>
-                          setMemCfg((s) => (s ? { ...s, summarize_threshold: Number(e.target.value) } : s))
-                        }
-                      />
-                    </label>
-                  </div>
-                  <label className="flex items-center gap-2 text-sm">
-                    <input
-                      type="checkbox"
-                      checked={Boolean(memCfg?.enable_summarization)}
+                    <TextInput
+                      label="上下文上限 (tokens)"
+                      type="number"
+                      min={100}
+                      max={200000}
+                      step={100}
+                      value={memCfg?.max_history_tokens ?? ''}
                       onChange={(e) =>
-                        setMemCfg((s) => (s ? { ...s, enable_summarization: e.target.checked } : s))
+                        setMemCfg((s) => (s ? { ...s, max_history_tokens: Number(e.target.value) } : s))
                       }
-                      className="accent-brand"
                     />
-                    启用上下文压缩（早期轮次折叠为摘要，防遗忘/防前后矛盾）
-                  </label>
+                    <TextInput
+                      label="保留最近完整轮数"
+                      type="number"
+                      min={1}
+                      max={100}
+                      value={memCfg?.summarize_keep_turns ?? ''}
+                      onChange={(e) =>
+                        setMemCfg((s) => (s ? { ...s, summarize_keep_turns: Number(e.target.value) } : s))
+                      }
+                    />
+                    <TextInput
+                      label="压缩阈值 (0.1-1.0)"
+                      type="number"
+                      min={0.1}
+                      max={1}
+                      step={0.05}
+                      value={memCfg?.summarize_threshold ?? ''}
+                      onChange={(e) =>
+                        setMemCfg((s) => (s ? { ...s, summarize_threshold: Number(e.target.value) } : s))
+                      }
+                    />
+                  </div>
+                  <SettingRow label="启用上下文压缩">
+                    <Toggle
+                      checked={Boolean(memCfg?.enable_summarization)}
+                      onChange={(enable_summarization) =>
+                        setMemCfg((s) => (s ? { ...s, enable_summarization } : s))
+                      }
+                      label="启用上下文压缩"
+                    />
+                  </SettingRow>
+                  <p className="text-[11px] text-faint -mt-2">早期轮次折叠为摘要，减少遗忘与前后矛盾。</p>
                   <div className="flex items-center gap-3">
                     <button
                       type="button"
                       className="btn btn-sm"
                       disabled={memSaving || !memCfg}
-                      onClick={async () => {
-                        if (!memCfg) return;
-                        setMemSaving(true);
-                        setMemMsg('');
-                        try {
-                          const saved = await saveMemoryConfig(memCfg);
-                          setMemCfg(saved);
-                          setMemMsg('已保存（新会话生效）');
-                        } catch (e) {
-                          setMemMsg(`保存失败：${toUserErrorMessage(e, '未知错误')}`);
-                        } finally {
-                          setMemSaving(false);
-                        }
+                      onClick={() => {
+                        void (async () => {
+                          if (!memCfg) return;
+                          setMemSaving(true);
+                          setMemMsg('');
+                          try {
+                            const saved = await saveMemoryConfig(memCfg);
+                            setMemCfg(saved);
+                            setMemMsg('已保存（新会话生效）');
+                          } catch (e) {
+                            setMemMsg(`保存失败：${toUserErrorMessage(e, '未知错误')}`);
+                          } finally {
+                            setMemSaving(false);
+                          }
+                        })();
                       }}
                     >
                       {memSaving ? '保存中…' : '保存配置'}

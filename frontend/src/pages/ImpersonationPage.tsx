@@ -7,13 +7,13 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { fetchNovels } from '@/api/novels';
+import ContextMonitor from '@/components/chat/ContextMonitor';
 import { Badge, Empty, Modal, Spinner, IconButton } from '@/components/ui/aura';
 import { useImpersonationSSE } from '@/hooks/useImpersonationSSE';
 import { formatMetaLine } from '@/lib/formatUsage';
 import { splitEvidenceByRole, evidenceRelevance } from '@/lib/streamReducers';
 import { useImpersonationStore } from '@/store/impersonationStore';
 import type { NovelVolumeInfo, StoryEvidence } from '@/types';
-import ContextMonitor from '@/components/chat/ContextMonitor';
 
 const LOW_SCORE_THRESHOLD = 0.35;
 

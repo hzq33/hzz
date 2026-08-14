@@ -53,9 +53,21 @@ export const STORAGE_KEY = {
 /* ── Welcome Quick Actions ── */
 
 export const QUICK_ACTIONS = [
-  { label: '搜索最新AI新闻', icon: '🔍' },
-  { label: '列出项目文件', icon: '📁' },
-  { label: '搜索小说剧情', icon: '📖' },
+  {
+    label: '搜索最新AI新闻',
+    icon: '🔍',
+    prompt: '用网络搜索查找今天的人工智能要闻，列出 3 条并注明来源。不要编造。',
+  },
+  {
+    label: '列出项目文件',
+    icon: '📁',
+    prompt: '用文件工具列出项目根目录的主要文件和文件夹，简要说明各目录用途。',
+  },
+  {
+    label: '搜索小说剧情',
+    icon: '📖',
+    prompt: '用 novel_search 检索已导入小说的主线剧情，概括库里有哪些作品以及各自核心冲突。没有入库则直接说明。',
+  },
   { label: '去工作台开始扮演', icon: '🎭', href: '/impersonation' },
 ] as const;
 

@@ -80,6 +80,12 @@ export default defineConfig(({ mode }) => {
       reportCompressedSize: false,
 
       rollupOptions: {
+        input: {
+          main: path.resolve(__dirname, 'index.html'),
+          panel: path.resolve(__dirname, 'panel.html'),
+          chat: path.resolve(__dirname, 'chat.html'),
+          feature: path.resolve(__dirname, 'feature.html'),
+        },
         output: {
           // 入口文件名（带 contenthash）
           entryFileNames: 'assets/[name]-[hash:8].js',

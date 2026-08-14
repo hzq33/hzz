@@ -4,13 +4,15 @@
  */
 import { useEffect, useRef, useState } from 'react';
 
-import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
-import rehypeSanitize from 'rehype-sanitize';
 
 import { decideToolApproval } from '@/api/chat';
 import { fetchNovels } from '@/api/novels';
-import { Spinner, Badge } from '@/components/ui/aura';
+import { Composer } from '@/components/chat/Composer';
+import { MessageBubble } from '@/components/chat/MessageBubble';
+import { ReasoningFold } from '@/components/chat/ReasoningFold';
+import { SessionRail } from '@/components/chat/SessionRail';
+import { Badge, Button, PageHeader, Spinner } from '@/components/ui';
 import { useSSE } from '@/hooks/useSSE';
 import { QUICK_ACTIONS } from '@/lib/constants';
 import { formatMetaLine } from '@/lib/formatUsage';
@@ -26,86 +28,22 @@ const I = {
   trash: (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
   ),
-  send: (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>
-  ),
-  stop: (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16" rx="3" /></svg>
-  ),
-};
-
-/* ═══════════ Markdown 渲染 ═══════════ */
-
-const mdComponents = {
-  pre: ({ children }: { children?: React.ReactNode }) => (
-    <pre className="bg-surface-3 text-ink rounded-xl p-3.5 my-2.5 overflow-x-auto text-xs leading-relaxed border border-line font-mono">
-      {children}
-    </pre>
-  ),
-  code: ({ className, children }: { className?: string; children?: React.ReactNode }) => {
-    if (!className)
-      return (
-        <code className="bg-brand/10 text-brand-strong dark:text-brand px-1.5 py-0.5 rounded-md text-[0.8em] font-mono">
-          {children}
-        </code>
-      );
-    return <code className="text-xs font-mono">{children}</code>;
-  },
-  a: ({ href, children }: { href?: string; children?: React.ReactNode }) => (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="text-brand underline decoration-brand/40 hover:decoration-brand transition-colors">
-      {children}
-    </a>
-  ),
-  ul: ({ children }: { children?: React.ReactNode }) => (
-    <ul className="list-disc list-outside ml-5 my-2 space-y-1">{children}</ul>
-  ),
-  ol: ({ children }: { children?: React.ReactNode }) => (
-    <ol className="list-decimal list-outside ml-5 my-2 space-y-1">{children}</ol>
-  ),
 };
 
 /* ═══════════ 消息气泡 ═══════════ */
 
-function MessageBubble({ message }: { message: ChatMessage }) {
-  const isUser = message.role === 'user';
+function AgentBubble({ message }: { message: ChatMessage }) {
   return (
-    <div className={`flex gap-3 ${isUser ? 'flex-row-reverse' : ''} animate-slide-up`}>
-      <div
-        className={`w-8 h-8 rounded-xl shrink-0 flex items-center justify-center shadow-sm ${
-          isUser
-            ? 'bg-gradient-to-br from-brand to-brand-strong text-white'
-            : 'bg-gradient-to-br from-brand to-accent text-white'
-        }`}
-      >
-        {isUser ? (
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-        ) : (
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z" /><path d="M8 14v2a4 4 0 0 0 8 0v-2" /></svg>
-        )}
-      </div>
-
-      <div className={`max-w-[78%] min-w-0 ${isUser ? '' : 'flex-1'}`}>
-        <div
-          className={`rounded-2xl px-4 py-3 text-sm leading-relaxed break-words ${
-            isUser
-              ? 'bg-gradient-to-br from-brand to-brand-strong text-white shadow-md shadow-brand/20 rounded-tr-sm'
-              : 'bg-surface border border-line shadow-soft rounded-tl-sm'
-          }`}
-        >
-          {message.plan ? <PlanCard plan={message.plan} /> : null}
-          {message.plan && message.content ? <div className="h-2" /> : null}
-          {message.content ? (
-            <ReactMarkdown rehypePlugins={[rehypeSanitize]} components={mdComponents}>
-              {message.content}
-            </ReactMarkdown>
-          ) : null}
-          {message.stepResults?.length ? <StepResults results={message.stepResults} /> : null}
-        </div>
-        {message.usage || message.elapsed ? (
-          <div className="mt-1.5 text-[10px] text-faint px-1">{formatMetaLine(message)}</div>
-        ) : null}
-      </div>
-    </div>
+    <MessageBubble
+      role={message.role}
+      name={message.role === 'assistant' ? 'Aurora' : undefined}
+      content={message.content}
+      split={message.role === 'assistant'}
+      meta={formatMetaLine(message)}
+      footer={message.stepResults?.length ? <StepResults results={message.stepResults} /> : null}
+    >
+      {message.plan ? <PlanCard plan={message.plan} /> : null}
+    </MessageBubble>
   );
 }
 
@@ -117,7 +55,9 @@ function PlanCard({ plan }: { plan: NonNullable<ChatMessage['plan']> }) {
       {plan.goal ? (
         <div className="font-medium text-brand-strong dark:text-brand">🎯 {plan.goal}</div>
       ) : null}
-      {plan.reasoning ? <div className="text-muted leading-relaxed">{plan.reasoning}</div> : null}
+      {plan.reasoning ? (
+        <ReasoningFold title="推理">{plan.reasoning}</ReasoningFold>
+      ) : null}
       {plan.steps?.length ? (
         <ol className="space-y-1.5">
           {plan.steps.map((s) => (
@@ -276,53 +216,6 @@ function NovelScopeSelector() {
   );
 }
 
-/* ═══════════ 输入栏 ═══════════ */
-
-function InputBar({
-  value, onChange, onSend, onStop, loading,
-}: {
-  value: string; onChange: (v: string) => void; onSend: () => void; onStop: () => void; loading: boolean;
-}) {
-  const ref = useRef<HTMLTextAreaElement>(null);
-  useEffect(() => { ref.current?.focus(); }, []);
-  const canSend = value.trim().length > 0 && !loading;
-  const onKey = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey && canSend) {
-      e.preventDefault();
-      onSend();
-    }
-  };
-  return (
-    <div className="relative flex items-end gap-2 bg-surface rounded-2xl border border-line p-2 shadow-card transition-all duration-200 focus-within:border-brand/50 focus-within:shadow-glow">
-      <textarea
-        ref={ref}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        onKeyDown={onKey}
-        placeholder="输入消息…（Enter 发送，Shift+Enter 换行）"
-        disabled={loading}
-        rows={1}
-        className="flex-1 bg-transparent border-none outline-none text-sm text-ink placeholder-faint resize-none py-2 px-2 min-h-[20px] max-h-[160px] disabled:opacity-60"
-      />
-      <button
-        type="button"
-        onClick={loading ? onStop : onSend}
-        disabled={!loading && !canSend}
-        className={`shrink-0 w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 ${
-          loading
-            ? 'bg-surface-3 text-ink hover:bg-surface-3/80 active:scale-95'
-            : canSend
-              ? 'bg-gradient-to-br from-brand to-accent text-white hover:shadow-glow-sm active:scale-95'
-              : 'bg-surface-3 text-faint cursor-not-allowed'
-        }`}
-        title={loading ? '停止生成' : '发送'}
-      >
-        {loading ? I.stop : I.send}
-      </button>
-    </div>
-  );
-}
-
 /* ═══════════ 欢迎页 ═══════════ */
 
 function Welcome() {
@@ -361,7 +254,7 @@ function Welcome() {
                   window.location.hash = href;
                   return;
                 }
-                setInput(q.label);
+                setInput('prompt' in q ? q.prompt : q.label);
               }}
               className="group flex items-center gap-2.5 px-4 py-3 rounded-xl border border-line bg-surface text-sm text-muted font-medium hover:border-brand/40 hover:text-brand hover:shadow-card-hover transition-all duration-200"
             >
@@ -388,84 +281,142 @@ export default function ChatPage() {
   const error = useChatStore((s) => s.error);
   const streamPhase = useChatStore((s) => s.streamPhase);
   const setInput = useChatStore((s) => s.setInput);
+  const archives = useChatStore((s) => s.archives);
+  const sessionId = useChatStore((s) => s.sessionId);
+  const persistCurrent = useChatStore((s) => s.persistCurrent);
+  const startNewChat = useChatStore((s) => s.startNewChat);
+  const loadArchive = useChatStore((s) => s.loadArchive);
+  const deleteArchive = useChatStore((s) => s.deleteArchive);
   const { send, clearSession, abort } = useSSE();
   const bottomRef = useRef<HTMLDivElement>(null);
+  const [attachments, setAttachments] = useState<File[]>([]);
+  const [railOpen, setRailOpen] = useState(false);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  useEffect(() => {
+    if (!loading && messages.length > 0) persistCurrent();
+  }, [loading, messages.length, persistCurrent]);
+
   const isEmpty = messages.length === 0;
+  const railSessions = archives.map((a) => ({
+    session_id: a.id,
+    title: a.title,
+    preview: a.messages.find((m) => m.role === 'user')?.content?.slice(0, 40),
+    updated_at: new Date(a.updatedAt).toISOString(),
+    active: a.id === sessionId || a.sessionId === sessionId,
+  }));
+
+  const handleSend = () => {
+    const names = attachments.map((f) => f.name);
+    const note = names.length
+      ? `\n\n（附件：${names.join('、')}。文件需在知识库入库后才能检索。）`
+      : '';
+    const text = `${input.trim()}${note}`.trim();
+    if (!text) return;
+    setAttachments([]);
+    void send(text);
+  };
 
   return (
     <div className="flex flex-col h-full relative overflow-hidden">
-      {/* 背景光晕 */}
       <div className="pointer-events-none absolute -top-32 -right-32 w-96 h-96 rounded-full bg-brand/10 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-accent/10 blur-3xl" />
 
-      {/* Header */}
-      <header className="relative z-10 flex items-center justify-between px-6 py-3.5 border-b border-line bg-surface/60 backdrop-blur-xl shrink-0">
-        <div className="flex items-center gap-2.5">
-          <span className="text-brand">{I.sparkle}</span>
-          <h2 className="text-sm font-semibold">通用助手</h2>
-          {!isEmpty && <Badge>{messages.length}</Badge>}
-          <NovelScopeSelector />
-        </div>
-        {!isEmpty && (
-          <button
-            onClick={() => {
-              if (confirm('确定要清除当前会话？')) void clearSession();
+      <PageHeader
+        icon={<span className="text-brand">{I.sparkle}</span>}
+        title="通用助手"
+        extra={
+          <>
+            {!isEmpty && <Badge>{messages.length}</Badge>}
+            <NovelScopeSelector />
+          </>
+        }
+        actions={
+          <>
+            <Button tone="ghost" size="sm" onClick={() => setRailOpen((v) => !v)}>
+              会话
+            </Button>
+            <Button tone="ghost" size="sm" onClick={startNewChat}>
+              新对话
+            </Button>
+            {!isEmpty && (
+              <button
+                type="button"
+                onClick={() => {
+                  if (confirm('确定要清除当前会话？')) void clearSession();
+                }}
+                className="flex items-center gap-1.5 text-xs text-faint hover:text-danger transition-colors px-2.5 py-1.5 rounded-lg hover:bg-danger/10"
+              >
+                {I.trash}
+                清除会话
+              </button>
+            )}
+          </>
+        }
+      />
+
+      <div className="flex min-h-0 flex-1">
+        {railOpen ? (
+          <SessionRail
+            sessions={railSessions}
+            activeId={sessionId}
+            onNew={startNewChat}
+            onSelect={loadArchive}
+            onDelete={(id) => {
+              if (confirm('删除这条存档？')) deleteArchive(id);
             }}
-            className="flex items-center gap-1.5 text-xs text-faint hover:text-danger transition-colors px-2.5 py-1.5 rounded-lg hover:bg-danger/10"
-          >
-            {I.trash}
-            清除会话
-          </button>
-        )}
-      </header>
-
-      {/* 消息区 */}
-      <div className="flex-1 overflow-y-auto relative z-0">
-        {isEmpty ? (
-          <Welcome />
-        ) : (
-          <div className="max-w-[820px] mx-auto py-6 px-6 space-y-5">
-            {messages.map((msg) => (
-              <MessageBubble key={msg.id} message={msg} />
-            ))}
-            {loading && streamPhase ? (
-              <div className="flex items-center gap-2.5 text-xs text-muted pl-11 animate-fade-in">
-                <Spinner size={14} className="text-brand" />
-                <span>
-                  {streamPhase === 'planning' && '正在规划…'}
-                  {streamPhase === 'tool_calling' && '正在调用工具…'}
-                  {streamPhase === 'executing' && '正在执行…'}
-                  {streamPhase === 'replying' && '正在生成回复…'}
-                  {streamPhase === 'plan_failed' && '规划失败，尝试直接回复…'}
-                </span>
-              </div>
-            ) : null}
-            {error ? (
-              <div className="ml-11 rounded-xl border border-danger/30 bg-danger/8 px-4 py-2.5 text-sm text-danger animate-fade-in">
-                {error}
-              </div>
-            ) : null}
-            <div ref={bottomRef} />
-          </div>
-        )}
-      </div>
-
-      {/* 输入区 */}
-      <div className="relative z-10 shrink-0 px-6 pb-5 pt-2 bg-gradient-to-t from-bg via-bg/90 to-transparent">
-        <div className="max-w-[820px] mx-auto">
-          <ApprovalBanner />
-          <InputBar
-            value={input}
-            onChange={setInput}
-            onSend={() => input.trim() && void send(input.trim())}
-            onStop={abort}
-            loading={loading}
           />
+        ) : null}
+
+        <div className="flex min-w-0 flex-1 flex-col">
+          <div className="flex-1 overflow-y-auto relative z-0">
+            {isEmpty ? (
+              <Welcome />
+            ) : (
+              <div className="max-w-[820px] mx-auto py-6 px-6 space-y-5">
+                {messages.map((msg) => (
+                  <AgentBubble key={msg.id} message={msg} />
+                ))}
+                {loading && streamPhase ? (
+                  <div className="flex items-center gap-2.5 text-xs text-muted pl-11 animate-fade-in">
+                    <Spinner size={14} className="text-brand" />
+                    <span>
+                      {streamPhase === 'planning' && '正在规划…'}
+                      {streamPhase === 'tool_calling' && '正在调用工具…'}
+                      {streamPhase === 'executing' && '正在执行…'}
+                      {streamPhase === 'replying' && '正在生成回复…'}
+                      {streamPhase === 'plan_failed' && '规划失败，尝试直接回复…'}
+                    </span>
+                  </div>
+                ) : null}
+                {error ? (
+                  <div className="ml-11 rounded-xl border border-danger/30 bg-danger/8 px-4 py-2.5 text-sm text-danger animate-fade-in">
+                    {error}
+                  </div>
+                ) : null}
+                <div ref={bottomRef} />
+              </div>
+            )}
+          </div>
+
+          <div className="relative z-10 shrink-0 px-6 pb-5 pt-2 bg-gradient-to-t from-bg via-bg/90 to-transparent">
+            <div className="max-w-[820px] mx-auto">
+              <ApprovalBanner />
+              <Composer
+                value={input}
+                onChange={setInput}
+                onSend={handleSend}
+                onStop={abort}
+                loading={loading}
+                allowAttach
+                attachments={attachments}
+                onAttachmentsChange={setAttachments}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

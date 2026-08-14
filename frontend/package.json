@@ -3,12 +3,17 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "main": "dist-electron/main.js",
   "description": "Modular Agent 前端 — Agent对话 + 角色扮演 + 知识库 + 世界体系(GraphRAG 全局问答)",
   "scripts": {
     "dev": "vite",
+    "dev:full": "cross-env NODE_ENV=development concurrently -k -n vite,tsc,electron \"vite\" \"tsc -p electron/tsconfig.json --watch\" \"wait-on http://localhost:3001 && electron .\"",
     "build": "tsc --noEmit && vite build",
     "build:analyze": "vite build --mode analyze",
     "build:dev": "vite build --mode development",
+    "build:electron": "tsc -p electron/tsconfig.json && vite build",
+    "pack": "npm run build:electron && electron-builder --win",
+    "electron:start": "electron .",
     "preview": "vite preview",
     "preview:prod": "vite preview --mode production --port 4000",
     "typecheck": "tsc --noEmit",
@@ -53,6 +58,10 @@
     "@vitest/coverage-v8": "^2.1.8",
     "@vitest/ui": "^2.1.8",
     "autoprefixer": "^10.4.16",
+    "concurrently": "^10.0.4",
+    "cross-env": "^10.1.0",
+    "electron": "^43.4.0",
+    "electron-builder": "^26.15.3",
     "eslint": "^9.17.0",
     "eslint-import-resolver-typescript": "^3.7.0",
     "eslint-plugin-import": "^2.31.0",
@@ -71,10 +80,30 @@
     "typescript": "^5.3.3",
     "typescript-eslint": "^8.18.2",
     "vite": "^5.0.8",
-    "vitest": "^2.1.8"
+    "vitest": "^2.1.8",
+    "wait-on": "^9.1.0"
   },
   "engines": {
     "node": ">=22.0.0",
     "npm": ">=10.0.0"
+  },
+  "build": {
+    "appId": "dev.aurora.agent",
+    "productName": "Aurora Agent",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": ["nsis"]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   }
 }

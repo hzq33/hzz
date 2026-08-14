@@ -96,6 +96,9 @@ describe('constants', () => {
     expect(API.HEALTH).toContain('/health');
     expect(API.HISTORY('abc')).toContain('session_id=abc');
     expect(QUICK_ACTIONS.length).toBeGreaterThan(0);
+    expect(QUICK_ACTIONS.some((a) => 'prompt' in a && a.prompt.includes('novel_search'))).toBe(
+      true,
+    );
     expect(PHASE_LABELS.planning).toBeTruthy();
     expect(UPLOAD_STAGE_LABELS.done).toBe('完成');
   });

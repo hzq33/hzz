@@ -79,6 +79,18 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     } catch {
       /* ignore */
     }
+    const resolvedNext = resolveMode(next);
+    void window.aurora?.setTheme?.(resolvedNext);
+  }, []);
+
+  useEffect(() => {
+    if (!window.aurora?.getTheme) return;
+    void window.aurora.getTheme().then((m) => {
+      if (m === 'light' || m === 'dark') setModeState(m);
+    });
+    return window.aurora.onThemeChanged((m) => {
+      if (m === 'light' || m === 'dark') setModeState(m);
+    });
   }, []);
 
   const toggle = useCallback(() => {

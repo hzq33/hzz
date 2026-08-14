@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom/client';
 import App from '@/App';
 import '@/styles/index.css';
 import { ErrorBoundary } from '@/components/feedback';
+import { ToastProvider } from '@/components/ui';
 import { config } from '@/lib/config';
 import { setupGlobalErrorHandler } from '@/lib/errors';
 import { initSentry, initPerformanceMonitoring } from '@/lib/monitor';
@@ -26,7 +27,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ErrorBoundary>
       <ThemeProvider>
-        <App />
+        <ToastProvider>
+          <App />
+        </ToastProvider>
       </ThemeProvider>
     </ErrorBoundary>
   </React.StrictMode>,

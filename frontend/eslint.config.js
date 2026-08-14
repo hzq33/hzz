@@ -12,6 +12,7 @@ export default tseslint.config(
   {
     ignores: [
       'dist/**',
+      'dist-electron/**',
       'node_modules/**',
       'coverage/**',
       'playwright-report/**',
@@ -33,7 +34,7 @@ export default tseslint.config(
   {
     languageOptions: {
       parserOptions: {
-        project: ['./tsconfig.json', './tsconfig.node.json'],
+        project: ['./tsconfig.json', './tsconfig.node.json', './electron/tsconfig.json'],
         tsconfigRootDir: import.meta.dirname,
         ecmaFeatures: { jsx: true },
         ecmaVersion: 2020,
@@ -241,6 +242,15 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-assignment': 'off',
       '@typescript-eslint/no-unsafe-member-access': 'off',
     },
+  },
+
+  /* ── Playwright E2E 测试 ──
+   * tests/e2e 不在 tsconfig.json include 中（与 playwright.config.ts 同理），
+   * 禁用 type-aware 规则避免 parserOptions.project 解析错误
+   */
+  {
+    files: ['tests/e2e/**/*.ts'],
+    extends: [tseslint.configs.disableTypeChecked],
   },
 
   /* ── 测试文件放宽 ── */
