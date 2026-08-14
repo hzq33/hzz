@@ -62,7 +62,7 @@
     "cross-env": "^10.1.0",
     "electron": "^43.4.0",
     "electron-builder": "^26.15.3",
-    "eslint": "^9.17.0",
+    "eslint": "^10.8.1",
     "eslint-import-resolver-typescript": "^3.7.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-react": "^7.37.3",
